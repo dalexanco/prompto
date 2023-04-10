@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Scroller } from "../component";
+import { PromptInput } from "../component";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
 import { action } from "@storybook/addon-actions";
@@ -7,16 +7,13 @@ import { action } from "@storybook/addon-actions";
 // // // //
 
 export default {
-    title: "Components/Scroller",
-    component: Scroller,
-    args: {
-        onClickScrollTop: action("click-scroll-top"),
-        onClickScrollBottom: action("click-scroll-bottom"),
-    },
-} as ComponentMeta<typeof Scroller>;
+    title: "Components/PromptInput",
+    component: PromptInput,
+    args: {},
+} as ComponentMeta<typeof PromptInput>;
 
-const Template: ComponentStory<typeof Scroller> = (args) => (
-    <Scroller {...args} />
+const Template: ComponentStory<typeof PromptInput> = (args) => (
+    <PromptInput {...args} />
 );
 
 // // // //
