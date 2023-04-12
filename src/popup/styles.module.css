@@ -2,4 +2,5 @@
     min-width: 400px;
     min-height: 300px;
     display: flex;
+    flex-direction: column;
 }
