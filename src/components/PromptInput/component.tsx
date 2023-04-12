@@ -1,4 +1,5 @@
 import React from "react";
+
 import MagnifyingGlassIcon from "../../icons/magnifying-glass";
 
 export function PromptInput(): JSX.Element {
