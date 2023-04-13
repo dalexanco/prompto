@@ -13,5 +13,6 @@ export interface PromptCommand {
 }
 
 export enum PromptCommandType {
+    UNKNOWN,
     BOOKMARK,
 }

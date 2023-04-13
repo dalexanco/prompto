@@ -7,6 +7,7 @@ import { Suggestion } from "../components/Suggestion";
 import useBookmarks from "../hooks/use-bookmarks";
 import ChevronDown from "../icons/chevron-down";
 import ChevronUp from "../icons/chevron-up";
+import { PromptCommandType } from "../types/commands";
 import css from "./styles.module.css";
 
 export function Popup(): JSX.Element {
@@ -15,7 +16,11 @@ export function Popup(): JSX.Element {
     }, []);
 
     const [inputValue, updateInput] = useState("");
-    const { results: suggestions } = useBookmarks(inputValue);
+    const { results } = useBookmarks(inputValue);
+    const suggestions = [
+        { title: "A bug", type: PromptCommandType.UNKNOWN, key: "0" },
+        ...results,
+    ];
     const [focusedLine, setFocus] = useState(0);
     const moveFocus = useCallback(
         (value) => {
