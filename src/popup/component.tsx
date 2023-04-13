@@ -4,6 +4,7 @@ import browser from "webextension-polyfill";
 
 import { PromptInput } from "../components/PromptInput";
 import { Suggestion } from "../components/Suggestion";
+import useBookmarks from "../hooks/use-bookmarks";
 import ChevronDown from "../icons/chevron-down";
 import ChevronUp from "../icons/chevron-up";
 import css from "./styles.module.css";
@@ -13,13 +14,16 @@ export function Popup(): JSX.Element {
         browser.runtime.sendMessage({ popupMounted: true });
     }, []);
 
-    const lineCount = 4;
+    const [inputValue, updateInput] = useState("");
+    const { results: suggestions } = useBookmarks(inputValue);
     const [focusedLine, setFocus] = useState(0);
     const moveFocus = useCallback(
         (value) => {
-            setFocus((lineCount + focusedLine + value) % lineCount);
+            setFocus(
+                (suggestions.length + focusedLine + value) % suggestions.length,
+            );
         },
-        [focusedLine, setFocus, lineCount],
+        [focusedLine, setFocus, suggestions.length],
     );
     useKeyPressEvent("ArrowUp", () => moveFocus(-1));
     useKeyPressEvent("ArrowDown", () => moveFocus(1));
@@ -27,13 +31,18 @@ export function Popup(): JSX.Element {
     return (
         <div className={css.popupContainer}>
             <header className="border-b border-b-gray-200">
-                <PromptInput />
+                <PromptInput onChange={updateInput} />
             </header>
             <section className="flex flex-grow flex-col items-stretch">
-                <Suggestion hasFocus={focusedLine === 0} />
-                <Suggestion hasFocus={focusedLine === 1} />
-                <Suggestion hasFocus={focusedLine === 2} />
-                <Suggestion hasFocus={focusedLine === 3} />
+                {suggestions.map((suggestion, index) => (
+                    <Suggestion
+                        key={suggestion.key}
+                        title={suggestion.title}
+                        description={suggestion.description}
+                        type={suggestion.type}
+                        hasFocus={focusedLine === index}
+                    />
+                ))}
             </section>
             <footer className="flex justify-end border-t border-t-gray-200 px-2 py-1 bg-gray-50">
                 <p className="justify-self-end text-xs text-gray-500 italic">

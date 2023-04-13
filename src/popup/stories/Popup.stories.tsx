@@ -7,4 +7,4 @@ export default {
     component: Popup,
 } as ComponentMeta<typeof Popup>;
 
-export const Render = () => <Popup />;
+export const Render = (): JSX.Element => <Popup />;
