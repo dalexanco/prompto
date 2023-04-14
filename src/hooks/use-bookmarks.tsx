@@ -5,7 +5,7 @@ import {
     PromptQuery,
 } from "../types/commands";
 
-const MAX_RESULTS = 10;
+const MAX_RESULTS = 5;
 const limit = (max: number) => (value: any, index: number) => index < max;
 
 export default function useBookmarks(input: string): PromptQuery {
@@ -24,7 +24,7 @@ export default function useBookmarks(input: string): PromptQuery {
                     key: `bookmark-${treeNode.id}`,
                     type: PromptCommandType.BOOKMARK,
                     title: treeNode.title,
-                    description: treeNode.url,
+                    url: treeNode.url,
                 }));
             setResults(results);
             setLoading(false);

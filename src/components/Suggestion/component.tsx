@@ -2,42 +2,61 @@ import React from "react";
 import classNames from "classnames";
 
 import MagnifyingGlassIcon from "../../icons/magnifying-glass";
-import { PromptCommandType } from "../../types/commands";
+import { PromptCommand, PromptCommandType } from "../../types/commands";
 import BookmarkIcon from "../../icons/bookmark";
+import RectangleStackIcon from "@src/icons/rectangle-stack";
 
 interface SuggestionProps {
-    title: string;
-    description?: string;
-    type: PromptCommandType;
+    suggestion: PromptCommand;
     hasFocus?: boolean;
 }
 
-const mapTypeIcon = (type: PromptCommandType): JSX.Element => {
+const mapTypeIcon = ({ type }: PromptCommand): JSX.Element => {
     switch (type) {
         case PromptCommandType.BOOKMARK:
             return <BookmarkIcon className="w-4 h-4 stroke-gray-500" />;
+        case PromptCommandType.EXISTING_TAB:
+            return <RectangleStackIcon className="w-4 h-4 stroke-gray-500" />;
         default:
             return <MagnifyingGlassIcon className="w-4 h-4 stroke-gray-500" />;
     }
 };
 
+const mapDescription = (command: PromptCommand): string | null => {
+    switch (command.type) {
+        case PromptCommandType.BOOKMARK:
+            return `Open bookmark ${command.url}`;
+        case PromptCommandType.EXISTING_TAB:
+            return `Open tab ${command.url}`;
+        default:
+            return null;
+    }
+};
+
+const mapTitle = (command: PromptCommand): string => {
+    switch (command.type) {
+        case PromptCommandType.BOOKMARK:
+            return command.title || "Empty bookmark";
+        default:
+            return command.title;
+    }
+};
+
 export function Suggestion({
-    title,
-    description,
-    type = PromptCommandType.UNKNOWN,
+    suggestion,
     hasFocus = false,
-}: SuggestionProps): JSX.Element {
+}: SuggestionProps): JSX.Element | null {
+    if (!suggestion) return null;
     const wrapperClass = classNames("flex flex-row items-start bg-white", {
         ["bg-slate-50"]: hasFocus,
     });
-    const iconClass = classNames(
-        "flex self-center rounded-md p-2 m-2 bg-gray-200",
-        {
-            ["bg-gray-200"]: hasFocus,
-            ["bg-gray-100"]: !hasFocus,
-        },
-    );
-    const Icon = mapTypeIcon(type);
+    const iconClass = classNames("flex self-center rounded-md p-2 m-2", {
+        ["bg-gray-200"]: hasFocus,
+        ["bg-gray-100"]: !hasFocus,
+    });
+    const Icon = mapTypeIcon(suggestion);
+    const title = mapTitle(suggestion);
+    const description = mapDescription(suggestion);
 
     return (
         <div className={wrapperClass}>

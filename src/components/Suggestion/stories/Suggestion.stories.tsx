@@ -9,18 +9,40 @@ export default {
 } as ComponentMeta<typeof Suggestion>;
 
 const TITLE = "A title";
-const DESCRIPTION = "A description";
+const DEFAULT_URL = "https://www.example.com/path?query=string";
 
-const Wrapper = ({ children }: { children: JSX.Element }) => (
-    <div className="max-w-md">{children}</div>
+const Wrapper = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+    <div className="max-w-md bg-white">{children}</div>
 );
 
 export const Default = (): JSX.Element => (
     <Wrapper>
         <Suggestion
-            title={TITLE}
-            description={DESCRIPTION}
-            type={PromptCommandType.BOOKMARK}
+            suggestion={{
+                key: "",
+                id: "",
+                title: TITLE,
+                url: DEFAULT_URL,
+                type: PromptCommandType.BOOKMARK,
+            }}
+        />
+        <Suggestion
+            suggestion={{
+                key: "",
+                id: "",
+                title: TITLE,
+                url: DEFAULT_URL,
+                type: PromptCommandType.EXISTING_TAB,
+            }}
+        />
+        <Suggestion
+            suggestion={{
+                key: "",
+                id: "",
+                title: TITLE,
+                url: DEFAULT_URL,
+                type: PromptCommandType.UNKNOWN,
+            }}
         />
     </Wrapper>
 );
@@ -28,10 +50,23 @@ export const Default = (): JSX.Element => (
 export const WithFocus = (): JSX.Element => (
     <Wrapper>
         <Suggestion
-            title={TITLE}
-            description={DESCRIPTION}
+            suggestion={{
+                key: "",
+                id: "",
+                title: "When it does not have focus",
+                url: DEFAULT_URL,
+                type: PromptCommandType.EXISTING_TAB,
+            }}
+        />
+        <Suggestion
+            suggestion={{
+                key: "",
+                id: "",
+                title: "When it has focus",
+                url: DEFAULT_URL,
+                type: PromptCommandType.BOOKMARK,
+            }}
             hasFocus
-            type={PromptCommandType.BOOKMARK}
         />
     </Wrapper>
 );
@@ -39,11 +74,13 @@ export const WithFocus = (): JSX.Element => (
 export const WithLongTitle = (): JSX.Element => (
     <Wrapper>
         <Suggestion
-            title={
-                "With a very very long title, I mean very very very very very very very very very very long"
-            }
-            description={DESCRIPTION}
-            type={PromptCommandType.BOOKMARK}
+            suggestion={{
+                key: "",
+                id: "",
+                title: "With a very very long title, I mean very very very very very very very very very very long",
+                url: DEFAULT_URL,
+                type: PromptCommandType.BOOKMARK,
+            }}
         />
     </Wrapper>
 );
@@ -51,10 +88,14 @@ export const WithLongTitle = (): JSX.Element => (
 export const WithLongDescription = (): JSX.Element => (
     <Wrapper>
         <Suggestion
-            title={TITLE}
+            suggestion={{
+                key: "",
+                id: "",
+                title: TITLE,
+                url: "https://www.example.com/path?query=I%20mean%20very%20very%20very%20very%20very%20very%20very%20very%20very%20very%20long",
+                type: PromptCommandType.BOOKMARK,
+            }}
             hasFocus
-            description="With a very very long description, I mean very very very very very very very very very very long"
-            type={PromptCommandType.BOOKMARK}
         />
     </Wrapper>
 );

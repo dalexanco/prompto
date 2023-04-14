@@ -8,11 +8,12 @@ export interface PromptCommand {
     id: string;
     type: PromptCommandType;
     title: string;
-    description?: string;
+    url?: string;
     colorCode?: string;
 }
 
 export enum PromptCommandType {
     UNKNOWN,
     BOOKMARK,
+    EXISTING_TAB,
 }

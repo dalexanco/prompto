@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import { useKeyPressEvent } from "react-use";
 import browser from "webextension-polyfill";
 
@@ -7,20 +7,14 @@ import { Suggestion } from "../components/Suggestion";
 import useBookmarks from "../hooks/use-bookmarks";
 import ChevronDown from "../icons/chevron-down";
 import ChevronUp from "../icons/chevron-up";
-import { PromptCommandType } from "../types/commands";
+import { PromptCommand, PromptCommandType } from "../types/commands";
 import css from "./styles.module.css";
+import useExistingTabs from "@src/hooks/use-existing-tabs";
+import useExecute from "@src/hooks/use-execute";
 
-export function Popup(): JSX.Element {
-    React.useEffect(() => {
-        browser.runtime.sendMessage({ popupMounted: true });
-    }, []);
-
-    const [inputValue, updateInput] = useState("");
-    const { results } = useBookmarks(inputValue);
-    const suggestions = [
-        { title: "A bug", type: PromptCommandType.UNKNOWN, key: "0" },
-        ...results,
-    ];
+const useSuggestionFocus = (
+    suggestions: PromptCommand[],
+): PromptCommand | undefined => {
     const [focusedLine, setFocus] = useState(0);
     const moveFocus = useCallback(
         (value) => {
@@ -33,19 +27,40 @@ export function Popup(): JSX.Element {
     useKeyPressEvent("ArrowUp", () => moveFocus(-1));
     useKeyPressEvent("ArrowDown", () => moveFocus(1));
 
+    return suggestions[focusedLine];
+};
+
+export function Popup(): JSX.Element {
+    React.useEffect(() => {
+        browser.runtime.sendMessage({ popupMounted: true });
+    }, []);
+
+    const [inputValue, updateInput] = useState("");
+    const { results: suggestionsBookmarks } = useBookmarks(inputValue);
+    const { results: suggestionsTabs } = useExistingTabs(inputValue);
+    const suggestions = [
+        ...suggestionsTabs,
+        ...suggestionsBookmarks,
+    ] as PromptCommand[];
+    const focusSuggestion = useSuggestionFocus(suggestions);
+
+    // Form validation
+    const onSubmit = (event: FormEvent) => {
+        event.preventDefault();
+        useExecute(focusSuggestion);
+    };
+
     return (
         <div className={css.popupContainer}>
-            <header className="border-b border-b-gray-200">
+            <form className="border-b border-b-gray-200" onSubmit={onSubmit}>
                 <PromptInput onChange={updateInput} />
-            </header>
+            </form>
             <section className="flex flex-grow flex-col items-stretch">
                 {suggestions.map((suggestion, index) => (
                     <Suggestion
+                        suggestion={suggestion}
                         key={suggestion.key}
-                        title={suggestion.title}
-                        description={suggestion.description}
-                        type={suggestion.type}
-                        hasFocus={focusedLine === index}
+                        hasFocus={suggestion.key === focusSuggestion?.key}
                     />
                 ))}
             </section>
