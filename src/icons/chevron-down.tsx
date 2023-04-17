@@ -4,7 +4,7 @@ interface IconProps {
     className: string | undefined;
 }
 
-export default function ChevronDown({ className }: IconProps): JSX.Element {
+export default function ChevronDownIcon({ className }: IconProps): JSX.Element {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"

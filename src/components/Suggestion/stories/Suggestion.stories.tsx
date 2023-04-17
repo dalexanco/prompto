@@ -32,7 +32,7 @@ export const Default = (): JSX.Element => (
                 id: "",
                 title: TITLE,
                 url: DEFAULT_URL,
-                type: PromptCommandType.EXISTING_TAB,
+                type: PromptCommandType.FOCUS_TAB,
             }}
         />
         <Suggestion
@@ -55,7 +55,7 @@ export const WithFocus = (): JSX.Element => (
                 id: "",
                 title: "When it does not have focus",
                 url: DEFAULT_URL,
-                type: PromptCommandType.EXISTING_TAB,
+                type: PromptCommandType.FOCUS_TAB,
             }}
         />
         <Suggestion

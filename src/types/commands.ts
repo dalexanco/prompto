@@ -15,5 +15,7 @@ export interface PromptCommand {
 export enum PromptCommandType {
     UNKNOWN,
     BOOKMARK,
-    EXISTING_TAB,
+    FOCUS_TAB,
+    CURRENT_TAB_PIN,
+    CURRENT_TAB_UNPIN,
 }

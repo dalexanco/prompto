@@ -4,11 +4,11 @@ import {
     PromptCommandType,
     PromptQuery,
 } from "../types/commands";
+import { limit } from "@src/helpers/list";
 
 const MAX_RESULTS = 20;
-const limit = (max: number) => (value: any, index: number) => index < max;
 
-export default function useExistingTabs(input: string): PromptQuery {
+export default function useFocusTabs(input: string): PromptQuery {
     const [isLoading, setLoading] = useState(false);
     const [results, setResults] = useState([] as PromptCommand[]);
 
@@ -27,7 +27,7 @@ export default function useExistingTabs(input: string): PromptQuery {
                 .map((tabElement) => ({
                     id: tabElement.id ? `${tabElement.id}` : "",
                     key: `bookmark-${tabElement.id}`,
-                    type: PromptCommandType.EXISTING_TAB,
+                    type: PromptCommandType.FOCUS_TAB,
                     title: tabElement.title || "Existing tab",
                     url: tabElement.url,
                 }));

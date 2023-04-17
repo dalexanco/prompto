@@ -4,13 +4,14 @@ import browser from "webextension-polyfill";
 
 import { PromptInput } from "../components/PromptInput";
 import { Suggestion } from "../components/Suggestion";
-import { PromptCommand } from "../types/commands";
 import useBookmarks from "../hooks/use-bookmarks";
-import ChevronDown from "../icons/chevron-down";
-import ChevronUp from "../icons/chevron-up";
+import { PromptCommand } from "../types/commands";
+import ChevronDownIcon from "../icons/chevron-down";
+import ChevronUpIcon from "../icons/chevron-up";
 import css from "./styles.module.css";
-import useExistingTabs from "@src/hooks/use-existing-tabs";
+import useFocusTabs from "@src/hooks/use-focus-tabs";
 import useExecute from "@src/hooks/use-execute";
+import useTabTools from "@src/hooks/use-current-tab-tools";
 
 const useSuggestionFocus = (
     suggestions: PromptCommand[],
@@ -38,9 +39,11 @@ export function Popup(): JSX.Element {
     }, []);
 
     const [inputValue, updateInput] = useState("");
+    const { results: suggestionsTabTools } = useTabTools(inputValue);
     const { results: suggestionsBookmarks } = useBookmarks(inputValue);
-    const { results: suggestionsTabs } = useExistingTabs(inputValue);
+    const { results: suggestionsTabs } = useFocusTabs(inputValue);
     const suggestions = [
+        ...suggestionsTabTools,
         ...suggestionsTabs,
         ...suggestionsBookmarks,
     ] as PromptCommand[];
@@ -62,9 +65,15 @@ export function Popup(): JSX.Element {
     const focusedSuggestion = useSuggestionFocus(suggestions, onFocusChange);
 
     // Form validation
+    const execute = useExecute();
     const onSubmit = (event: FormEvent) => {
         event.preventDefault();
-        useExecute(focusedSuggestion);
+        (async function () {
+            const commandSuccess = await execute(focusedSuggestion);
+            if (commandSuccess) {
+                window.close();
+            }
+        })();
     };
 
     return (
@@ -88,10 +97,10 @@ export function Popup(): JSX.Element {
                 <p className="justify-self-end text-xs text-gray-500 italic">
                     Use{" "}
                     <span className=" inline-flex bg-gray-200 px-1 py-1 rounded-sm">
-                        <ChevronUp className="w-2 h-2 inline-flex" />
+                        <ChevronUpIcon className="w-2 h-2 inline-flex" />
                     </span>{" "}
                     <span className=" inline-flex bg-gray-200 px-1 py-1 rounded-sm">
-                        <ChevronDown className="w-2 h-2 inline-flex" />
+                        <ChevronDownIcon className="w-2 h-2 inline-flex" />
                     </span>{" "}
                     to navigate
                 </p>

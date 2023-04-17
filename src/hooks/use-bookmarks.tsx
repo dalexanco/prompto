@@ -4,9 +4,9 @@ import {
     PromptCommandType,
     PromptQuery,
 } from "../types/commands";
+import { limit } from "@src/helpers/list";
 
 const MAX_RESULTS = 5;
-const limit = (max: number) => (value: any, index: number) => index < max;
 
 export default function useBookmarks(input: string): PromptQuery {
     const [isLoading, setLoading] = useState(false);

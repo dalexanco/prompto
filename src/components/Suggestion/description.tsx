@@ -30,7 +30,7 @@ export default function Description({
                 </Fragment>
             );
             break;
-        case PromptCommandType.EXISTING_TAB:
+        case PromptCommandType.FOCUS_TAB:
             body = (
                 <Fragment>
                     {`Focus tab `}

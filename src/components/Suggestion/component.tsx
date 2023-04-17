@@ -7,6 +7,7 @@ import BookmarkIcon from "../../icons/bookmark";
 import RectangleStackIcon from "@src/icons/rectangle-stack";
 import Title from "./title";
 import Description from "./description";
+import BoltIcon from "@src/icons/bolt";
 
 interface SuggestionProps {
     suggestion: PromptCommand;
@@ -17,8 +18,11 @@ const mapTypeIcon = ({ type }: PromptCommand): JSX.Element => {
     switch (type) {
         case PromptCommandType.BOOKMARK:
             return <BookmarkIcon className="w-4 h-4 stroke-gray-500" />;
-        case PromptCommandType.EXISTING_TAB:
+        case PromptCommandType.FOCUS_TAB:
             return <RectangleStackIcon className="w-4 h-4 stroke-gray-500" />;
+        case PromptCommandType.CURRENT_TAB_PIN:
+        case PromptCommandType.CURRENT_TAB_UNPIN:
+            return <BoltIcon className="w-4 h-4 stroke-gray-500" />;
         default:
             return <MagnifyingGlassIcon className="w-4 h-4 stroke-gray-500" />;
     }
