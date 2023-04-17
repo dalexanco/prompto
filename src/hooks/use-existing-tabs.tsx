@@ -5,7 +5,7 @@ import {
     PromptQuery,
 } from "../types/commands";
 
-const MAX_RESULTS = 5;
+const MAX_RESULTS = 20;
 const limit = (max: number) => (value: any, index: number) => index < max;
 
 export default function useExistingTabs(input: string): PromptQuery {
