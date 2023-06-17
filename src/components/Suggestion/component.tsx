@@ -17,6 +17,7 @@ interface SuggestionProps {
 const mapTypeIcon = ({ type }: PromptCommand): JSX.Element => {
     switch (type) {
         case PromptCommandType.BOOKMARK:
+        case PromptCommandType.BOOKMARK_SAVE:
             return <BookmarkIcon className="w-4 h-4 stroke-gray-500" />;
         case PromptCommandType.FOCUS_TAB:
             return <RectangleStackIcon className="w-4 h-4 stroke-gray-500" />;

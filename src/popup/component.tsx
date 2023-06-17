@@ -1,4 +1,10 @@
-import React, { FormEvent, useCallback, useRef, useState } from "react";
+import React, {
+    FormEvent,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import { useKeyPressEvent } from "react-use";
 import browser from "webextension-polyfill";
 
@@ -12,6 +18,8 @@ import css from "./styles.module.css";
 import useFocusTabs from "@src/hooks/use-focus-tabs";
 import useExecute from "@src/hooks/use-execute";
 import useTabTools from "@src/hooks/use-current-tab-tools";
+import saveCurrentTab from "@src/commands/save-current-tab";
+import { useSuggestions } from "@src/commands";
 
 const useSuggestionFocus = (
     suggestions: PromptCommand[],
@@ -39,14 +47,16 @@ export function Popup(): JSX.Element {
     }, []);
 
     const [inputValue, updateInput] = useState("");
-    const { results: suggestionsTabTools } = useTabTools(inputValue);
-    const { results: suggestionsBookmarks } = useBookmarks(inputValue);
-    const { results: suggestionsTabs } = useFocusTabs(inputValue);
-    const suggestions = [
-        ...suggestionsTabTools,
-        ...suggestionsTabs,
-        ...suggestionsBookmarks,
-    ] as PromptCommand[];
+    const suggestions = useSuggestions(inputValue);
+
+    // const { results: suggestionsTabTools } = useTabTools(inputValue);
+    // const { results: suggestionsBookmarks } = useBookmarks(inputValue);
+    // const { results: suggestionsTabs } = useFocusTabs(inputValue);
+    // const suggestions = [
+    //     ...suggestionsTabTools,
+    //     ...suggestionsTabs,
+    //     ...suggestionsBookmarks,
+    // ] as PromptCommand[];
 
     // Manage focus suggestion
     const suggestionListRef = useRef<HTMLUListElement>(null);
