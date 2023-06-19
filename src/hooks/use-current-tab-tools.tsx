@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 import {
-    PromptCommand,
-    PromptCommandType,
+    CommandSuggestion,
+    CommandSuggestionType,
     PromptQuery,
 } from "../types/commands";
 
 const COMMANDS = [
     {
-        type: PromptCommandType.CURRENT_TAB_PIN,
+        type: CommandSuggestionType.CURRENT_TAB_PIN,
         key: `tab-current-pin`,
         id: `tab-current-pin`,
         title: "Pin current tab",
     },
     {
-        type: PromptCommandType.CURRENT_TAB_UNPIN,
+        type: CommandSuggestionType.CURRENT_TAB_UNPIN,
         key: `tab-current-unpin`,
         id: `tab-current-unpin`,
         title: "Unpin current tab",
     },
-] as PromptCommand[];
+] as CommandSuggestion[];
 
 export default function useTabTools(input: string): PromptQuery {
-    const [ignoredTypes, ignoreTypes] = useState<PromptCommandType[]>([]);
+    const [ignoredTypes, ignoreTypes] = useState<CommandSuggestionType[]>([]);
     useEffect(() => {
         (async function () {
             const [currentTab] = await chrome.tabs.query({
@@ -29,8 +29,8 @@ export default function useTabTools(input: string): PromptQuery {
                 active: true,
             });
             currentTab?.pinned
-                ? ignoreTypes([PromptCommandType.CURRENT_TAB_PIN])
-                : ignoreTypes([PromptCommandType.CURRENT_TAB_UNPIN]);
+                ? ignoreTypes([CommandSuggestionType.CURRENT_TAB_PIN])
+                : ignoreTypes([CommandSuggestionType.CURRENT_TAB_UNPIN]);
         })();
     }, []);
 

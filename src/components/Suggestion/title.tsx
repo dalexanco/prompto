@@ -1,8 +1,8 @@
 import React from "react";
-import { PromptCommand } from "@src/types/commands";
+import { CommandSuggestion } from "@src/types/commands";
 
 interface TitleProps {
-    suggestion: PromptCommand;
+    suggestion: CommandSuggestion;
 }
 
 export default function Title({ suggestion }: TitleProps): JSX.Element {

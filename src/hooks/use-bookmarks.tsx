@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
-    PromptCommand,
-    PromptCommandType,
+    CommandSuggestion,
+    CommandSuggestionType,
     PromptQuery,
 } from "../types/commands";
 import { limit } from "@src/helpers/list";
@@ -10,7 +10,7 @@ const MAX_RESULTS = 5;
 
 export default function useBookmarks(input: string): PromptQuery {
     const [isLoading, setLoading] = useState(false);
-    const [results, setResults] = useState([] as PromptCommand[]);
+    const [results, setResults] = useState([] as CommandSuggestion[]);
 
     useEffect(() => {
         (async () => {
@@ -22,7 +22,7 @@ export default function useBookmarks(input: string): PromptQuery {
                 .map((treeNode) => ({
                     id: treeNode.id,
                     key: `bookmark-${treeNode.id}`,
-                    type: PromptCommandType.BOOKMARK,
+                    type: CommandSuggestionType.BOOKMARK,
                     title: treeNode.title,
                     url: treeNode.url,
                 }));

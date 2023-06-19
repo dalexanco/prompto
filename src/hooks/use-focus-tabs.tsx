@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
-    PromptCommand,
-    PromptCommandType,
+    CommandSuggestion,
+    CommandSuggestionType,
     PromptQuery,
 } from "../types/commands";
 import { limit } from "@src/helpers/list";
@@ -10,7 +10,7 @@ const MAX_RESULTS = 20;
 
 export default function useFocusTabs(input: string): PromptQuery {
     const [isLoading, setLoading] = useState(false);
-    const [results, setResults] = useState([] as PromptCommand[]);
+    const [results, setResults] = useState([] as CommandSuggestion[]);
 
     useEffect(() => {
         (async () => {
@@ -27,7 +27,7 @@ export default function useFocusTabs(input: string): PromptQuery {
                 .map((tabElement) => ({
                     id: tabElement.id ? `${tabElement.id}` : "",
                     key: `bookmark-${tabElement.id}`,
-                    type: PromptCommandType.FOCUS_TAB,
+                    type: CommandSuggestionType.FOCUS_TAB,
                     title: tabElement.title || "Existing tab",
                     url: tabElement.url,
                 }));

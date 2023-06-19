@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 
 import MagnifyingGlassIcon from "../../icons/magnifying-glass";
-import { PromptCommand, PromptCommandType } from "../../types/commands";
+import { CommandSuggestion, CommandSuggestionType } from "../../types/commands";
 import BookmarkIcon from "../../icons/bookmark";
 import RectangleStackIcon from "@src/icons/rectangle-stack";
 import Title from "./title";
@@ -10,19 +10,19 @@ import Description from "./description";
 import BoltIcon from "@src/icons/bolt";
 
 interface SuggestionProps {
-    suggestion: PromptCommand;
+    suggestion: CommandSuggestion;
     hasFocus?: boolean;
 }
 
-const mapTypeIcon = ({ type }: PromptCommand): JSX.Element => {
+const mapTypeIcon = ({ type }: CommandSuggestion): JSX.Element => {
     switch (type) {
-        case PromptCommandType.BOOKMARK:
-        case PromptCommandType.BOOKMARK_SAVE:
+        case CommandSuggestionType.BOOKMARK:
+        case CommandSuggestionType.BOOKMARK_SAVE:
             return <BookmarkIcon className="w-4 h-4 stroke-gray-500" />;
-        case PromptCommandType.FOCUS_TAB:
+        case CommandSuggestionType.FOCUS_TAB:
             return <RectangleStackIcon className="w-4 h-4 stroke-gray-500" />;
-        case PromptCommandType.CURRENT_TAB_PIN:
-        case PromptCommandType.CURRENT_TAB_UNPIN:
+        case CommandSuggestionType.CURRENT_TAB_PIN:
+        case CommandSuggestionType.CURRENT_TAB_UNPIN:
             return <BoltIcon className="w-4 h-4 stroke-gray-500" />;
         default:
             return <MagnifyingGlassIcon className="w-4 h-4 stroke-gray-500" />;

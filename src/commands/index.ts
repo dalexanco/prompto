@@ -1,28 +1,23 @@
-import { PromptCommand } from "@src/types/commands";
+import { CommandTemplate, CommandSuggestion } from "@src/types/commands";
 import { useEffect, useState } from "react";
 import { flatten } from "lodash";
 
 import saveCurrentTab from "./save-current-tab";
-
-interface CommandTemplate {
-    keywordRequired: boolean;
-    keywords: string[];
-    initialize: () => void;
-    generateSuggestions: (input: string) => Promise<PromptCommand[]>;
-}
 
 export const DEFAULT_COMMANDS = [saveCurrentTab] as CommandTemplate[];
 
 export const useSuggestions = (
     rawInput?: string,
     commands = DEFAULT_COMMANDS,
-): PromptCommand[] => {
-    const [suggestions, setSuggestions] = useState<PromptCommand[]>([]);
+): { isLoading: boolean; suggestions: CommandSuggestion[] } => {
+    const [suggestions, setSuggestions] = useState<CommandSuggestion[]>([]);
+    const [isLoading, setLoading] = useState<boolean>(true);
+
     useEffect(() => {
         commands.forEach((command) => command.initialize());
     }, []);
-    useEffect(() => {
-        (async () => {
+    useEffect((): void => {
+        (async function anyNameFunction() {
             if (!rawInput) return;
 
             const suggestionsPromises = commands.map((command) => {
@@ -45,8 +40,9 @@ export const useSuggestions = (
             const results = await Promise.all(suggestionsPromises);
 
             setSuggestions(flatten(results));
+            setLoading(false);
         })();
-    }, [rawInput]);
+    }, [setSuggestions, rawInput]);
 
-    return suggestions;
+    return { suggestions, isLoading };
 };

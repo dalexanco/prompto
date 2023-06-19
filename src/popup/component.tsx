@@ -11,7 +11,7 @@ import browser from "webextension-polyfill";
 import { PromptInput } from "../components/PromptInput";
 import { Suggestion } from "../components/Suggestion";
 import useBookmarks from "../hooks/use-bookmarks";
-import { PromptCommand } from "../types/commands";
+import { CommandSuggestion } from "../types/commands";
 import ChevronDownIcon from "../icons/chevron-down";
 import ChevronUpIcon from "../icons/chevron-up";
 import css from "./styles.module.css";
@@ -22,9 +22,9 @@ import saveCurrentTab from "@src/commands/save-current-tab";
 import { useSuggestions } from "@src/commands";
 
 const useSuggestionFocus = (
-    suggestions: PromptCommand[],
+    suggestions: CommandSuggestion[],
     onFocusChange: (index: number) => void,
-): PromptCommand | undefined => {
+): CommandSuggestion | undefined => {
     const [focusedLine, setFocus] = useState(0);
     const moveFocus = useCallback(
         (value) => {
@@ -56,7 +56,7 @@ export function Popup(): JSX.Element {
     //     ...suggestionsTabTools,
     //     ...suggestionsTabs,
     //     ...suggestionsBookmarks,
-    // ] as PromptCommand[];
+    // ] as CommandSuggestion[];
 
     // Manage focus suggestion
     const suggestionListRef = useRef<HTMLUListElement>(null);

@@ -1,5 +1,5 @@
 import { limit } from "@src/helpers/list";
-import { PromptCommand, PromptCommandType } from "@src/types/commands";
+import { CommandSuggestion, CommandSuggestionType } from "@src/types/commands";
 import { flatten } from "lodash";
 
 const RESULTS_LIMIT = 5;
@@ -45,7 +45,9 @@ export default {
 
         bookmarksFolderCache = digBookmarks(rootNode);
     },
-    generateSuggestions: async (rawInput: string): Promise<PromptCommand[]> => {
+    generateSuggestions: async (
+        rawInput: string,
+    ): Promise<CommandSuggestion[]> => {
         if (!rawInput || rawInput.length < MIN_INPUT_LENGTH) return [];
 
         const inputWords = rawInput.toLowerCase().split(" ");
@@ -60,7 +62,7 @@ export default {
         return folders.filter(limit(RESULTS_LIMIT)).map((folder) => ({
             id: folder.id,
             key: `save-on-${folder.id}`,
-            type: PromptCommandType.BOOKMARK_SAVE,
+            type: CommandSuggestionType.BOOKMARK_SAVE,
             title: `Save in ${folder.index}`,
             url: "Attach current tab in this folder",
         }));

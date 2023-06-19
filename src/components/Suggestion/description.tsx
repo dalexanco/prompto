@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import { PromptCommand, PromptCommandType } from "@src/types/commands";
+import { CommandSuggestion, CommandSuggestionType } from "@src/types/commands";
 
 interface DescriptionProps {
-    suggestion: PromptCommand;
+    suggestion: CommandSuggestion;
     hasFocus: boolean;
 }
 
@@ -22,7 +22,7 @@ export default function Description({
     const { url, type } = suggestion;
     let body: JSX.Element;
     switch (type) {
-        case PromptCommandType.BOOKMARK:
+        case CommandSuggestionType.BOOKMARK:
             body = (
                 <Fragment>
                     {`Open `}
@@ -30,7 +30,7 @@ export default function Description({
                 </Fragment>
             );
             break;
-        case PromptCommandType.FOCUS_TAB:
+        case CommandSuggestionType.FOCUS_TAB:
             body = (
                 <Fragment>
                     {`Focus tab `}
