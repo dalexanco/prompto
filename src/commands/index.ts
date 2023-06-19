@@ -11,22 +11,25 @@ interface CommandTemplate {
     generateSuggestions: (input: string) => Promise<PromptCommand[]>;
 }
 
-export const templates = [saveCurrentTab] as CommandTemplate[];
+export const DEFAULT_COMMANDS = [saveCurrentTab] as CommandTemplate[];
 
-export const useSuggestions = (rawInput: string): PromptCommand[] => {
+export const useSuggestions = (
+    rawInput?: string,
+    commands = DEFAULT_COMMANDS,
+): PromptCommand[] => {
     const [suggestions, setSuggestions] = useState<PromptCommand[]>([]);
     useEffect(() => {
-        templates.forEach((template) => template.initialize());
+        commands.forEach((command) => command.initialize());
     }, []);
     useEffect(() => {
         (async () => {
             if (!rawInput) return;
 
-            const suggestionsPromises = templates.map((template) => {
-                if (!template.keywordRequired)
-                    return template.generateSuggestions(rawInput);
+            const suggestionsPromises = commands.map((command) => {
+                if (!command.keywordRequired)
+                    return command.generateSuggestions(rawInput);
 
-                const matchingKeyword = template.keywords.find((keyword) =>
+                const matchingKeyword = command.keywords.find((keyword) =>
                     rawInput.startsWith(keyword),
                 );
 
@@ -36,7 +39,7 @@ export const useSuggestions = (rawInput: string): PromptCommand[] => {
                     .substring(matchingKeyword.length)
                     .trim();
 
-                return template.generateSuggestions(inputAfterKeyword);
+                return command.generateSuggestions(inputAfterKeyword);
             });
 
             const results = await Promise.all(suggestionsPromises);

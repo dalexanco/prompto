@@ -4,41 +4,86 @@ exports[`component renders 1`] = `
 <div
   className="popupContainer"
 >
-  <div
-    className="mx-4 my-4"
+  <form
+    className="border-b border-b-gray-200"
+    onSubmit={[Function]}
   >
     <div
-      className="row"
+      className="inline-flex items-center bg-white px-4 py-2"
     >
-      <div
-        className="col-lg-12 text-center"
+      <svg
+        className="w-4 h-4 stroke-gray-500"
+        fill="none"
+        strokeWidth={2}
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <p
-          className="lead mb-0"
+        <path
+          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      <input
+        autoFocus={true}
+        className="text-base whitespace-nowrap px-2 my-1 ml-4 outline-none placeholder:italic"
+        onChange={[Function]}
+        placeholder="Search or command..."
+        type="text"
+      />
+    </div>
+  </form>
+  <ul
+    className="flex flex-grow flex-col items-stretch overflow-y-scroll"
+  />
+  <footer
+    className="flex justify-end border-t border-t-gray-200 p-2 bg-gray-50"
+  >
+    <p
+      className="justify-self-end text-xs text-gray-500 italic"
+    >
+      Use
+       
+      <span
+        className=" inline-flex bg-gray-200 px-1 py-1 rounded-sm"
+      >
+        <svg
+          className="w-2 h-2 inline-flex"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={3}
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          Example Extension
-        </p>
-      </div>
-    </div>
-    <hr />
-    <div
-      className="grid gap-3 grid-cols-2 mt-3 w-full"
-    >
-      <button
-        className="btn"
-        data-testid="scroll-to-top"
-        onClick={[Function]}
+          <path
+            d="M4.5 15.75l7.5-7.5 7.5 7.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+       
+      <span
+        className=" inline-flex bg-gray-200 px-1 py-1 rounded-sm"
       >
-        Scroll To Top
-      </button>
-      <button
-        className="btn"
-        data-testid="scroll-to-bottom"
-        onClick={[Function]}
-      >
-        Scroll To Bottom
-      </button>
-    </div>
-  </div>
+        <svg
+          className="w-2 h-2 inline-flex"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={3}
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+       
+      to navigate
+    </p>
+  </footer>
 </div>
 `;
