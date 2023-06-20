@@ -16,10 +16,10 @@ import ChevronDownIcon from "../icons/chevron-down";
 import ChevronUpIcon from "../icons/chevron-up";
 import css from "./styles.module.css";
 import useFocusTabs from "@src/hooks/use-focus-tabs";
-import useExecute from "@src/hooks/use-execute";
+
 import useTabTools from "@src/hooks/use-current-tab-tools";
 import saveCurrentTab from "@src/commands/save-current-tab";
-import { useSuggestions } from "@src/commands";
+import useExecute, { useSuggestions } from "@src/commands";
 
 const useSuggestionFocus = (
     suggestions: CommandSuggestion[],
@@ -47,7 +47,7 @@ export function Popup(): JSX.Element {
     }, []);
 
     const [inputValue, updateInput] = useState("");
-    const suggestions = useSuggestions(inputValue);
+    const { suggestions } = useSuggestions(inputValue);
 
     // const { results: suggestionsTabTools } = useTabTools(inputValue);
     // const { results: suggestionsBookmarks } = useBookmarks(inputValue);

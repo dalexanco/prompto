@@ -2,7 +2,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 
 import {
     CommandSuggestion,
-    CommandSuggestionType,
+    CommandType,
     CommandTemplate,
 } from "@src/types/commands";
 import { useSuggestions } from "..";
@@ -10,7 +10,7 @@ import { useSuggestions } from "..";
 const DEFAULT_SUGGESTION_MOCK = {
     key: "mock",
     id: "mock",
-    type: CommandSuggestionType.BOOKMARK_SAVE,
+    type: CommandType.BOOKMARK_SAVE,
     title: "test mock",
 } as CommandSuggestion;
 

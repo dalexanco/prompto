@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-    CommandSuggestion,
-    CommandSuggestionType,
-    PromptQuery,
-} from "../types/commands";
+import { CommandSuggestion, CommandType, PromptQuery } from "../types/commands";
 import { limit } from "@src/helpers/list";
 
 const MAX_RESULTS = 20;
@@ -27,7 +23,7 @@ export default function useFocusTabs(input: string): PromptQuery {
                 .map((tabElement) => ({
                     id: tabElement.id ? `${tabElement.id}` : "",
                     key: `bookmark-${tabElement.id}`,
-                    type: CommandSuggestionType.FOCUS_TAB,
+                    type: CommandType.FOCUS_TAB,
                     title: tabElement.title || "Existing tab",
                     url: tabElement.url,
                 }));

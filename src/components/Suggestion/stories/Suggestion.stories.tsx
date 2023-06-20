@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Suggestion } from "../component";
 import { ComponentMeta } from "@storybook/react";
-import { CommandSuggestionType } from "../../../types/commands";
+import { CommandType } from "../../../types/commands";
 
 export default {
     title: "Components/Suggestion",
@@ -23,7 +23,7 @@ export const Default = (): JSX.Element => (
                 id: "",
                 title: TITLE,
                 url: DEFAULT_URL,
-                type: CommandSuggestionType.BOOKMARK,
+                type: CommandType.BOOKMARK,
             }}
         />
         <Suggestion
@@ -32,7 +32,7 @@ export const Default = (): JSX.Element => (
                 id: "",
                 title: TITLE,
                 url: DEFAULT_URL,
-                type: CommandSuggestionType.FOCUS_TAB,
+                type: CommandType.FOCUS_TAB,
             }}
         />
         <Suggestion
@@ -41,7 +41,7 @@ export const Default = (): JSX.Element => (
                 id: "",
                 title: TITLE,
                 url: DEFAULT_URL,
-                type: CommandSuggestionType.UNKNOWN,
+                type: CommandType.UNKNOWN,
             }}
         />
     </Wrapper>
@@ -55,7 +55,7 @@ export const WithFocus = (): JSX.Element => (
                 id: "",
                 title: "When it does not have focus",
                 url: DEFAULT_URL,
-                type: CommandSuggestionType.FOCUS_TAB,
+                type: CommandType.FOCUS_TAB,
             }}
         />
         <Suggestion
@@ -64,7 +64,7 @@ export const WithFocus = (): JSX.Element => (
                 id: "",
                 title: "When it has focus",
                 url: DEFAULT_URL,
-                type: CommandSuggestionType.BOOKMARK,
+                type: CommandType.BOOKMARK,
             }}
             hasFocus
         />
@@ -79,7 +79,7 @@ export const WithLongTitle = (): JSX.Element => (
                 id: "",
                 title: "With a very very long title, I mean very very very very very very very very very very long",
                 url: DEFAULT_URL,
-                type: CommandSuggestionType.BOOKMARK,
+                type: CommandType.BOOKMARK,
             }}
         />
     </Wrapper>
@@ -93,7 +93,7 @@ export const WithLongDescription = (): JSX.Element => (
                 id: "",
                 title: TITLE,
                 url: "https://www.example.com/path?query=I%20mean%20very%20very%20very%20very%20very%20very%20very%20very%20very%20very%20long",
-                type: CommandSuggestionType.BOOKMARK,
+                type: CommandType.BOOKMARK,
             }}
             hasFocus
         />

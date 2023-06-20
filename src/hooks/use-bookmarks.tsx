@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-    CommandSuggestion,
-    CommandSuggestionType,
-    PromptQuery,
-} from "../types/commands";
+import { CommandSuggestion, CommandType, PromptQuery } from "../types/commands";
 import { limit } from "@src/helpers/list";
 
 const MAX_RESULTS = 5;
@@ -22,7 +18,7 @@ export default function useBookmarks(input: string): PromptQuery {
                 .map((treeNode) => ({
                     id: treeNode.id,
                     key: `bookmark-${treeNode.id}`,
-                    type: CommandSuggestionType.BOOKMARK,
+                    type: CommandType.BOOKMARK,
                     title: treeNode.title,
                     url: treeNode.url,
                 }));

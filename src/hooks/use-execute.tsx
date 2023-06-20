@@ -1,4 +1,4 @@
-import { CommandSuggestion, CommandSuggestionType } from "@src/types/commands";
+import { CommandSuggestion, CommandType } from "@src/types/commands";
 
 async function updateCurrentTab(
     updateProperties: chrome.tabs.UpdateProperties,
@@ -17,21 +17,35 @@ async function execute(command?: CommandSuggestion): Promise<boolean> {
     if (!command) return Promise.reject("no command provided");
 
     switch (command.type) {
-        case CommandSuggestionType.BOOKMARK:
+        case CommandType.GROUP_CREATE:
+            const [currentTab] = await chrome.tabs.query({
+                active: true,
+                lastFocusedWindow: true,
+            });
+            console.log("creating group");
+            if (!currentTab || !currentTab.id) return false;
+
+            const groupId = await chrome.tabs.group({
+                tabIds: [currentTab.id],
+            });
+            await chrome.tabGroups.update(groupId, { title: command.key });
+            return true;
+        case CommandType.BOOKMARK:
             await chrome.tabs.create({ url: command.url, active: true });
             return true;
 
-        case CommandSuggestionType.FOCUS_TAB:
+        case CommandType.FOCUS_TAB:
+            if (!command.id) return false;
             await chrome.tabs.update(parseInt(command.id, 10), {
                 active: true,
             });
             return false;
 
-        case CommandSuggestionType.CURRENT_TAB_PIN:
+        case CommandType.CURRENT_TAB_PIN:
             await updateCurrentTab({ pinned: true });
             return true;
 
-        case CommandSuggestionType.CURRENT_TAB_UNPIN:
+        case CommandType.CURRENT_TAB_UNPIN:
             await updateCurrentTab({ pinned: false });
             return true;
     }

@@ -1,5 +1,9 @@
 import { limit } from "@src/helpers/list";
-import { CommandSuggestion, CommandSuggestionType } from "@src/types/commands";
+import {
+    CommandSuggestion,
+    CommandTemplate,
+    CommandType,
+} from "@src/types/commands";
 import { flatten } from "lodash";
 
 const RESULTS_LIMIT = 5;
@@ -38,6 +42,7 @@ function digBookmarks(
 let bookmarksFolderCache = [] as SimpleBookmarkNode[];
 
 export default {
+    type: CommandType.BOOKMARK_SAVE,
     keywords: ["save"],
     keywordRequired: true,
     initialize: async (): Promise<void> => {
@@ -45,10 +50,12 @@ export default {
 
         bookmarksFolderCache = digBookmarks(rootNode);
     },
+    execute: () => Promise.resolve(false),
     generateSuggestions: async (
         rawInput: string,
     ): Promise<CommandSuggestion[]> => {
-        if (!rawInput || rawInput.length < MIN_INPUT_LENGTH) return [];
+        if (!rawInput || rawInput.length < MIN_INPUT_LENGTH)
+            return Promise.resolve([]);
 
         const inputWords = rawInput.toLowerCase().split(" ");
 
@@ -59,12 +66,14 @@ export default {
             return nonMatchingWordsIndex < 0;
         });
 
-        return folders.filter(limit(RESULTS_LIMIT)).map((folder) => ({
-            id: folder.id,
-            key: `save-on-${folder.id}`,
-            type: CommandSuggestionType.BOOKMARK_SAVE,
-            title: `Save in ${folder.index}`,
-            url: "Attach current tab in this folder",
-        }));
+        return Promise.resolve(
+            folders.filter(limit(RESULTS_LIMIT)).map((folder) => ({
+                id: folder.id,
+                key: `save-on-${folder.id}`,
+                type: CommandType.BOOKMARK_SAVE,
+                title: `Save in ${folder.index}`,
+                url: "Attach current tab in this folder",
+            })),
+        );
     },
-};
+} as CommandTemplate;

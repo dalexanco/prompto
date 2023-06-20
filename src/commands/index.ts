@@ -3,8 +3,15 @@ import { useEffect, useState } from "react";
 import { flatten } from "lodash";
 
 import saveCurrentTab from "./save-current-tab";
+import groupCurrentTab from "./group-current-tab";
+import groupCreate from "./group-create";
+import { commands } from "webextension-polyfill";
 
-export const DEFAULT_COMMANDS = [saveCurrentTab] as CommandTemplate[];
+export const DEFAULT_COMMANDS = [
+    saveCurrentTab,
+    groupCurrentTab,
+    groupCreate,
+] as CommandTemplate[];
 
 export const useSuggestions = (
     rawInput?: string,
@@ -46,3 +53,25 @@ export const useSuggestions = (
 
     return { suggestions, isLoading };
 };
+
+async function execute(
+    templates: CommandTemplate[],
+    command?: CommandSuggestion | undefined,
+): Promise<boolean> {
+    if (!command) return Promise.reject("no suggestion provided");
+
+    const commandTemplate = templates.find(
+        (template) => template.type === command.type,
+    );
+
+    if (!commandTemplate) return Promise.reject("no template found");
+
+    return commandTemplate.execute(command);
+}
+
+export default function useExecute(
+    templates = DEFAULT_COMMANDS,
+): (command?: CommandSuggestion | undefined) => Promise<boolean> {
+    return (command: CommandSuggestion | undefined) =>
+        execute(templates, command);
+}
