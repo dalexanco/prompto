@@ -5,73 +5,80 @@ import { flatten } from "lodash";
 import saveCurrentTab from "./save-current-tab";
 import groupCurrentTab from "./group-current-tab";
 import groupCreate from "./group-create";
-import { commands } from "webextension-polyfill";
+import pinCurrentTab from "./pin-current-tab";
+import unpinCurrentTab from "./unpin-current-tab";
+import ungroupCurrentTab from "./ungroup-current-tab";
+import sortTabs from "./sort-tabs";
 
 export const DEFAULT_COMMANDS = [
-    saveCurrentTab,
-    groupCurrentTab,
-    groupCreate,
+  saveCurrentTab,
+  groupCurrentTab,
+  groupCreate,
+  pinCurrentTab,
+  unpinCurrentTab,
+  ungroupCurrentTab,
+  sortTabs,
 ] as CommandTemplate[];
 
 export const useSuggestions = (
-    rawInput?: string,
-    commands = DEFAULT_COMMANDS,
+  rawInput?: string,
+  commands = DEFAULT_COMMANDS,
 ): { isLoading: boolean; suggestions: CommandSuggestion[] } => {
-    const [suggestions, setSuggestions] = useState<CommandSuggestion[]>([]);
-    const [isLoading, setLoading] = useState<boolean>(true);
+  const [suggestions, setSuggestions] = useState<CommandSuggestion[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(true);
 
-    useEffect(() => {
-        commands.forEach((command) => command.initialize());
-    }, []);
-    useEffect((): void => {
-        (async function anyNameFunction() {
-            if (!rawInput) return;
+  useEffect(() => {
+    commands.forEach(({ initialize }) => initialize && initialize());
+  }, []);
+  useEffect((): void => {
+    (async function anyNameFunction() {
+      if (!rawInput) return;
 
-            const suggestionsPromises = commands.map((command) => {
-                if (!command.keywordRequired)
-                    return command.generateSuggestions(rawInput);
+      const suggestionsPromises = commands.map((command) => {
+        if (!command.keywordRequired)
+          return command.generateSuggestions(rawInput);
 
-                const matchingKeyword = command.keywords.find((keyword) =>
-                    rawInput.startsWith(keyword),
-                );
+        const matchingKeyword = command.keywords.find((keyword) =>
+          rawInput.startsWith(keyword),
+        );
 
-                if (!matchingKeyword) return Promise.resolve([]);
+        if (!matchingKeyword) return Promise.resolve([]);
 
-                const inputAfterKeyword = rawInput
-                    .substring(matchingKeyword.length)
-                    .trim();
+        const inputAfterKeyword = rawInput
+          .substring(matchingKeyword.length)
+          .trim();
 
-                return command.generateSuggestions(inputAfterKeyword);
-            });
+        return command.generateSuggestions(inputAfterKeyword);
+      });
 
-            const results = await Promise.all(suggestionsPromises);
+      const results = await Promise.all(suggestionsPromises);
 
-            setSuggestions(flatten(results));
-            setLoading(false);
-        })();
-    }, [setSuggestions, rawInput]);
+      setSuggestions(flatten(results));
+      setLoading(false);
+    })();
+  }, [setSuggestions, rawInput]);
 
-    return { suggestions, isLoading };
+  return { suggestions, isLoading };
 };
 
 async function execute(
-    templates: CommandTemplate[],
-    command?: CommandSuggestion | undefined,
+  templates: CommandTemplate[],
+  command?: CommandSuggestion | undefined,
 ): Promise<boolean> {
-    if (!command) return Promise.reject("no suggestion provided");
+  if (!command) return Promise.reject("no suggestion provided");
 
-    const commandTemplate = templates.find(
-        (template) => template.type === command.type,
-    );
+  const commandTemplate = templates.find(
+    (template) => template.type === command.type,
+  );
 
-    if (!commandTemplate) return Promise.reject("no template found");
+  if (!commandTemplate) return Promise.reject("no template found");
 
-    return commandTemplate.execute(command);
+  return commandTemplate.execute(command);
 }
 
 export default function useExecute(
-    templates = DEFAULT_COMMANDS,
+  templates = DEFAULT_COMMANDS,
 ): (command?: CommandSuggestion | undefined) => Promise<boolean> {
-    return (command: CommandSuggestion | undefined) =>
-        execute(templates, command);
+  return (command: CommandSuggestion | undefined) =>
+    execute(templates, command);
 }
