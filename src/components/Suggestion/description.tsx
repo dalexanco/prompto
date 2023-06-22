@@ -19,27 +19,30 @@ export default function Description({
 }: DescriptionProps): JSX.Element | null {
   if (!hasFocus) return null;
 
-  const { url, type } = suggestion;
+  const { description, type } = suggestion;
+
+  if (!description) return null;
+
   let body: JSX.Element;
   switch (type) {
-    case CommandType.BOOKMARK:
-      body = (
-        <Fragment>
-          {`Open `}
-          <span className="font-medium">{simplifyUrl(url)}</span>
-        </Fragment>
-      );
-      break;
-    case CommandType.FOCUS_TAB:
-      body = (
-        <Fragment>
-          {`Focus tab `}
-          <span className="font-medium">{simplifyUrl(url)}</span>
-        </Fragment>
-      );
-      break;
+    // case CommandType.BOOKMARK:
+    //   body = (
+    //     <Fragment>
+    //       {`Open `}
+    //       <span className="font-medium">{simplifyUrl(url)}</span>
+    //     </Fragment>
+    //   );
+    //   break;
+    // case CommandType.FOCUS_TAB:
+    //   body = (
+    //     <Fragment>
+    //       {`Focus tab `}
+    //       <span className="font-medium">{simplifyUrl(url)}</span>
+    //     </Fragment>
+    //   );
+    //   break;
     default:
-      return null;
+      body = <Fragment>{description}</Fragment>;
   }
 
   return (

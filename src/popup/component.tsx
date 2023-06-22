@@ -70,7 +70,10 @@ export function Popup(): JSX.Element {
 
   return (
     <div className={css.popupContainer}>
-      <form className="border-b border-b-gray-200" onSubmit={onSubmit}>
+      <div className="px-4 py-2 bg-gray-50 border-b border-b-gray-200">
+        <span className="font-bold text-sm">🤖 Prompto</span>
+      </div>
+      <form onSubmit={onSubmit}>
         <PromptInput onChange={updateInput} ignoreKeys={KEYBOARD_ARROW_KEYS} />
       </form>
       <ul

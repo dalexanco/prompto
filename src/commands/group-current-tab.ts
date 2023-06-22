@@ -5,7 +5,7 @@ import {
   CommandType,
 } from "@src/types/commands";
 
-const RESULTS_LIMIT = 4;
+const RESULTS_LIMIT = 5;
 const MIN_INPUT_LENGTH = 1;
 
 interface CommandSuggestionGroupCurrentTab extends CommandSuggestion {
@@ -59,6 +59,7 @@ export default {
             key: `group-in-${group.id}`,
             type: CommandType.GROUP_CURRENT,
             title: `Group in ${group.title || ""}`,
+            description: "Attach current tab to a group",
           } as CommandSuggestionGroupCurrentTab),
       );
 

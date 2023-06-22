@@ -14,18 +14,25 @@ interface SuggestionProps {
   hasFocus?: boolean;
 }
 
-const mapTypeIcon = ({ type }: CommandSuggestion): JSX.Element => {
+const mapTypeIcon = (
+  { type }: CommandSuggestion,
+  hasFocus: boolean,
+): JSX.Element => {
+  const styles = classNames("w-4 h-4", {
+    ["stroke-purple-500"]: hasFocus,
+    ["stroke-gray-500"]: !hasFocus,
+  });
   switch (type) {
     case CommandType.BOOKMARK:
     case CommandType.BOOKMARK_SAVE:
-      return <BookmarkIcon className="w-4 h-4 stroke-gray-500" />;
+      return <BookmarkIcon className={styles} />;
     case CommandType.FOCUS_TAB:
-      return <RectangleStackIcon className="w-4 h-4 stroke-gray-500" />;
+      return <RectangleStackIcon className={styles} />;
     case CommandType.PIN_CURRENT_TAB:
     case CommandType.UNPIN_CURRENT_TAB:
-      return <BoltIcon className="w-4 h-4 stroke-gray-500" />;
+      return <BoltIcon className={styles} />;
     default:
-      return <MagnifyingGlassIcon className="w-4 h-4 stroke-gray-500" />;
+      return <MagnifyingGlassIcon className={styles} />;
   }
 };
 
@@ -34,14 +41,17 @@ export function Suggestion({
   hasFocus = false,
 }: SuggestionProps): JSX.Element | null {
   if (!suggestion) return null;
-  const wrapperClass = classNames("flex flex-row items-start bg-white p-1", {
-    ["bg-slate-50"]: hasFocus,
+  const wrapperClass = classNames(
+    "flex flex-row items-start p-1 mx-2 rounded-md last:mb-2",
+    {
+      ["bg-purple-50"]: hasFocus,
+    },
+  );
+  const iconClass = classNames("flex self-center rounded-lg p-2 m-2", {
+    ["bg-purple-50"]: hasFocus,
+    ["bg-gray-50"]: !hasFocus,
   });
-  const iconClass = classNames("flex self-center rounded-md p-2 m-2", {
-    ["bg-gray-200"]: hasFocus,
-    ["bg-gray-100"]: !hasFocus,
-  });
-  const Icon = mapTypeIcon(suggestion);
+  const Icon = mapTypeIcon(suggestion, hasFocus);
 
   return (
     <li className={wrapperClass}>

@@ -7,10 +7,8 @@ export interface CommandSuggestion {
   key: string;
   type: CommandType;
   title: string;
+  description?: string;
   colorCode?: string;
-
-  id?: string;
-  url?: string;
 }
 
 export enum CommandType {
