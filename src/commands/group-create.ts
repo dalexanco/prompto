@@ -47,6 +47,7 @@ export default {
         key: `group-in-new`,
         type: CommandType.GROUP_CREATE,
         title: `Group in ${rawInput}`,
+        description: "Create a new group",
         groupName: rawInput,
       } as CommandSuggestionGroupCreate,
     ]);

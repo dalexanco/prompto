@@ -8,6 +8,7 @@ import RectangleStackIcon from "@src/icons/rectangle-stack";
 import Title from "./title";
 import Description from "./description";
 import BoltIcon from "@src/icons/bolt";
+import InformationCircleIcon from "@src/icons/information-circle";
 
 interface SuggestionProps {
   suggestion: CommandSuggestion;
@@ -23,10 +24,13 @@ const mapTypeIcon = (
     ["stroke-gray-500"]: !hasFocus,
   });
   switch (type) {
+    case CommandType.HERO:
+      return <InformationCircleIcon className={styles} />;
     case CommandType.BOOKMARK:
     case CommandType.BOOKMARK_SAVE:
       return <BookmarkIcon className={styles} />;
-    case CommandType.FOCUS_TAB:
+    case CommandType.GROUP_CREATE:
+    case CommandType.GROUP_CURRENT:
       return <RectangleStackIcon className={styles} />;
     case CommandType.PIN_CURRENT_TAB:
     case CommandType.UNPIN_CURRENT_TAB:
@@ -47,7 +51,7 @@ export function Suggestion({
       ["bg-purple-50"]: hasFocus,
     },
   );
-  const iconClass = classNames("flex self-center rounded-lg p-2 m-2", {
+  const iconClass = classNames("flex self-center rounded-lg p-3 m-1", {
     ["bg-purple-50"]: hasFocus,
     ["bg-gray-50"]: !hasFocus,
   });

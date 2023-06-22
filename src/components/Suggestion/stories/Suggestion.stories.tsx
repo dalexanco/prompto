@@ -9,7 +9,6 @@ export default {
 } as ComponentMeta<typeof Suggestion>;
 
 const TITLE = "A title";
-const DEFAULT_URL = "https://www.example.com/path?query=string";
 
 const Wrapper = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
   <div className="max-w-md bg-white">{children}</div>
@@ -20,27 +19,24 @@ export const Default = (): JSX.Element => (
     <Suggestion
       suggestion={{
         key: "",
-        id: "",
         title: TITLE,
-        url: DEFAULT_URL,
+        description: "And an awesome description !",
         type: CommandType.BOOKMARK,
       }}
     />
     <Suggestion
       suggestion={{
         key: "",
-        id: "",
         title: TITLE,
-        url: DEFAULT_URL,
+        description: "And an awesome description !",
         type: CommandType.FOCUS_TAB,
       }}
     />
     <Suggestion
       suggestion={{
         key: "",
-        id: "",
         title: TITLE,
-        url: DEFAULT_URL,
+        description: "And an awesome description !",
         type: CommandType.UNKNOWN,
       }}
     />
@@ -52,18 +48,16 @@ export const WithFocus = (): JSX.Element => (
     <Suggestion
       suggestion={{
         key: "",
-        id: "",
         title: "When it does not have focus",
-        url: DEFAULT_URL,
+        description: "And an awesome description !",
         type: CommandType.FOCUS_TAB,
       }}
     />
     <Suggestion
       suggestion={{
         key: "",
-        id: "",
         title: "When it has focus",
-        url: DEFAULT_URL,
+        description: "And an awesome description !",
         type: CommandType.BOOKMARK,
       }}
       hasFocus
@@ -76,10 +70,9 @@ export const WithLongTitle = (): JSX.Element => (
     <Suggestion
       suggestion={{
         key: "",
-        id: "",
         title:
           "With a very very long title, I mean very very very very very very very very very very long",
-        url: DEFAULT_URL,
+        description: "And an awesome description !",
         type: CommandType.BOOKMARK,
       }}
     />
@@ -91,9 +84,8 @@ export const WithLongDescription = (): JSX.Element => (
     <Suggestion
       suggestion={{
         key: "",
-        id: "",
         title: TITLE,
-        url: "https://www.example.com/path?query=I%20mean%20very%20very%20very%20very%20very%20very%20very%20very%20very%20very%20long",
+        description: "And an awesome description !",
         type: CommandType.BOOKMARK,
       }}
       hasFocus

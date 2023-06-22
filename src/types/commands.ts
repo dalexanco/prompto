@@ -13,6 +13,7 @@ export interface CommandSuggestion {
 
 export enum CommandType {
   UNKNOWN,
+  HERO,
   BOOKMARK,
   BOOKMARK_SAVE,
   GROUP_CURRENT,

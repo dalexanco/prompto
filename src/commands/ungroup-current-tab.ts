@@ -25,11 +25,15 @@ export default {
     if (!currentTab || !currentTab.id || !currentTab.groupId)
       return Promise.resolve([]);
 
+    const group = await chrome.tabGroups.get(currentTab.groupId);
+    if (!group) return Promise.resolve([]);
+
     return Promise.resolve([
       {
         key: `ungroup-current-tab`,
         type: CommandType.UNGROUP_CURRENT,
         title: `Ungroup current tab`,
+        description: `Remove current tab from '${group.title}'`,
         tabId: currentTab.id,
       } as CommandSuggestionUngroupCurrentTab,
     ]);

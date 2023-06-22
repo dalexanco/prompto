@@ -17,7 +17,7 @@ export function PromptInput({
     [ignoreKeys],
   );
   return (
-    <div className="inline-flex items-center bg-white px-4 py-2">
+    <div className="inline-flex items-center bg-white px-6 py-2">
       <MagnifyingGlassIcon className="w-4 h-4 stroke-gray-500" />
       <input
         onChange={(event) => onChange && onChange(event.currentTarget.value)}

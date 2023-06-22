@@ -17,7 +17,7 @@ export default function Description({
   suggestion,
   hasFocus,
 }: DescriptionProps): JSX.Element | null {
-  if (!hasFocus) return null;
+  // if (!hasFocus) return null;
 
   const { description, type } = suggestion;
 

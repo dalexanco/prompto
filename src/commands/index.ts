@@ -9,15 +9,17 @@ import pinCurrentTab from "./pin-current-tab";
 import unpinCurrentTab from "./unpin-current-tab";
 import ungroupCurrentTab from "./ungroup-current-tab";
 import sortTabs from "./sort-tabs";
+import hero from "./hero";
 
 export const DEFAULT_COMMANDS = [
-  saveCurrentTab,
   groupCurrentTab,
   groupCreate,
+  hero,
   pinCurrentTab,
-  unpinCurrentTab,
-  ungroupCurrentTab,
+  saveCurrentTab,
   sortTabs,
+  ungroupCurrentTab,
+  unpinCurrentTab,
 ] as CommandTemplate[];
 
 export const useSuggestions = (
@@ -32,7 +34,7 @@ export const useSuggestions = (
   }, []);
   useEffect((): void => {
     (async function anyNameFunction() {
-      if (!rawInput) return;
+      if (rawInput == undefined) return;
 
       const suggestionsPromises = commands.map((command) => {
         if (!command.keywordRequired)

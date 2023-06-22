@@ -70,15 +70,12 @@ export function Popup(): JSX.Element {
 
   return (
     <div className={css.popupContainer}>
-      <div className="px-4 py-2 bg-gray-50 border-b border-b-gray-200">
-        <span className="font-bold text-sm">🤖 Prompto</span>
-      </div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="border-b border-b-gray-200">
         <PromptInput onChange={updateInput} ignoreKeys={KEYBOARD_ARROW_KEYS} />
       </form>
       <ul
         ref={suggestionListRef}
-        className="flex flex-grow flex-col items-stretch overflow-y-scroll"
+        className="flex flex-grow flex-col items-stretch overflow-y-scroll mt-2"
       >
         {suggestions.map((suggestion) => (
           <Suggestion
@@ -88,7 +85,8 @@ export function Popup(): JSX.Element {
           />
         ))}
       </ul>
-      <footer className="flex justify-end border-t border-t-gray-200 p-2 bg-gray-50">
+      <footer className="flex border-t border-t-gray-100 px-4 py-2 bg-gray-50">
+        <span className="flex-grow font-semibold text-xs">Prompto</span>
         <p className="justify-self-end text-xs text-gray-500 italic">
           Use{" "}
           <span className=" inline-flex bg-gray-200 px-1 py-1 rounded-sm">
