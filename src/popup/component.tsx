@@ -8,7 +8,7 @@ import { CommandSuggestion } from "../types/commands";
 import ChevronDownIcon from "../icons/chevron-down";
 import ChevronUpIcon from "../icons/chevron-up";
 import css from "./styles.module.css";
-import useExecute, { useSuggestions } from "@src/commands";
+import useExecute, { usePlaceholder, useSuggestions } from "@src/commands";
 
 const KEYBOARD_ARROW_KEYS = ["ArrowUp", "ArrowDown"];
 
@@ -39,6 +39,7 @@ export function Popup(): JSX.Element {
 
   const [inputValue, updateInput] = useState("");
   const { suggestions } = useSuggestions(inputValue);
+  const { placeholderValue } = usePlaceholder(inputValue);
 
   // Manage focus suggestion
   const suggestionListRef = useRef<HTMLUListElement>(null);
@@ -71,7 +72,11 @@ export function Popup(): JSX.Element {
   return (
     <div className={css.popupContainer}>
       <form onSubmit={onSubmit} className="border-b border-b-gray-200">
-        <PromptInput onChange={updateInput} ignoreKeys={KEYBOARD_ARROW_KEYS} />
+        <PromptInput
+          placeholderValue={placeholderValue}
+          onChange={updateInput}
+          ignoreKeys={KEYBOARD_ARROW_KEYS}
+        />
       </form>
       <ul
         ref={suggestionListRef}

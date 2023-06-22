@@ -1,5 +1,5 @@
 import { CommandTemplate, CommandSuggestion } from "@src/types/commands";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { flatten } from "lodash";
 
 import saveCurrentTab from "./save-current-tab";
@@ -21,6 +21,32 @@ export const DEFAULT_COMMANDS = [
   ungroupCurrentTab,
   unpinCurrentTab,
 ] as CommandTemplate[];
+
+const EMPTY_PLACEHOLDER = { placeholderValue: "" };
+export const usePlaceholder = (
+  rawInput?: string,
+  commands = DEFAULT_COMMANDS,
+): { placeholderValue?: string } => {
+  const keywords = useMemo(
+    () =>
+      flatten(
+        commands.map(({ keywords }) =>
+          keywords.map((keyword) => keyword.toLowerCase()),
+        ),
+      ),
+    [commands],
+  );
+  if (!rawInput) return EMPTY_PLACEHOLDER;
+  const inputValue = rawInput.toLowerCase();
+  const firstMatching = keywords.find((keyword) =>
+    keyword.startsWith(inputValue),
+  );
+  if (!firstMatching) return EMPTY_PLACEHOLDER;
+
+  return {
+    placeholderValue: firstMatching,
+  };
+};
 
 export const useSuggestions = (
   rawInput?: string,
