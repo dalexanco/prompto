@@ -1,5 +1,5 @@
 import React, { FormEvent, useCallback, useRef, useState } from "react";
-import { useKeyPressEvent } from "react-use";
+import { useKey, useKeyPressEvent } from "react-use";
 import browser from "webextension-polyfill";
 
 import { PromptInput } from "../components/PromptInput";
@@ -10,7 +10,8 @@ import ChevronUpIcon from "../icons/chevron-up";
 import css from "./styles.module.css";
 import useExecute, { usePlaceholder, useSuggestions } from "@src/commands";
 
-const KEYBOARD_ARROW_KEYS = ["ArrowUp", "ArrowDown"];
+const PROMPT_IGNORE_KEYS = ["ArrowUp", "ArrowDown", "Tab"];
+const SPACE = " ";
 
 const useSuggestionFocus = (
   suggestions: CommandSuggestion[],
@@ -40,6 +41,17 @@ export function Popup(): JSX.Element {
   const [inputValue, updateInput] = useState("");
   const { suggestions } = useSuggestions(inputValue);
   const { placeholderValue } = usePlaceholder(inputValue);
+  useKey(
+    "Tab",
+    (event) => {
+      if (!placeholderValue || placeholderValue.length == 0) return;
+
+      updateInput(placeholderValue + SPACE);
+      event.preventDefault();
+    },
+    {},
+    [placeholderValue, updateInput],
+  );
 
   // Manage focus suggestion
   const suggestionListRef = useRef<HTMLUListElement>(null);
@@ -73,9 +85,10 @@ export function Popup(): JSX.Element {
     <div className={css.popupContainer}>
       <form onSubmit={onSubmit} className="border-b border-b-gray-200">
         <PromptInput
-          placeholderValue={placeholderValue}
+          placeholder={placeholderValue}
+          value={inputValue}
           onChange={updateInput}
-          ignoreKeys={KEYBOARD_ARROW_KEYS}
+          ignoreKeys={PROMPT_IGNORE_KEYS}
         />
       </form>
       <ul

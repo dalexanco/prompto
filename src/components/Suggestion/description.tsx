@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { CommandSuggestion, CommandType } from "@src/types/commands";
+import { CommandSuggestion } from "@src/types/commands";
 
 interface DescriptionProps {
   suggestion: CommandSuggestion;
@@ -15,7 +15,6 @@ export const simplifyUrl = (url?: string): string | undefined => {
 
 export default function Description({
   suggestion,
-  hasFocus,
 }: DescriptionProps): JSX.Element | null {
   // if (!hasFocus) return null;
 

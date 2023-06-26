@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { LegacyRef, RefAttributes, useCallback } from "react";
 
 import MagnifyingGlassIcon from "../../icons/magnifying-glass";
 import classNames from "classnames";
@@ -6,13 +6,16 @@ import css from "./styles.module.css";
 
 interface PromptInputProps {
   onChange?: (value: string) => void;
-  placeholderValue: string;
+  placeholder?: string;
+  value?: string;
   ignoreKeys?: string[];
+  ref?: LegacyRef<HTMLInputElement>;
 }
 
 export function PromptInput({
   onChange,
-  placeholderValue,
+  placeholder = "",
+  value = "",
   ignoreKeys = [],
 }: PromptInputProps): JSX.Element {
   const ignoreArrowKeys = useCallback(
@@ -26,12 +29,12 @@ export function PromptInput({
   );
 
   return (
-    <div className={wrapperClassName} data-placeholder={placeholderValue}>
+    <div className={wrapperClassName} data-placeholder={placeholder}>
       <MagnifyingGlassIcon className="w-4 h-4 stroke-gray-500" />
       <input
         onChange={(event) => onChange && onChange(event.currentTarget.value)}
         onKeyDown={ignoreArrowKeys}
-        onKeyPress={ignoreArrowKeys}
+        value={value}
         autoFocus
         placeholder="Search or command..."
         type="text"
