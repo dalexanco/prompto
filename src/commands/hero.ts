@@ -19,7 +19,7 @@ export default {
         key: `hero`,
         type: CommandType.HERO,
         title: `Hi ! Welcome aboard !`,
-        description: `You will love Prompto, let see how`,
+        description: `You will love Prompto, let see how you can use it`,
       } as CommandSuggestion,
     ]);
   },

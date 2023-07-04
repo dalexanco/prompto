@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import classNames from "classnames";
 
 import MagnifyingGlassIcon from "../../icons/magnifying-glass";
@@ -43,7 +43,12 @@ const mapTypeIcon = (
 export function Suggestion({
   suggestion,
   hasFocus = false,
-}: SuggestionProps): JSX.Element | null {
+  ...wrapperProps
+}: React.DetailedHTMLProps<
+  React.LiHTMLAttributes<HTMLLIElement>,
+  HTMLLIElement
+> &
+  SuggestionProps): JSX.Element | null {
   if (!suggestion) return null;
   const wrapperClass = classNames(
     "flex flex-row items-start p-1 mx-2 rounded-md last:mb-2",
@@ -58,7 +63,7 @@ export function Suggestion({
   const Icon = mapTypeIcon(suggestion, hasFocus);
 
   return (
-    <li className={wrapperClass}>
+    <li className={wrapperClass} {...wrapperProps}>
       <div className={iconClass}>{Icon}</div>
       <div className="mx-2 self-center min-w-0">
         <Title suggestion={suggestion} />

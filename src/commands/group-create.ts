@@ -17,9 +17,10 @@ export default {
   initialize: async (): Promise<void> => Promise.resolve(),
   execute: async (suggestion: CommandSuggestion) => {
     const command = suggestion as CommandSuggestionGroupCreate;
+    const windowId = chrome.windows.WINDOW_ID_CURRENT;
     const [currentTab] = await chrome.tabs.query({
       active: true,
-      lastFocusedWindow: true,
+      windowId,
     });
     if (!currentTab || !currentTab.id) return false;
 
@@ -35,9 +36,9 @@ export default {
     if (!rawInput || rawInput.length < MIN_INPUT_LENGTH)
       return Promise.resolve([]);
 
-    const currentWindowId = chrome.windows.WINDOW_ID_CURRENT;
+    const windowId = chrome.windows.WINDOW_ID_CURRENT;
     const existingGroups = await chrome.tabGroups.query({
-      windowId: currentWindowId,
+      windowId,
       title: rawInput,
     });
     if (existingGroups.length > 0) return Promise.resolve([]);

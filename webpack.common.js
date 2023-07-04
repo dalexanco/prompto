@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
@@ -44,4 +45,10 @@ module.exports = {
       "@src": path.resolve(__dirname, "src/"),
     },
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+    }),
+  ],
+  // plugins: [new webpack.EnvironmentPlugin(["NODE_ENV"])],
 };

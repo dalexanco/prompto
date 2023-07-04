@@ -1,4 +1,4 @@
-import React, { LegacyRef, RefAttributes, useCallback } from "react";
+import React, { LegacyRef } from "react";
 
 import MagnifyingGlassIcon from "../../icons/magnifying-glass";
 import classNames from "classnames";
@@ -12,17 +12,15 @@ interface PromptInputProps {
   ref?: LegacyRef<HTMLInputElement>;
 }
 
+const PROMPT_IGNORE_KEYS = ["ArrowUp", "ArrowDown", "Tab"];
+
 export function PromptInput({
   onChange,
   placeholder = "",
   value = "",
-  ignoreKeys = [],
 }: PromptInputProps): JSX.Element {
-  const ignoreArrowKeys = useCallback(
-    (event: React.KeyboardEvent) =>
-      ignoreKeys.includes(event.key) && event.preventDefault(),
-    [ignoreKeys],
-  );
+  const ignoreArrowKeys = (event: React.KeyboardEvent) =>
+    PROMPT_IGNORE_KEYS.includes(event.key) && event.preventDefault();
   const wrapperClassName = classNames(
     "inline-flex items-center bg-white px-6 py-2 dynamicPlaceholder",
     css.dynamicPlaceholder,

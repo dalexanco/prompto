@@ -21,6 +21,7 @@ export enum CommandType {
   UNGROUP_CURRENT,
   FOCUS_TAB,
   PIN_CURRENT_TAB,
+  CLEAN,
   UNPIN_CURRENT_TAB,
   SORT_TABS,
 }

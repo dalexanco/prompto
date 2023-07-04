@@ -1,5 +1,5 @@
 import { CommandTemplate, CommandSuggestion } from "@src/types/commands";
-import { useEffect, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { flatten } from "lodash";
 
 import saveCurrentTab from "./save-current-tab";
@@ -10,23 +10,29 @@ import unpinCurrentTab from "./unpin-current-tab";
 import ungroupCurrentTab from "./ungroup-current-tab";
 import sortTabs from "./sort-tabs";
 import hero from "./hero";
+import { useKey } from "react-use";
+import clean from "./clean";
 
 export const DEFAULT_COMMANDS = [
+  hero,
   groupCurrentTab,
   groupCreate,
-  hero,
   pinCurrentTab,
   saveCurrentTab,
   sortTabs,
   ungroupCurrentTab,
   unpinCurrentTab,
+  clean,
 ] as CommandTemplate[];
 
-const EMPTY_PLACEHOLDER = { placeholderValue: "" };
+const SPACE = " ";
+const EMPTY_PLACEHOLDER = "";
+
 export const usePlaceholder = (
-  rawInput?: string,
+  rawInput: string,
+  setInput: Dispatch<SetStateAction<string>>,
   commands = DEFAULT_COMMANDS,
-): { placeholderValue?: string } => {
+): string => {
   const keywords = useMemo(
     () =>
       flatten(
@@ -36,16 +42,32 @@ export const usePlaceholder = (
       ),
     [commands],
   );
-  if (!rawInput) return EMPTY_PLACEHOLDER;
-  const inputValue = rawInput.toLowerCase();
-  const firstMatching = keywords.find((keyword) =>
-    keyword.startsWith(inputValue),
-  );
-  if (!firstMatching) return EMPTY_PLACEHOLDER;
+  const [placeholder, setPlaceholder] = useState(EMPTY_PLACEHOLDER);
+  useKey(
+    "Tab",
+    (event) => {
+      if (!placeholder || placeholder.length == 0) return;
 
-  return {
-    placeholderValue: firstMatching,
-  };
+      event.preventDefault();
+      setInput(placeholder + SPACE);
+    },
+    {},
+    [placeholder, setInput],
+  );
+  useEffect(() => {
+    if (!rawInput) {
+      setPlaceholder(EMPTY_PLACEHOLDER);
+      return;
+    }
+    const inputValue = rawInput.toLowerCase();
+    const firstMatching = keywords.find((keyword) =>
+      keyword.startsWith(inputValue),
+    );
+
+    setPlaceholder(firstMatching || "");
+  }, [setPlaceholder, rawInput, keywords]);
+
+  return placeholder;
 };
 
 export const useSuggestions = (
