@@ -9,7 +9,7 @@ export default function Title({ suggestion }: TitleProps): JSX.Element {
   const titleValue = suggestion.title || "Empty bookmark";
 
   return (
-    <p className="text-sm font-medium overflow-ellipsis whitespace-nowrap overflow-hidden">
+    <p className="text-sm font-medium overflow-ellipsis whitespace-nowrap overflow-hidden dark:text-gray-100">
       {titleValue}
     </p>
   );

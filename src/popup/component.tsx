@@ -65,43 +65,45 @@ export function Popup(): JSX.Element {
   };
 
   return (
-    <div className={css.popupContainer}>
-      <form onSubmit={onSubmit} className="border-b border-b-gray-200">
-        <PromptInput
-          placeholder={placeholderValue}
-          value={inputValue}
-          onChange={updateInput}
-        />
-      </form>
-      <ul
-        ref={suggestionListRef}
-        className="flex flex-grow flex-col items-stretch overflow-y-scroll mt-2"
-      >
-        {suggestions.map((suggestion, index) => (
-          <Suggestion
-            onClick={() => onClickSuggestion(index)}
-            onMouseEnter={() => setFocus(index)}
-            suggestion={suggestion}
-            key={suggestion.key}
-            hasFocus={suggestion.key === focusedSuggestion?.key}
+    <div className={`${css.popupContainer}`}>
+      <div className=" bg-white dark:bg-gray-900">
+        <form onSubmit={onSubmit} className="border-b  dark:border-b-gray-600">
+          <PromptInput
+            placeholder={placeholderValue}
+            value={inputValue}
+            onChange={updateInput}
           />
-        ))}
-      </ul>
-      <footer className="flex border-t border-t-gray-100 px-4 py-2 bg-gray-50">
-        <span className="flex-grow font-medium text-xs text-slate-600">
-          Prompto
-        </span>
-        <p className="justify-self-end text-xs text-gray-500 italic">
-          Use{" "}
-          <span className=" inline-flex bg-gray-200 px-1 py-1 rounded-sm">
-            <ChevronUpIcon className="w-2 h-2 inline-flex" />
-          </span>{" "}
-          <span className=" inline-flex bg-gray-200 px-1 py-1 rounded-sm">
-            <ChevronDownIcon className="w-2 h-2 inline-flex" />
-          </span>{" "}
-          to navigate
-        </p>
-      </footer>
+        </form>
+        <ul
+          ref={suggestionListRef}
+          className="flex flex-grow flex-col items-stretch overflow-y-scroll mt-2 dark:bg-opacity-10 dark:bg-purple-600"
+        >
+          {suggestions.map((suggestion, index) => (
+            <Suggestion
+              onClick={() => onClickSuggestion(index)}
+              onMouseEnter={() => setFocus(index)}
+              suggestion={suggestion}
+              key={suggestion.key}
+              hasFocus={suggestion.key === focusedSuggestion?.key}
+            />
+          ))}
+        </ul>
+        <footer className="flex border-t border-t-gray-100 dark:border-t-gray-600 px-4 py-2">
+          <span className="flex-grow font-medium text-xs text-slate-600">
+            Prompto
+          </span>
+          <p className="justify-self-end text-xs text-gray-500 dark:text-gray-400 italic">
+            Use{" "}
+            <span className=" inline-flex px-1 py-1 rounded-sm bg-gray-200 dark:bg-gray-500">
+              <ChevronUpIcon className="w-2 h-2 inline-flex dark:stroke-slate-100" />
+            </span>{" "}
+            <span className=" inline-flex px-1 py-1 rounded-sm bg-gray-200 dark:bg-gray-500">
+              <ChevronDownIcon className="w-2 h-2 inline-flex dark:stroke-slate-100" />
+            </span>{" "}
+            to navigate
+          </p>
+        </footer>
+      </div>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export function PromptInput({
   const ignoreArrowKeys = (event: React.KeyboardEvent) =>
     PROMPT_IGNORE_KEYS.includes(event.key) && event.preventDefault();
   const wrapperClassName = classNames(
-    "inline-flex items-center bg-white px-6 py-2 dynamicPlaceholder",
+    "inline-flex items-center bg-transparent px-6 py-2 dynamicPlaceholder",
     css.dynamicPlaceholder,
   );
 
@@ -36,7 +36,7 @@ export function PromptInput({
         autoFocus
         placeholder="Search or command..."
         type="text"
-        className="text-base whitespace-nowrap px-2 my-1 ml-4 outline-none placeholder:italic"
+        className="bg-transparent text-base whitespace-nowrap px-2 my-1 ml-4 outline-none placeholder:italic"
       />
     </div>
   );

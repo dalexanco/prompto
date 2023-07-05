@@ -53,12 +53,12 @@ export function Suggestion({
   const wrapperClass = classNames(
     "flex flex-row items-start p-1 mx-2 rounded-md last:mb-2",
     {
-      ["bg-purple-50"]: hasFocus,
+      ["bg-purple-100 dark:bg-purple-900"]: hasFocus,
     },
   );
   const iconClass = classNames("flex self-center rounded-lg p-3 m-1", {
-    ["bg-purple-50"]: hasFocus,
-    ["bg-gray-50"]: !hasFocus,
+    ["bg-purple-100 dark:bg-purple-900"]: hasFocus,
+    ["bg-gray-50 dark:bg-gray-900"]: !hasFocus,
   });
   const Icon = mapTypeIcon(suggestion, hasFocus);
 
