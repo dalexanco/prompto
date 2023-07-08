@@ -1,0 +1,9 @@
+.dynamicPlaceholder::after {
+  position: absolute;
+  content: attr(data-placeholder);
+  pointer-events: none;
+  opacity: 0.25;
+  margin-left: 2.5rem;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
