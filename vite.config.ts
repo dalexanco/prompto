@@ -1,21 +1,30 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { chromeExtension } from 'vite-plugin-chrome-extension';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 const sourceDir = resolve(__dirname, 'src');
 
+const ROOT_HARD_FILES = ['background'];
+const DEFAULT_ENTRY_FILENAME = 'assets/[name]-[hash].js';
+
 // https://vitejs.dev/config https://vitest.dev/config
 export default defineConfig({
-  plugins: [react(), tsconfigPaths(), chromeExtension()],
-  sourceMap: true,
-  resolveJsonModule: true,
-  importHelpers: true,
-  removeComments: true,
+  plugins: [react(), tsconfigPaths()],
   build: {
     rollupOptions: {
-      input: resolve(__dirname, 'manifest.json')
+      input: {
+        main: resolve(__dirname, 'popup.html'),
+        background: resolve(__dirname, 'src/background/index.ts')
+      },
+      output: {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        entryFileNames: (file: any) => {
+          return ROOT_HARD_FILES.includes(file.name)
+            ? `[name].js`
+            : DEFAULT_ENTRY_FILENAME;
+        }
+      }
     }
   },
   resolve: {
