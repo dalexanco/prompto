@@ -3,7 +3,7 @@ import {
   ExtensionRuntimeRequest,
   ExtensionRuntimeRequestType
 } from '../types/extension';
-// import { Log } from './logger'
+import { Log } from '../logger';
 
 // Listen for messages sent from other parts of the extension
 browser.runtime.onMessage.addListener((request: ExtensionRuntimeRequest) => {
@@ -15,9 +15,8 @@ browser.runtime.onMessage.addListener((request: ExtensionRuntimeRequest) => {
       console.log('backgroundPage notified that Popup.tsx has mounted.');
       break;
     case ExtensionRuntimeRequestType.LOG:
-      // const log = request.content as Log
-      //console.log(log.message, log.params)
-      console.log('log !');
+      const log = request.content as Log;
+      console.log(log.message, log.params);
       break;
     default:
       console.log('Received unknown message : ', request);
