@@ -20,7 +20,7 @@ const mapTypeIcon = (
   hasFocus: boolean
 ): JSX.Element => {
   const styles = classNames('w-4 h-4', {
-    ['stroke-purple-500']: hasFocus,
+    ['stroke-cyan-500']: hasFocus,
     ['stroke-gray-500']: !hasFocus
   });
   switch (type) {
@@ -53,11 +53,11 @@ export function Suggestion({
   const wrapperClass = classNames(
     'flex flex-row items-start p-1 mx-2 rounded-md last:mb-2',
     {
-      ['bg-purple-50']: hasFocus
+      ['bg-cyan-50']: hasFocus
     }
   );
   const iconClass = classNames('flex self-center rounded-lg p-3 m-1', {
-    ['bg-purple-50']: hasFocus,
+    ['bg-cyan-50']: hasFocus,
     ['bg-gray-50']: !hasFocus
   });
   const Icon = mapTypeIcon(suggestion, hasFocus);
@@ -65,7 +65,7 @@ export function Suggestion({
   return (
     <li className={wrapperClass} {...wrapperProps}>
       <div className={iconClass}>{Icon}</div>
-      <div className="mx-2 self-center min-w-0">
+      <div className="mx-2 min-w-0 self-center">
         <Title suggestion={suggestion} />
         <Description suggestion={suggestion} hasFocus={hasFocus} />
       </div>
