@@ -2,7 +2,6 @@
   "onboardingConfig": {
     "extends": ["config:base"]
   },
-  "logFile": "renovate.log.json",
   "gitAuthor": "RenovateBot <dalexanco+renovate@gmail.com>",
   "baseBranches": ["main"],
   "assignees": ["dalexanco"],
