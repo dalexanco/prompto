@@ -1,9 +1,12 @@
 {
-  "onboardingConfig": {
-    "extends": ["config:base"]
-  },
-  "gitAuthor": "RenovateBot <dalexanco+renovate@gmail.com>",
-  "baseBranches": ["main"],
   "assignees": ["dalexanco"],
-  "repositories": ["dalexanco/prompto"]
+  "baseBranches": ["main"],
+  "depTypeList": ["devDependencies"],
+  "gitAuthor": "RenovateBot <dalexanco+renovate@gmail.com>",
+  "groupName": "Update devDependencies",
+  "matchPackagePatterns": ["*"],
+  "onboardingConfig": { "extends": ["config:base"] },
+  "packageManager": "pnpm",
+  "repositories": ["dalexanco/prompto"],
+  "repositoryUrl": "https://github.com/dalexanco/prompto.git"
 }
