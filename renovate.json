@@ -1,7 +1,6 @@
 {
   "assignees": ["dalexanco"],
   "baseBranches": ["main"],
-  "depTypeList": ["devDependencies"],
   "gitAuthor": "RenovateBot <dalexanco+renovate@gmail.com>",
   "groupName": "Update devDependencies",
   "matchPackagePatterns": ["*"],
