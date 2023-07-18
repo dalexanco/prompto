@@ -39,7 +39,7 @@
     "@storybook/react": "^7.0.26",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@types/chrome": "^0.0.240",
+    "@types/chrome": "^0.0.241",
     "@types/lodash": "^4.14.195",
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.14",
