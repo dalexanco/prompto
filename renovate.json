@@ -5,5 +5,5 @@
   "gitAuthor": "RenovateBot <dalexanco+renovate@gmail.com>",
   "baseBranches": ["main"],
   "assignees": ["dalexanco"],
-  "repositories": ["dalexancoc/renovate-bot"]
+  "repositories": ["dalexanco/prompto"]
 }
