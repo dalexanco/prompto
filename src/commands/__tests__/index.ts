@@ -1,4 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
 
 import {
   CommandSuggestion,
@@ -31,7 +32,7 @@ describe('Command engine', () => {
   describe('#useSuggestion hook', () => {
     it('should initialize all command temaplates', () => {
       // Prepare
-      const initializeMock = jest.fn();
+      const initializeMock = vi.fn();
       const mock = mockCommand({
         initialize: () => initializeMock()
       });
