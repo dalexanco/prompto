@@ -15,8 +15,8 @@ export default function SuggestionIcon({
   hasFocus: boolean;
 }): JSX.Element {
   const styles = classNames('w-4 h-4', {
-    ['stroke-primary-500']: hasFocus,
-    ['stroke-gray-500']: !hasFocus
+    ['stroke-white']: hasFocus,
+    ['stroke-gray-600']: !hasFocus
   });
   switch (iconKey) {
     case CommandIcon.INFORMATION_CIRCLE:

@@ -33,10 +33,11 @@ const GroupCurrentTab = ({
       hasFocus={hasFocus}
       {...wrapperProps}
     >
-      <Title>
-        <TitleHighlight>group</TitleHighlight> in {customSuggestion.groupName}
+      <Title colored={hasFocus}>
+        <TitleHighlight colored={hasFocus}>group</TitleHighlight> in{' '}
+        {customSuggestion.groupName}
       </Title>
-      <Description>{suggestion.description}</Description>
+      <Description colored={hasFocus}>{suggestion.description}</Description>
     </SuggestionWrapper>
   );
 };
@@ -53,10 +54,11 @@ const GroupCreate = ({
       hasFocus={hasFocus}
       {...wrapperProps}
     >
-      <Title>
-        <TitleHighlight>group</TitleHighlight> in {customSuggestion.groupName}
+      <Title colored={hasFocus}>
+        <TitleHighlight colored={hasFocus}>group</TitleHighlight> in{' '}
+        {customSuggestion.groupName}
       </Title>
-      <Description>{suggestion.description}</Description>
+      <Description colored={hasFocus}>{suggestion.description}</Description>
     </SuggestionWrapper>
   );
 };
@@ -79,8 +81,8 @@ export function Suggestion(props: SuggestionProps): JSX.Element | null {
           hasFocus={hasFocus}
           {...wrapperProps}
         >
-          <Title>{suggestion.title}</Title>
-          <Description>{suggestion.description}</Description>
+          <Title colored={hasFocus}>{suggestion.title}</Title>
+          <Description colored={hasFocus}>{suggestion.description}</Description>
         </SuggestionWrapper>
       );
   }
