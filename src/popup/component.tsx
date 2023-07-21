@@ -39,6 +39,15 @@ export function Popup(): JSX.Element {
   useKeyPressEvent('ArrowDown', () => moveFocus(1));
   const focusedSuggestion = suggestions[focusedIndex];
 
+  // Prompt changes
+  const onInputChange = useCallback(
+    (value: string) => {
+      setFocus(0);
+      updateInput(value);
+    },
+    [updateInput, setFocus]
+  );
+
   // Form validation
   const execute = useExecute();
   const executeFocusSuggestion = useCallback(() => {
@@ -69,7 +78,7 @@ export function Popup(): JSX.Element {
         <PromptInput
           placeholder={placeholderValue}
           value={inputValue}
-          onChange={updateInput}
+          onChange={onInputChange}
         />
       </form>
       <ul
