@@ -15,6 +15,7 @@ import {
   ExtensionRuntimeRequestType
 } from '@src/types/extension';
 import logger from '@src/logger';
+import PromptoIcon from '@src/icons/prompto';
 
 export function Popup(): JSX.Element {
   React.useEffect(() => {
@@ -87,7 +88,10 @@ export function Popup(): JSX.Element {
         ))}
       </ul>
       <footer className="flex border-t border-t-gray-100 bg-gray-50 px-4 py-2">
-        <span className="grow text-xs font-medium text-slate-600">Prompto</span>
+        <span className="grow text-xs font-medium text-primary-800">
+          <PromptoIcon className="inline-block h-3 w-3 fill-current align-text-bottom text-primary-600" />{' '}
+          Prompto
+        </span>
         <p className="justify-self-end text-xs italic text-gray-500">
           Use{' '}
           <span className=" inline-flex rounded-sm bg-gray-200 p-1">
