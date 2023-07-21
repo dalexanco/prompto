@@ -28,7 +28,7 @@ export function PromptInput({
 
   return (
     <div className={wrapperClassName} data-placeholder={placeholder}>
-      <MagnifyingGlassIcon className="w-4 h-4 stroke-gray-500" />
+      <MagnifyingGlassIcon className="h-4 w-4 stroke-gray-500" />
       <input
         onChange={(event) => onChange && onChange(event.currentTarget.value)}
         onKeyDown={ignoreArrowKeys}
@@ -36,7 +36,7 @@ export function PromptInput({
         autoFocus
         placeholder="Search or command..."
         type="text"
-        className="text-base whitespace-nowrap px-2 my-1 ml-4 outline-none placeholder:italic"
+        className="my-1 ml-4 whitespace-nowrap px-2 text-base outline-none placeholder:italic"
       />
     </div>
   );

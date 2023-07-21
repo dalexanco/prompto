@@ -8,7 +8,7 @@ import {
 const RESULTS_LIMIT = 5;
 const MIN_INPUT_LENGTH = 1;
 
-interface CommandSuggestionGroupCurrentTab extends CommandSuggestion {
+export interface CommandSuggestionGroupCurrentTab extends CommandSuggestion {
   groupId: number;
   groupName: string;
 }

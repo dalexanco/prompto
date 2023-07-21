@@ -6,7 +6,7 @@ import {
 
 const MIN_INPUT_LENGTH = 2;
 
-interface CommandSuggestionGroupCreate extends CommandSuggestion {
+export interface CommandSuggestionGroupCreate extends CommandSuggestion {
   groupName?: string;
 }
 

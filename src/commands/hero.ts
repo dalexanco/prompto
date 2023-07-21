@@ -1,4 +1,5 @@
 import {
+  CommandIcon,
   CommandSuggestion,
   CommandTemplate,
   CommandType
@@ -18,6 +19,7 @@ export default {
       {
         key: `hero`,
         type: CommandType.HERO,
+        iconKey: CommandIcon.INFORMATION_CIRCLE,
         title: `Hi ! Welcome aboard !`,
         description: `You will love Prompto, let see how you can use it`
       } as CommandSuggestion

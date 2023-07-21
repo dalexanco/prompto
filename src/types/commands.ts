@@ -9,6 +9,7 @@ export interface CommandSuggestion {
   title: string;
   description?: string;
   colorCode?: string;
+  iconKey?: CommandIcon;
 }
 
 export enum CommandType {
@@ -33,4 +34,12 @@ export interface CommandTemplate {
   initialize?: () => void;
   generateSuggestions: (input: string) => Promise<CommandSuggestion[]>;
   execute: (suggestion: CommandSuggestion) => Promise<boolean>;
+}
+
+export enum CommandIcon {
+  INFORMATION_CIRCLE,
+  BOOKMARK,
+  RECTANGLE_STACK,
+  BOLT,
+  MAGNIFYING_GLASS
 }
