@@ -29,7 +29,7 @@ export function PromptInput({
 
   return (
     <div className={wrapperClassName} data-placeholder={placeholder}>
-      <PromptoIcon className="h-5 w-5 fill-current text-gray-600" />
+      <PromptoIcon className="h-5 w-5 fill-current text-primary-600" />
       <input
         onChange={(event) => onChange && onChange(event.currentTarget.value)}
         onKeyDown={ignoreArrowKeys}
