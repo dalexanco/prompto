@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+import colors from 'tailwindcss/colors';
 
-module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-    extend: {}
-  },
-  plugins: []
+export const content = ['./src/**/*.{js,ts,jsx,tsx}'];
+export const theme = {
+  extend: {
+    colors: {
+      primary: colors.cyan
+    }
+  }
 };
+export const plugins = [];

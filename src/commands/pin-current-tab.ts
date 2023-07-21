@@ -1,4 +1,5 @@
 import {
+  CommandIcon,
   CommandSuggestion,
   CommandTemplate,
   CommandType

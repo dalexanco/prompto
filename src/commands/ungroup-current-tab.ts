@@ -1,4 +1,5 @@
 import {
+  CommandIcon,
   CommandSuggestion,
   CommandTemplate,
   CommandType
@@ -32,6 +33,7 @@ export default {
       {
         key: `ungroup-current-tab`,
         type: CommandType.UNGROUP_CURRENT,
+        iconKey: CommandIcon.RECTANGLE_STACK,
         title: `Ungroup current tab`,
         description: `Remove current tab from '${group.title}'`,
         tabId: currentTab.id

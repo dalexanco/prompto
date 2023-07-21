@@ -3,6 +3,7 @@ import React, { LegacyRef } from 'react';
 import MagnifyingGlassIcon from '../../icons/magnifying-glass';
 import classNames from 'classnames';
 import css from './styles.module.css';
+import PromptoIcon from '@src/icons/prompto';
 
 interface PromptInputProps {
   onChange?: (value: string) => void;
@@ -28,7 +29,7 @@ export function PromptInput({
 
   return (
     <div className={wrapperClassName} data-placeholder={placeholder}>
-      <MagnifyingGlassIcon className="w-4 h-4 stroke-gray-500" />
+      <PromptoIcon className="h-5 w-5 fill-current text-gray-600" />
       <input
         onChange={(event) => onChange && onChange(event.currentTarget.value)}
         onKeyDown={ignoreArrowKeys}
@@ -36,7 +37,7 @@ export function PromptInput({
         autoFocus
         placeholder="Search or command..."
         type="text"
-        className="text-base whitespace-nowrap px-2 my-1 ml-4 outline-none placeholder:italic"
+        className="my-1 ml-3 whitespace-nowrap px-2 text-base outline-none placeholder:italic"
       />
     </div>
   );
