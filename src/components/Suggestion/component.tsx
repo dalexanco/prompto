@@ -42,6 +42,25 @@ const GroupCurrentTab = ({
   );
 };
 
+const Hero = ({
+  suggestion,
+  hasFocus,
+  ...wrapperProps
+}: SuggestionProps): JSX.Element => {
+  return (
+    <SuggestionWrapper
+      iconKey={CommandIcon.INFORMATION_CIRCLE}
+      hasFocus={hasFocus}
+      {...wrapperProps}
+    >
+      <Title colored={hasFocus}>{suggestion.title}</Title>
+      <Description colored={hasFocus} multiline={true}>
+        {suggestion.description}
+      </Description>
+    </SuggestionWrapper>
+  );
+};
+
 const GroupCreate = ({
   suggestion,
   hasFocus,
@@ -72,6 +91,8 @@ export function Suggestion(props: SuggestionProps): JSX.Element | null {
       return <GroupCurrentTab {...props} />;
     case CommandType.GROUP_CREATE:
       return <GroupCreate {...props} />;
+    case CommandType.HERO:
+      return <Hero {...props} />;
     default:
       const iconKey =
         suggestion.iconKey != undefined ? suggestion.iconKey : CommandIcon.BOLT;
