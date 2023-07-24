@@ -9,6 +9,8 @@ import { CommandIcon } from '@src/types/commands';
 import SquarePlusIcon from '@src/icons/square-plus';
 import SquareXIcon from '@src/icons/square-x';
 import SquareHelpIcon from '@src/icons/square-help';
+import PinnedIcon from '@src/icons/pinned';
+import PinnedOffIcon from '@src/icons/pinned-off';
 
 export default function SuggestionIcon({
   iconKey,
@@ -36,6 +38,10 @@ export default function SuggestionIcon({
       return <SquareXIcon className={styles} />;
     case CommandIcon.SQUARE_HELP:
       return <SquareHelpIcon className={styles} />;
+    case CommandIcon.PINNED:
+      return <PinnedIcon className={styles} />;
+    case CommandIcon.PINNED_OFF:
+      return <PinnedOffIcon className={styles} />;
     case CommandIcon.MAGNIFYING_GLASS:
     default:
       return <MagnifyingGlassIcon className={styles} />;

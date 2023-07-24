@@ -106,7 +106,7 @@ export const useSuggestions = (
       setSuggestions(flatten(results));
       setLoading(false);
     })();
-  }, [setSuggestions, rawInput]);
+  }, [setSuggestions, rawInput, commands]);
 
   return { suggestions, isLoading };
 };

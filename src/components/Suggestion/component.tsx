@@ -1,17 +1,11 @@
 /* eslint-disable no-case-declarations */
 import React from 'react';
 
-import {
-  CommandIcon,
-  CommandSuggestion,
-  CommandType
-} from '../../types/commands';
+import { CommandIcon, CommandSuggestion } from '../../types/commands';
 import Title from './title';
 import Description from './description';
-import SuggestionWrapper from './wrapper';
-import TitleHighlight from './title-highlight';
-import { CommandSuggestionGroupCreate } from '@src/commands/group-create';
-import { CommandSuggestionGroupCurrentTab } from '@src/commands/group-current-tab';
+import SuggestionIcon from './icon';
+import classNames from 'classnames';
 
 type SuggestionProps = React.DetailedHTMLProps<
   React.LiHTMLAttributes<HTMLLIElement>,
@@ -21,69 +15,29 @@ type SuggestionProps = React.DetailedHTMLProps<
   hasFocus?: boolean;
 };
 
-const GroupCurrentTab = ({
+export function Suggestion({
   suggestion,
-  hasFocus,
+  hasFocus = false,
   ...wrapperProps
-}: SuggestionProps): JSX.Element => {
-  const customSuggestion = suggestion as CommandSuggestionGroupCurrentTab;
-  return (
-    <SuggestionWrapper
-      iconKey={suggestion.iconKey || CommandIcon.BOLT}
-      hasFocus={hasFocus}
-      {...wrapperProps}
-    >
-      <Title colored={hasFocus}>
-        <TitleHighlight colored={hasFocus}>group</TitleHighlight> in{' '}
-        {customSuggestion.groupName}
-      </Title>
-      <Description colored={hasFocus}>{suggestion.description}</Description>
-    </SuggestionWrapper>
-  );
-};
-
-const GroupCreate = ({
-  suggestion,
-  hasFocus,
-  ...wrapperProps
-}: SuggestionProps): JSX.Element => {
-  const customSuggestion = suggestion as CommandSuggestionGroupCreate;
-  return (
-    <SuggestionWrapper
-      iconKey={suggestion.iconKey || CommandIcon.BOLT}
-      hasFocus={hasFocus}
-      {...wrapperProps}
-    >
-      <Title colored={hasFocus}>
-        <TitleHighlight colored={hasFocus}>group</TitleHighlight> in{' '}
-        {customSuggestion.groupName}
-      </Title>
-      <Description colored={hasFocus}>{suggestion.description}</Description>
-    </SuggestionWrapper>
-  );
-};
-
-export function Suggestion(props: SuggestionProps): JSX.Element | null {
-  const { suggestion, hasFocus = false, ...wrapperProps } = props;
+}: SuggestionProps): JSX.Element | null {
   if (!suggestion) return null;
 
-  switch (suggestion.type) {
-    case CommandType.GROUP_CURRENT:
-      return <GroupCurrentTab {...props} />;
-    case CommandType.GROUP_CREATE:
-      return <GroupCreate {...props} />;
-    default:
-      const iconKey =
-        suggestion.iconKey != undefined ? suggestion.iconKey : CommandIcon.BOLT;
-      return (
-        <SuggestionWrapper
-          iconKey={iconKey}
-          hasFocus={hasFocus}
-          {...wrapperProps}
-        >
-          <Title colored={hasFocus}>{suggestion.title}</Title>
-          <Description colored={hasFocus}>{suggestion.description}</Description>
-        </SuggestionWrapper>
-      );
-  }
+  const wrapperClass = classNames('flex flex-row items-start p-1 last:mb-2', {
+    ['bg-gray-50']: hasFocus
+  });
+  const iconClass = classNames('flex self-center rounded-lg p-2 m-1', {});
+  const iconKey =
+    suggestion.iconKey != undefined ? suggestion.iconKey : CommandIcon.BOLT;
+
+  return (
+    <li className={wrapperClass} {...wrapperProps}>
+      <div className={iconClass}>
+        <SuggestionIcon hasFocus={hasFocus} iconKey={iconKey} />
+      </div>
+      <div className="mx-2 min-w-0 self-center">
+        <Title colored={hasFocus}>{suggestion.title}</Title>
+        <Description colored={hasFocus}>{suggestion.description}</Description>
+      </div>
+    </li>
+  );
 }

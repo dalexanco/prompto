@@ -36,7 +36,7 @@ export function PromptInput({
         autoFocus
         placeholder="Search or command..."
         type="text"
-        className="my-1 ml-3 whitespace-nowrap px-2 text-base outline-none placeholder:italic"
+        className="my-1 ml-3 whitespace-nowrap px-2 text-base leading-none outline-none placeholder:italic"
       />
     </div>
   );

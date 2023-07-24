@@ -1,4 +1,5 @@
 import {
+  CommandIcon,
   CommandSuggestion,
   CommandTemplate,
   CommandType
@@ -30,7 +31,8 @@ export default {
         key: `unpin-current-tab`,
         type: CommandType.UNPIN_CURRENT_TAB,
         title: `Unpin current tab`,
-        tabId: currentTab.id
+        tabId: currentTab.id,
+        iconKey: CommandIcon.PINNED_OFF
       } as CommandSuggestionUnpinCurrentTab
     ]);
   }
