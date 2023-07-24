@@ -4,8 +4,6 @@ import browser from 'webextension-polyfill';
 
 import { PromptInput } from '../components/PromptInput';
 import { Suggestion } from '../components/Suggestion';
-import ChevronDownIcon from '../icons/chevron-down';
-import ChevronUpIcon from '../icons/chevron-up';
 import css from './styles.module.css';
 import useExecute, { usePlaceholder, useSuggestions } from '@src/commands';
 import useFocusLoop from '@src/hooks/useFocusLoop';
@@ -15,7 +13,7 @@ import {
   ExtensionRuntimeRequestType
 } from '@src/types/extension';
 import logger from '@src/logger';
-import PromptoIcon from '@src/icons/prompto';
+import Footer from '@src/components/Footer';
 
 export function Popup(): JSX.Element {
   React.useEffect(() => {
@@ -96,22 +94,7 @@ export function Popup(): JSX.Element {
           />
         ))}
       </ul>
-      <footer className="flex border-t border-t-gray-100 bg-gray-50 px-4 py-2">
-        <span className="grow text-xs font-medium text-primary-800">
-          <PromptoIcon className="inline-block h-3 w-3 fill-current align-text-bottom text-primary-600" />{' '}
-          Prompto
-        </span>
-        <p className="justify-self-end text-xs italic text-gray-500">
-          Use{' '}
-          <span className=" inline-flex rounded-sm bg-gray-200 p-1">
-            <ChevronUpIcon className="inline-flex h-2 w-2" />
-          </span>{' '}
-          <span className=" inline-flex rounded-sm bg-gray-200 p-1">
-            <ChevronDownIcon className="inline-flex h-2 w-2" />
-          </span>{' '}
-          to navigate
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }

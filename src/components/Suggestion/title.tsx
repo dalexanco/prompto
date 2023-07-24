@@ -10,7 +10,7 @@ export default function Title({ colored, children }: TitleProps): JSX.Element {
   const styles = classNames(
     'overflow-hidden text-ellipsis whitespace-nowrap text-sm',
     {
-      ['text-white']: colored
+      ['text-gray-800']: colored
     }
   );
   return <p className={styles}>{children}</p>;

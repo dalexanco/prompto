@@ -6,6 +6,9 @@ import InformationCircleIcon from '@src/icons/information-circle';
 import MagnifyingGlassIcon from '@src/icons/magnifying-glass';
 import RectangleStackIcon from '@src/icons/rectangle-stack';
 import { CommandIcon } from '@src/types/commands';
+import SquarePlusIcon from '@src/icons/square-plus';
+import SquareXIcon from '@src/icons/square-x';
+import SquareHelpIcon from '@src/icons/square-help';
 
 export default function SuggestionIcon({
   iconKey,
@@ -14,8 +17,8 @@ export default function SuggestionIcon({
   iconKey: CommandIcon;
   hasFocus: boolean;
 }): JSX.Element {
-  const styles = classNames('w-4 h-4', {
-    ['stroke-white']: hasFocus,
+  const styles = classNames('w-5 h-5', {
+    ['stroke-primary-500']: hasFocus,
     ['stroke-gray-600']: !hasFocus
   });
   switch (iconKey) {
@@ -27,6 +30,13 @@ export default function SuggestionIcon({
       return <RectangleStackIcon className={styles} />;
     case CommandIcon.BOLT:
       return <BoltIcon className={styles} />;
+    case CommandIcon.SQUARE_PLUS:
+      return <SquarePlusIcon className={styles} />;
+    case CommandIcon.SQUARE_X:
+      return <SquareXIcon className={styles} />;
+    case CommandIcon.SQUARE_HELP:
+      return <SquareHelpIcon className={styles} />;
+    case CommandIcon.MAGNIFYING_GLASS:
     default:
       return <MagnifyingGlassIcon className={styles} />;
   }

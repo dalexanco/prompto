@@ -29,7 +29,7 @@ const GroupCurrentTab = ({
   const customSuggestion = suggestion as CommandSuggestionGroupCurrentTab;
   return (
     <SuggestionWrapper
-      iconKey={CommandIcon.RECTANGLE_STACK}
+      iconKey={suggestion.iconKey || CommandIcon.BOLT}
       hasFocus={hasFocus}
       {...wrapperProps}
     >
@@ -50,7 +50,7 @@ const GroupCreate = ({
   const customSuggestion = suggestion as CommandSuggestionGroupCreate;
   return (
     <SuggestionWrapper
-      iconKey={CommandIcon.RECTANGLE_STACK}
+      iconKey={suggestion.iconKey || CommandIcon.BOLT}
       hasFocus={hasFocus}
       {...wrapperProps}
     >
