@@ -25,15 +25,10 @@ export default function SuggestionWrapper({
   iconKey,
   ...wrapperProps
 }: SuggestionWrapperProps) {
-  const wrapperClass = classNames(
-    'flex flex-row items-start p-1 mx-2 rounded-md last:mb-2',
-    {
-      ['bg-primary-600']: hasFocus
-    }
-  );
-  const iconClass = classNames('flex self-center rounded-lg p-3 m-1', {
-    [' bg-gray-50']: !hasFocus
+  const wrapperClass = classNames('flex flex-row items-start p-1 last:mb-2', {
+    ['bg-gray-50']: hasFocus
   });
+  const iconClass = classNames('flex self-center rounded-lg p-2 m-1', {});
 
   return (
     <li className={wrapperClass} {...wrapperProps}>

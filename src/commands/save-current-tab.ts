@@ -1,5 +1,6 @@
 import { limit } from '@src/helpers/list';
 import {
+  CommandIcon,
   CommandSuggestion,
   CommandTemplate,
   CommandType
@@ -65,13 +66,17 @@ export default {
     });
 
     return Promise.resolve(
-      folders.filter(limit(RESULTS_LIMIT)).map((folder) => ({
-        id: folder.id,
-        key: `save-on-${folder.id}`,
-        type: CommandType.BOOKMARK_SAVE,
-        title: `Save in ${folder.index}`,
-        url: 'Attach current tab in this folder'
-      }))
+      folders.filter(limit(RESULTS_LIMIT)).map(
+        (folder) =>
+          ({
+            id: folder.id,
+            key: `save-on-${folder.id}`,
+            type: CommandType.BOOKMARK_SAVE,
+            title: `Save in ${folder.index}`,
+            url: 'Attach current tab in this folder',
+            iconKey: CommandIcon.BOOKMARK
+          } as CommandSuggestion)
+      )
     );
   }
 } as CommandTemplate;

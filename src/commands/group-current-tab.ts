@@ -1,5 +1,6 @@
 import { limit } from '@src/helpers/list';
 import {
+  CommandIcon,
   CommandSuggestion,
   CommandTemplate,
   CommandType
@@ -22,7 +23,8 @@ function mapGroupToSuggestion(
     key: `group-in-${group.id}`,
     type: CommandType.GROUP_CURRENT,
     title: `Group in ${group.title || ''}`,
-    description: 'Attach current tab to a group'
+    description: 'Attach current tab to a group',
+    iconKey: CommandIcon.SQUARE_PLUS
   } as CommandSuggestionGroupCurrentTab;
 }
 

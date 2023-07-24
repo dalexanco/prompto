@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Suggestion } from '../component';
 import { ComponentMeta } from '@storybook/react';
-import { CommandType } from '../../../types/commands';
+import { CommandIcon, CommandType } from '../../../types/commands';
 
 export default {
   title: 'Components/Suggestion',
@@ -21,7 +21,8 @@ export const Default = (): JSX.Element => (
         key: '',
         title: TITLE,
         description: 'And an awesome description !',
-        type: CommandType.BOOKMARK
+        type: CommandType.BOOKMARK,
+        iconKey: CommandIcon.BOOKMARK
       }}
     />
     <Suggestion
@@ -29,7 +30,8 @@ export const Default = (): JSX.Element => (
         key: '',
         title: TITLE,
         description: 'And an awesome description !',
-        type: CommandType.FOCUS_TAB
+        type: CommandType.FOCUS_TAB,
+        iconKey: CommandIcon.SQUARE_PLUS
       }}
     />
     <Suggestion
@@ -38,6 +40,16 @@ export const Default = (): JSX.Element => (
         title: TITLE,
         description: 'And an awesome description !',
         type: CommandType.UNKNOWN
+      }}
+      hasFocus
+    />
+    <Suggestion
+      suggestion={{
+        key: '',
+        title: TITLE,
+        description: 'And an awesome description !',
+        type: CommandType.UNKNOWN,
+        iconKey: CommandIcon.INFORMATION_CIRCLE
       }}
     />
   </Wrapper>

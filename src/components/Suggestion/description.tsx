@@ -13,7 +13,8 @@ export default function Description({
   const styles = classNames(
     'overflow-hidden text-ellipsis whitespace-nowrap text-xs',
     {
-      ['text-primary-200']: colored
+      ['text-gray-600']: colored,
+      ['text-gray-500']: !colored
     }
   );
   return <p className={styles}>{children}</p>;

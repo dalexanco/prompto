@@ -22,13 +22,13 @@ export function PromptInput({
   const ignoreArrowKeys = (event: React.KeyboardEvent) =>
     PROMPT_IGNORE_KEYS.includes(event.key) && event.preventDefault();
   const wrapperClassName = classNames(
-    'inline-flex items-center bg-white px-6 py-2 dynamicPlaceholder',
+    'inline-flex items-center bg-white px-4 py-2 dynamicPlaceholder',
     css.dynamicPlaceholder
   );
 
   return (
     <div className={wrapperClassName} data-placeholder={placeholder}>
-      <MagnifyingGlassIcon className="h-4 w-4 stroke-gray-500" />
+      <MagnifyingGlassIcon className="h-5 w-5 stroke-gray-500" />
       <input
         onChange={(event) => onChange && onChange(event.currentTarget.value)}
         onKeyDown={ignoreArrowKeys}
@@ -36,7 +36,7 @@ export function PromptInput({
         autoFocus
         placeholder="Search or command..."
         type="text"
-        className="my-1 ml-4 whitespace-nowrap px-2 text-base outline-none placeholder:italic"
+        className="my-1 ml-3 whitespace-nowrap px-2 text-base outline-none placeholder:italic"
       />
     </div>
   );

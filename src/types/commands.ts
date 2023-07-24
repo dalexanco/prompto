@@ -41,5 +41,8 @@ export enum CommandIcon {
   BOOKMARK,
   RECTANGLE_STACK,
   BOLT,
+  SQUARE_PLUS,
+  SQUARE_X,
+  SQUARE_HELP,
   MAGNIFYING_GLASS
 }

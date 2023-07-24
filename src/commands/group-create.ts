@@ -1,4 +1,5 @@
 import {
+  CommandIcon,
   CommandSuggestion,
   CommandTemplate,
   CommandType
@@ -49,7 +50,8 @@ export default {
         type: CommandType.GROUP_CREATE,
         title: `Group in ${rawInput}`,
         description: 'Create a new group',
-        groupName: rawInput
+        groupName: rawInput,
+        iconKey: CommandIcon.SQUARE_HELP
       } as CommandSuggestionGroupCreate
     ]);
   }
