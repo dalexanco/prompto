@@ -1,60 +1,36 @@
-![reactjs-vite-tailwindcss-boilerplate](https://user-images.githubusercontent.com/16243531/217138979-b854309c-4742-4275-a705-f9fec5158217.jpg)
+![Prompto logo](https://github.com/dalexanco/prompto/blob/main/docs/logo.svg?raw=true)
 
-# React Tailwindcss Boilerplate build with Vite
+# Prompto
 
-This is a boilerplate build with Vite, React 18, TypeScript, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier.
+Prompto is a chrome extension that let you control your browser using a prompt.
+You will find many commands to group a tab, save a bookmark or even clean your current activity.
 
-## What is inside?
-
-This project uses many tools like:
-
-- [Vite](https://vitejs.dev)
-- [ReactJS](https://reactjs.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Vitest](https://vitest.dev)
-- [Testing Library](https://testing-library.com)
-- [Tailwindcss](https://tailwindcss.com)
-- [Eslint](https://eslint.org)
-- [Prettier](https://prettier.io)
+**Technical aspect**
+This chrome extension is built with Vite, React 18, TypeScript, Tailwind, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier.
 
 ## Getting Started
 
-### Install
-
-Create the project.
-
-```bash
-npx degit joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate my-app
-```
-
-Access the project directory.
-
-```bash
-cd my-app
-```
-
-Install dependencies.
+As a prerequisite, you have to install npm dependencies first.
 
 ```bash
 pnpm install
 ```
 
-Serve with hot reload at <http://localhost:5173>.
+### Dev
+
+Then run the development server
 
 ```bash
 pnpm run dev
 ```
 
+You can now load the "unpacked" extension from the folder `dist/`.
+The extension is now added to your browser.
+
 ### Lint
 
 ```bash
 pnpm run lint
-```
-
-### Typecheck
-
-```bash
-pnpm run typecheck
 ```
 
 ### Build

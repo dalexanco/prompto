@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Extension Starter",
-  "description": "A Chrome Extension starter kit",
+  "name": "Prompto",
+  "description": "A prompt to master you browser",
   "version": "1.0.0",
   "action": {
     "default_icon": {
