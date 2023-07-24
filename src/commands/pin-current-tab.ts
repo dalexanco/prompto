@@ -31,7 +31,8 @@ export default {
         key: `pin-current-tab`,
         type: CommandType.PIN_CURRENT_TAB,
         title: `Pin current tab`,
-        tabId: currentTab.id
+        tabId: currentTab.id,
+        iconKey: CommandIcon.PINNED
       } as CommandSuggestionPinCurrentTab
     ]);
   }

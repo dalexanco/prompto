@@ -48,8 +48,8 @@ export default {
       {
         key: `group-in-new`,
         type: CommandType.GROUP_CREATE,
-        title: `Group in ${rawInput}`,
-        description: 'Create a new group',
+        title: `group in ${rawInput}`,
+        description: 'Create a new group containing current tab',
         groupName: rawInput,
         iconKey: CommandIcon.SQUARE_HELP
       } as CommandSuggestionGroupCreate

@@ -22,8 +22,8 @@ function mapGroupToSuggestion(
     groupName: group.title,
     key: `group-in-${group.id}`,
     type: CommandType.GROUP_CURRENT,
-    title: `Group in ${group.title || ''}`,
-    description: 'Attach current tab to a group',
+    title: `group in ${group.title || ''}`,
+    description: 'Attach current tab to this group',
     iconKey: CommandIcon.SQUARE_PLUS
   } as CommandSuggestionGroupCurrentTab;
 }
