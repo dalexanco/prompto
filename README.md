@@ -1,22 +1,53 @@
-![Prompto logo](https://github.com/dalexanco/prompto/blob/main/docs/logo.svg?raw=true)
+<h1 align="center">
+    <img src="./docs/logo.svg" width="80" height="80" /><br/>
+    Prompto
+</h1>
 
-# Prompto
+<p align="center">
+  <i align="center">
+    Prompto is a chrome extension that let you control your browser using a prompt.<br/>
+  </i>
+</p>
 
-Prompto is a chrome extension that let you control your browser using a prompt.
+## Introduction
+
 You will find many commands to group a tab, save a bookmark or even clean your current activity.
 
-**Technical aspect**
-This chrome extension is built with Vite, React 18, TypeScript, Tailwind, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier.
+## Usage
 
-## Getting Started
+--- Work in progress ---
 
-As a prerequisite, you have to install npm dependencies first.
+### Tutorials
+
+### Commands
+
+## Development
+
+<details>
+<summary>
+Pre-requisites
+</summary> <br />
+To be able to start development on amplication make sure that you have the following pre-requisites installed:
+
+###
+
+- Node.js v18 or above
+- Git
+
+Then install the project dependencies :
 
 ```bash
 pnpm install
 ```
 
-### Dev
+</details>
+
+<details>
+<summary>
+Scripts
+</summary> <br />
+
+### Local development
 
 Then run the development server
 
@@ -24,7 +55,7 @@ Then run the development server
 pnpm run dev
 ```
 
-You can now load the "unpacked" extension from the folder `dist/`.
+You can now load the "unpacked" extension from the folder `dist/`.<br/>
 The extension is now added to your browser.
 
 ### Lint
@@ -50,6 +81,8 @@ View and interact with your tests via UI.
 ```bash
 pnpm run test:ui
 ```
+
+</details>
 
 ## License
 
