@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useState } from 'react';
+import React, { Component, FormEvent, useCallback, useState } from 'react';
 import { useKeyPressEvent } from 'react-use';
 import browser from 'webextension-polyfill';
 
@@ -14,6 +14,8 @@ import {
 } from '@src/types/extension';
 import logger from '@src/logger';
 import Footer from '@src/components/Footer';
+import { CommandType } from '@src/types/commands';
+import SuggestionBookmark from '@src/components/SuggestionBookmark';
 
 export function Popup(): JSX.Element {
   React.useEffect(() => {
@@ -84,15 +86,17 @@ export function Popup(): JSX.Element {
         ref={suggestionListRef}
         className="mt-2 flex grow flex-col items-stretch overflow-y-scroll"
       >
-        {suggestions.map((suggestion, index) => (
-          <Suggestion
-            onClick={() => onClickSuggestion(index)}
-            onMouseEnter={() => setFocus(index)}
-            suggestion={suggestion}
-            key={suggestion.key}
-            hasFocus={suggestion.key === focusedSuggestion?.key}
-          />
-        ))}
+        {suggestions.map((suggestion, index) => {
+          return (
+            <Suggestion
+              onClick={() => onClickSuggestion(index)}
+              onMouseEnter={() => setFocus(index)}
+              suggestion={suggestion}
+              key={suggestion.key}
+              hasFocus={suggestion.key === focusedSuggestion?.key}
+            />
+          );
+        })}
       </ul>
       <Footer />
     </div>

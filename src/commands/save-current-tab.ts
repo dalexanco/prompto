@@ -10,22 +10,59 @@ import { flatten } from 'lodash';
 const RESULTS_LIMIT = 5;
 const MIN_INPUT_LENGTH = 2;
 
-interface SimpleBookmarkNode {
+export enum BookmarkFolderSuggestionType {
+  FOLDER,
+  ROOT_BAR,
+  ROOT_MOB,
+  ROOT_OTHERS
+}
+
+export interface BookmarkFolderSuggestion {
   id: string;
-  path: string[];
-  index: string;
+  type: BookmarkFolderSuggestionType;
+  title: string;
+}
+
+interface SimpleBookmarkNode {
+  bookmarkFolderId: string;
+  bookmarkFolderPath: BookmarkFolderSuggestion[];
+  bookmarkIndex: string;
+}
+
+export type SaveCurrentTabSuggestion = CommandSuggestion & SimpleBookmarkNode;
+
+const SYSTEM_FOLDER_TYPES = {
+  ['1']: BookmarkFolderSuggestionType.ROOT_BAR,
+  ['2']: BookmarkFolderSuggestionType.ROOT_OTHERS,
+  ['3']: BookmarkFolderSuggestionType.ROOT_MOB
+} as {
+  [key: string]: BookmarkFolderSuggestionType;
+};
+
+function mapNodeToBookmarkFolder({
+  id,
+  title
+}: chrome.bookmarks.BookmarkTreeNode): BookmarkFolderSuggestion {
+  return {
+    id,
+    type: SYSTEM_FOLDER_TYPES[id] || BookmarkFolderSuggestionType.FOLDER,
+    title
+  } as BookmarkFolderSuggestion;
 }
 
 function digBookmarks(
   node: chrome.bookmarks.BookmarkTreeNode,
-  parentPath: string[] = []
+  parentPath: BookmarkFolderSuggestion[] = []
 ): SimpleBookmarkNode[] {
-  const currentPath = node.title ? [...parentPath, node.title] : parentPath;
-  const currentIndex = currentPath.join('/').toLocaleLowerCase();
+  const currentPath = node.title
+    ? [...parentPath, mapNodeToBookmarkFolder(node)]
+    : parentPath;
   const currentSimpleNode = {
-    id: node.id,
-    path: currentPath,
-    index: currentIndex
+    bookmarkFolderId: node.id,
+    bookmarkFolderPath: currentPath,
+    bookmarkIndex: currentPath
+      .map(({ title }) => title.toLocaleLowerCase())
+      .join('/')
   } as SimpleBookmarkNode;
 
   if (!node.children) return [];
@@ -60,7 +97,7 @@ export default {
 
     const folders = bookmarksFolderCache.filter((folder) => {
       const nonMatchingWordsIndex = inputWords.findIndex(
-        (word) => !folder.index.includes(word)
+        (word) => !folder.bookmarkIndex.includes(word)
       );
       return nonMatchingWordsIndex < 0;
     });
@@ -69,13 +106,14 @@ export default {
       folders.filter(limit(RESULTS_LIMIT)).map(
         (folder) =>
           ({
-            id: folder.id,
-            key: `save-on-${folder.id}`,
+            id: folder.bookmarkFolderId,
+            key: `save-on-${folder.bookmarkFolderId}`,
             type: CommandType.BOOKMARK_SAVE,
-            title: `Save in ${folder.index}`,
+            title: `Save in ${folder.bookmarkIndex}`,
             url: 'Attach current tab in this folder',
-            iconKey: CommandIcon.BOOKMARK
-          } as CommandSuggestion)
+            iconKey: CommandIcon.BOOKMARK,
+            ...folder
+          } as SaveCurrentTabSuggestion)
       )
     );
   }

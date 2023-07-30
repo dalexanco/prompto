@@ -8,7 +8,7 @@ interface TitleProps {
 
 export default function Title({ colored, children }: TitleProps): JSX.Element {
   const styles = classNames(
-    'overflow-hidden text-ellipsis whitespace-nowrap text-sm',
+    'overflow-x-hidden text-ellipsis whitespace-nowrap text-sm',
     {
       ['text-gray-800']: colored
     }
