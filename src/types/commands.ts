@@ -39,6 +39,7 @@ export interface CommandTemplate {
 export enum CommandIcon {
   BOLT,
   BOOKMARK,
+  EYE,
   INFORMATION_CIRCLE,
   MAGNIFYING_GLASS,
   PINNED,

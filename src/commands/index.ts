@@ -12,9 +12,11 @@ import sortTabs from './sort-tabs';
 import hero from './hero';
 import { useKey } from 'react-use';
 import clean from './clean';
+import focusTab from './focus-tab';
 
 export const DEFAULT_COMMANDS = [
   hero,
+  focusTab,
   groupCurrentTab,
   groupCreate,
   pinCurrentTab,
