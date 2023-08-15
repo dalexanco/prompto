@@ -1,7 +1,8 @@
+@import url(./styles/material/theme.css);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply bg-gray-200;
+  /* @apply bg-gray-200; */
 }

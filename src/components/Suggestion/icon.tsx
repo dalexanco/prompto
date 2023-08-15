@@ -19,10 +19,7 @@ export default function SuggestionIcon({
   iconKey: CommandIcon;
   hasFocus: boolean;
 }): JSX.Element {
-  const styles = classNames('w-5 h-5', {
-    ['stroke-primary-500']: hasFocus,
-    ['stroke-gray-600']: !hasFocus
-  });
+  const styles = classNames('w-5 h-5 stroke-on-surface-variant', {});
   switch (iconKey) {
     case CommandIcon.INFORMATION_CIRCLE:
       return <InformationCircleIcon className={styles} />;

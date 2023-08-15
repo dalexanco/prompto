@@ -2,19 +2,19 @@ import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
 interface DescriptionProps {
-  colored?: boolean;
   children: ReactNode;
+  hasFocus?: boolean;
 }
 
 export default function Description({
-  colored,
-  children
+  children,
+  hasFocus = false
 }: DescriptionProps): JSX.Element | null {
   const styles = classNames(
-    'overflow-hidden text-ellipsis whitespace-nowrap text-xs',
+    'overflow-hidden text-ellipsis whitespace-nowrap text-xs text-on-surface-container',
     {
-      ['text-gray-600']: colored,
-      ['text-gray-500']: !colored
+      ['text-on-surface']: hasFocus,
+      ['text-on-surface-variant']: !hasFocus
     }
   );
   return <p className={styles}>{children}</p>;

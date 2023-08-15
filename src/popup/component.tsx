@@ -15,6 +15,20 @@ import {
 import logger from '@src/logger';
 import Footer from '@src/components/Footer';
 
+function Hero({ inputValue }: { inputValue: string }) {
+  if (inputValue && inputValue.length > 0) return;
+
+  return (
+    <div className="mx-3 mt-3 rounded-xl bg-secondary-container px-5 py-4 text-on-secondary-container">
+      <p className="text-xs font-bold uppercase leading-5">Welcome aboard !</p>
+      <p className="text-sm opacity-80">
+        The best way to learn is to play with it, so try typing a command like
+        &quot;group&quot;, &quot;save&quot; or &quot;clean&quot;.{' '}
+      </p>
+    </div>
+  );
+}
+
 export function Popup(): JSX.Element {
   React.useEffect(() => {
     browser.runtime.sendMessage({
@@ -72,28 +86,36 @@ export function Popup(): JSX.Element {
   };
 
   return (
-    <div className={css.popupContainer}>
-      <form onSubmit={onSubmit} className="border-b border-b-gray-200">
+    <div className={`${css.popupContainer} bg-background`}>
+      <form
+        onSubmit={onSubmit}
+        className="bg-surface-container border-b-surface-container-high border-b"
+      >
         <PromptInput
           placeholder={placeholderValue}
           value={inputValue}
           onChange={onInputChange}
         />
       </form>
-      <ul
-        ref={suggestionListRef}
-        className="mt-2 flex grow flex-col items-stretch overflow-y-scroll"
-      >
-        {suggestions.map((suggestion, index) => (
-          <Suggestion
-            onClick={() => onClickSuggestion(index)}
-            onMouseEnter={() => setFocus(index)}
-            suggestion={suggestion}
-            key={suggestion.key}
-            hasFocus={suggestion.key === focusedSuggestion?.key}
-          />
-        ))}
-      </ul>
+      <div className="flex grow flex-col overflow-y-scroll">
+        <Hero inputValue={inputValue} />
+
+        <ul
+          ref={suggestionListRef}
+          className="flex grow flex-col items-stretch p-3"
+        >
+          {suggestions.map((suggestion, index) => (
+            <Suggestion
+              className="first:rounded-t-xl last:rounded-b-xl"
+              onClick={() => onClickSuggestion(index)}
+              onMouseEnter={() => setFocus(index)}
+              suggestion={suggestion}
+              key={suggestion.key}
+              hasFocus={suggestion.key === focusedSuggestion?.key}
+            />
+          ))}
+        </ul>
+      </div>
       <Footer />
     </div>
   );

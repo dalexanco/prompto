@@ -15,14 +15,15 @@ export default {
   ): Promise<CommandSuggestion[]> => {
     if (rawInput.length > 0) return Promise.resolve([]);
 
-    return Promise.resolve([
-      {
-        key: `hero`,
-        type: CommandType.HERO,
-        iconKey: CommandIcon.INFORMATION_CIRCLE,
-        title: `Hi ! Welcome aboard !`,
-        description: `You will love Prompto, let see how you can use it`
-      } as CommandSuggestion
-    ]);
+    return Promise.resolve([]);
+    // return Promise.resolve([
+    //   {
+    //     key: `hero`,
+    //     type: CommandType.HERO,
+    //     iconKey: CommandIcon.INFORMATION_CIRCLE,
+    //     title: `Hi ! Welcome aboard !`,
+    //     description: `You will love Prompto, let see how you can use it`
+    //   } as CommandSuggestion
+    // ]);
   }
 } as CommandTemplate;
