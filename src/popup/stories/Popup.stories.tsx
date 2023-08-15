@@ -2,7 +2,7 @@ import BookmarkIcon from '@src/icons/bookmark';
 import MagnifyingGlassIcon from '@src/icons/magnifying-glass';
 import { ComponentMeta } from '@storybook/react';
 import { range } from 'lodash';
-import * as React from 'react';
+import React from 'react';
 
 export default {
   title: 'Mockups/Popup',
@@ -10,45 +10,53 @@ export default {
 } as ComponentMeta<typeof Mockup>;
 
 const Item = () => (
-  <li className=" bg-surface-container-low hover:bg-surface-container mt-1 flex flex-row p-3 first:rounded-t-xl last:rounded-b-xl">
-    <div className="self-center rounded-lg p-2">
-      <BookmarkIcon className="w-5 stroke-on-surface" />
+  <li className="bg-surface-container-low hover:bg-surface-container flex flex-row p-2 last:rounded-b-xl">
+    <div className="self-center rounded-lg px-2">
+      <BookmarkIcon className="w-4 stroke-on-surface" />
     </div>
     <div className="ml-2">
-      <p className="text-on-surface">Title</p>
-      <p className="text-sm text-on-surface-variant">Description</p>
+      <p className="text-sm text-on-surface">Title</p>
+      <p className="text-xs text-on-surface-variant">Description</p>
     </div>
   </li>
 );
 
 export function Mockup() {
   return (
-    <div className="bg-white" style={{ width: '400px' }}>
+    <div style={{ width: '400px' }}>
       <div className="flex w-full flex-col bg-background">
-        <div className="bg-surface-container-high mb-3 flex flex-row text-on-surface ">
-          <MagnifyingGlassIcon className="mx-4 w-5" />
+        <div className="bg-surface-container-high group peer mx-5 mt-5 flex flex-row rounded-xl text-on-surface focus-within:rounded-b-none">
+          <MagnifyingGlassIcon className="mx-4 w-4 stroke-on-surface" />
           <input
             type="text"
-            className="h-14 grow bg-transparent py-4 outline-none placeholder:italic placeholder:text-on-surface placeholder:opacity-40"
+            className="h-11 grow bg-transparent py-4 text-sm outline-none placeholder:italic placeholder:text-on-surface placeholder:opacity-40"
             placeholder="Search or command..."
           />
         </div>
 
-        <div className="m-2">
-          <div className="mx-2 mb-3 rounded-xl bg-secondary-container px-5 py-4 text-on-secondary-container">
-            <p className="text-xs font-bold uppercase leading-5">
-              Welcome abord
-            </p>
-            <p className="text-sm opacity-80">
-              Hey, this should be a tutorial card
-            </p>
-          </div>
+        <ul className=" mx-5">
+          <li className="bg-surface-container-low px-4 py-1 pt-2 text-xs font-semibold text-on-surface-variant opacity-80">
+            Actions
+          </li>
+          {range(0, 3).map((i) => (
+            <Item key={i} />
+          ))}
+          <li className="bg-surface-container-low px-4 py-1 text-xs font-semibold text-on-surface-variant opacity-80">
+            Historique
+          </li>
+          {range(0, 3).map((i) => (
+            <Item key={i + 3} />
+          ))}
+          <li className="bg-surface-container border-surface-container-highest rounded-b-xl border-t px-4 py-3 text-xs text-on-surface-variant opacity-80">
+            Tips: type enter to execute an action
+          </li>
+        </ul>
 
-          <ul className="mx-2">
-            {range(0, 10).map((i) => (
-              <Item key={i} />
-            ))}
-          </ul>
+        <div className="m-5 rounded-xl bg-secondary-container px-5 py-4 text-on-secondary-container">
+          <p className="text-xs font-bold uppercase leading-5">Welcome abord</p>
+          <p className="text-sm opacity-80">
+            Hey, this should be a tutorial card
+          </p>
         </div>
       </div>
     </div>
