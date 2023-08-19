@@ -1,8 +1,11 @@
 import BookmarkIcon from '@src/icons/bookmark';
 import MagnifyingGlassIcon from '@src/icons/magnifying-glass';
+import PromptoIcon from '@src/icons/prompto';
+import PromptoSquareIcon from '@src/icons/prompto-square';
 import { ComponentMeta } from '@storybook/react';
+import classNames from 'classnames';
 import { range } from 'lodash';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 export default {
   title: 'Mockups/Popup',
@@ -10,7 +13,7 @@ export default {
 } as ComponentMeta<typeof Mockup>;
 
 const Item = () => (
-  <li className="bg-surface-container-low hover:bg-surface-container flex flex-row p-2 last:rounded-b-xl">
+  <li className="hover:bg-surface-container mx-2 my-1 flex flex-row rounded-xl p-2">
     <div className="self-center rounded-lg px-2">
       <BookmarkIcon className="w-4 stroke-on-surface" />
     </div>
@@ -22,37 +25,108 @@ const Item = () => (
 );
 
 export function Mockup() {
+  const [isLayerOpen, setLayerOpen] = useState(true);
+
   return (
-    <div style={{ width: '400px' }}>
+    <div style={{ width: '400px', maxHeight: '600px', overflow: 'scroll' }}>
       <div className="flex w-full flex-col bg-background">
-        <div className="bg-surface-container-high group peer mx-5 mt-5 flex flex-row rounded-xl text-on-surface focus-within:rounded-b-none">
+        <div className="flex items-center px-4 py-2">
+          <PromptoSquareIcon className="inline-block h-4 w-4 align-text-bottom" />{' '}
+          <span className="ml-2 text-xs font-medium text-on-background">
+            Prompto
+          </span>
+        </div>
+
+        <div
+          className={classNames(
+            'group peer flex flex-row text-on-surface bg-surface-container-lowest border-b border-t border-surface-container-highest'
+          )}
+        >
+          <MagnifyingGlassIcon className="mx-4 w-4 stroke-on-surface" />
+          <input
+            onFocus={() => setLayerOpen(true)}
+            onBlur={() => setLayerOpen(false)}
+            type="text"
+            className="h-11 grow bg-transparent py-4 text-sm outline-none placeholder:text-on-surface placeholder:opacity-40"
+            placeholder="Search or command..."
+          />
+        </div>
+
+        <ul
+          className={classNames(
+            'rounded-b-xl transition-[height] transition-transform duration-200 ease-in-out',
+            {
+              ['h-0 overlay-none overflow-hidden']: !isLayerOpen
+            }
+          )}
+        >
+          {range(0, 8).map((i) => (
+            <Item key={i} />
+          ))}
+        </ul>
+
+        <div className="bg-surface-container mx-2 mt-3 rounded-xl px-5 py-4 text-on-surface">
+          <p className="text-xs font-bold uppercase leading-5">Tips</p>
+          <p className="text-sm opacity-80">Type enter to execute an action</p>
+        </div>
+
+        <div className="mx-2 my-3 rounded-xl bg-tertiary-container px-5  py-4 text-on-tertiary-container">
+          <p className="text-xs font-bold uppercase leading-5">Welcome abord</p>
+          <p className="text-sm opacity-80">
+            Hey, this should be a tutorial card
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function MockupMaterial() {
+  const [isLayerOpen, setLayerOpen] = useState(false);
+
+  return (
+    <div style={{ width: '400px', maxHeight: '500px', overflowY: 'scroll' }}>
+      <div className="flex w-full flex-col bg-background">
+        <div className="mx-4 my-3 flex items-center">
+          <PromptoSquareIcon className="inline-block h-4 w-4 align-text-bottom" />{' '}
+          <span className="ml-2 text-xs font-medium text-on-background">
+            Prompto
+          </span>
+        </div>
+
+        <div className="bg-surface-container-high group peer mx-3 flex flex-row rounded-xl text-on-surface focus-within:rounded-b-none">
           <MagnifyingGlassIcon className="mx-4 w-4 stroke-on-surface" />
           <input
             type="text"
+            onFocus={() => setLayerOpen(true)}
+            onBlur={() => setLayerOpen(false)}
             className="h-11 grow bg-transparent py-4 text-sm outline-none placeholder:italic placeholder:text-on-surface placeholder:opacity-40"
             placeholder="Search or command..."
           />
         </div>
 
-        <ul className=" mx-5">
-          <li className="bg-surface-container-low px-4 py-1 pt-2 text-xs font-semibold text-on-surface-variant opacity-80">
+        <ul
+          className={classNames(
+            'bg-surface-container-low mx-3 rounded-b-xl pb-1',
+            {
+              ['h-0 overlay-none overflow-hidden']: !isLayerOpen
+            }
+          )}
+        >
+          <li className="px-4 py-1 pt-2 text-xs font-semibold text-on-surface-variant opacity-80">
             Actions
           </li>
-          {range(0, 3).map((i) => (
+          {range(0, 6).map((i) => (
             <Item key={i} />
           ))}
-          <li className="bg-surface-container-low px-4 py-1 text-xs font-semibold text-on-surface-variant opacity-80">
-            Historique
-          </li>
-          {range(0, 3).map((i) => (
-            <Item key={i + 3} />
-          ))}
-          <li className="bg-surface-container border-surface-container-highest rounded-b-xl border-t px-4 py-3 text-xs text-on-surface-variant opacity-80">
-            Tips: type enter to execute an action
-          </li>
         </ul>
 
-        <div className="m-5 rounded-xl bg-secondary-container px-5 py-4 text-on-secondary-container">
+        <div className="bg-surface-container mx-2 mt-3 rounded-xl px-5 py-4 text-on-surface">
+          <p className="text-xs font-bold uppercase leading-5">Tips</p>
+          <p className="text-sm opacity-80">Type enter to execute an action</p>
+        </div>
+
+        <div className="m-3  rounded-xl bg-secondary-container px-5 py-4 text-on-secondary-container">
           <p className="text-xs font-bold uppercase leading-5">Welcome abord</p>
           <p className="text-sm opacity-80">
             Hey, this should be a tutorial card

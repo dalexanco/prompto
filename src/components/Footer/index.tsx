@@ -7,8 +7,8 @@ import PromptoIcon from '@src/icons/prompto';
 export default function Footer(): JSX.Element | null {
   return (
     <footer className="flex border-t border-t-gray-100 bg-gray-50 px-4 py-2">
-      <span className="grow text-xs font-medium text-primary-800">
-        <PromptoIcon className="inline-block h-3 w-3 fill-current align-text-bottom text-primary-600" />{' '}
+      <span className="grow text-xs font-medium text-primary">
+        <PromptoIcon className="inline-block h-3 w-3 fill-current align-text-bottom text-primary" />{' '}
         Prompto
       </span>
       <p className="justify-self-end text-xs italic text-gray-500">
