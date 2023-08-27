@@ -5,8 +5,6 @@ import {
   CommandType
 } from '@src/types/commands';
 
-const MIN_INPUT_LENGTH = 2;
-
 export interface CommandSuggestionGroupCreate extends CommandSuggestion {
   groupName?: string;
 }
@@ -34,8 +32,7 @@ export default {
   generateSuggestions: async (
     rawInput: string
   ): Promise<CommandSuggestion[]> => {
-    if (!rawInput || rawInput.length < MIN_INPUT_LENGTH)
-      return Promise.resolve([]);
+    if (!rawInput) return Promise.resolve([]);
 
     const windowId = chrome.windows.WINDOW_ID_CURRENT;
     const existingGroups = await chrome.tabGroups.query({

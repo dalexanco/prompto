@@ -14,6 +14,34 @@ import {
 } from '@src/types/extension';
 import logger from '@src/logger';
 import Footer from '@src/components/Footer';
+import classNames from 'classnames';
+import PromptoSquareIcon from '@src/icons/prompto-square';
+import Card, { CardContent, CardTitle } from '@src/components/Card';
+
+function Hero({ hidden }: { hidden: boolean }) {
+  if (hidden) return;
+
+  return (
+    <Card color="primary" className="mx-4 mt-3">
+      <CardTitle color="primary">Welcome aboard !</CardTitle>
+      <CardContent color="primary">
+        The best way to learn is to play with it, so try typing a command like
+        &quot;group&quot;, &quot;save&quot; or &quot;clean&quot;.{' '}
+      </CardContent>
+    </Card>
+  );
+}
+
+function TipsOfTheDay({ hidden }: { hidden: boolean }) {
+  if (hidden) return;
+
+  return (
+    <Card className="mx-4 mt-3">
+      <CardTitle>Tip of the day</CardTitle>
+      <CardContent>You can pin a tab using &quot;tab&quot; command</CardContent>
+    </Card>
+  );
+}
 
 export function Popup(): JSX.Element {
   React.useEffect(() => {
@@ -70,30 +98,45 @@ export function Popup(): JSX.Element {
     event.preventDefault();
     executeFocusSuggestion();
   };
+  const hasSuggestions = suggestions.length > 0;
 
   return (
-    <div className={css.popupContainer}>
-      <form onSubmit={onSubmit} className="border-b border-b-gray-200">
-        <PromptInput
-          placeholder={placeholderValue}
-          value={inputValue}
-          onChange={onInputChange}
-        />
-      </form>
-      <ul
-        ref={suggestionListRef}
-        className="mt-2 flex grow flex-col items-stretch overflow-y-scroll"
-      >
-        {suggestions.map((suggestion, index) => (
-          <Suggestion
-            onClick={() => onClickSuggestion(index)}
-            onMouseEnter={() => setFocus(index)}
-            suggestion={suggestion}
-            key={suggestion.key}
-            hasFocus={suggestion.key === focusedSuggestion?.key}
+    <div className={`${css.popupContainer} flex flex-col bg-stone-50`}>
+      <div className="m-4 flex items-center justify-center">
+        <PromptoSquareIcon className="inline-block h-5 w-5 align-text-bottom" />{' '}
+        <span className="ml-2 text-base font-medium text-stone-800">
+          Prompto
+        </span>
+      </div>
+      <Card color="white" className="mx-4 p-0">
+        <form onSubmit={onSubmit}>
+          <PromptInput
+            placeholder={placeholderValue}
+            value={inputValue}
+            onChange={onInputChange}
+            className={classNames('border-gray-200', {
+              ['border-b']: hasSuggestions
+            })}
           />
-        ))}
-      </ul>
+          <ul
+            ref={suggestionListRef}
+            className="flex max-h-96 grow flex-col items-stretch overflow-y-scroll"
+          >
+            {suggestions.map((suggestion, index) => (
+              <Suggestion
+                onClick={() => onClickSuggestion(index)}
+                onMouseEnter={() => setFocus(index)}
+                suggestion={suggestion}
+                key={suggestion.key}
+                hasFocus={suggestion.key === focusedSuggestion?.key}
+              />
+            ))}
+          </ul>
+        </form>
+      </Card>
+      <Hero hidden={hasSuggestions} />
+      <TipsOfTheDay hidden={hasSuggestions} />
+
       <Footer />
     </div>
   );

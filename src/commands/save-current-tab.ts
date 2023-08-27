@@ -7,7 +7,7 @@ import {
 } from '@src/types/commands';
 import { flatten } from 'lodash';
 
-const RESULTS_LIMIT = 5;
+const RESULTS_LIMIT = 15;
 const MIN_INPUT_LENGTH = 2;
 
 interface SimpleBookmarkNode {
@@ -66,17 +66,21 @@ export default {
     });
 
     return Promise.resolve(
-      folders.filter(limit(RESULTS_LIMIT)).map(
-        (folder) =>
-          ({
-            id: folder.id,
-            key: `save-on-${folder.id}`,
-            type: CommandType.BOOKMARK_SAVE,
-            title: `Save in ${folder.index}`,
-            url: 'Attach current tab in this folder',
-            iconKey: CommandIcon.BOOKMARK
-          } as CommandSuggestion)
-      )
+      folders.filter(limit(RESULTS_LIMIT)).map((folder) => {
+        const formatedFolder = folder.path[folder.path.length - 1];
+        const formatedPath = folder.path
+          .slice(0, folder.path.length - 2)
+          .join('/');
+        return {
+          id: folder.id,
+          key: `save-on-${folder.id}`,
+          type: CommandType.BOOKMARK_SAVE,
+          title: `Save in ${formatedFolder}`,
+          url: 'Attach current tab in this folder',
+          description: `In folder ${formatedPath}`,
+          iconKey: CommandIcon.BOOKMARK
+        } as CommandSuggestion;
+      })
     );
   }
 } as CommandTemplate;

@@ -18,13 +18,18 @@ type SuggestionProps = React.DetailedHTMLProps<
 export function Suggestion({
   suggestion,
   hasFocus = false,
+  className,
   ...wrapperProps
 }: SuggestionProps): JSX.Element | null {
   if (!suggestion) return null;
 
-  const wrapperClass = classNames('flex flex-row items-start p-1 last:mb-2', {
-    ['bg-gray-50']: hasFocus
-  });
+  const wrapperClass = classNames(
+    className,
+    'flex flex-row items-start m-1 py-1 rounded-lg',
+    {
+      ['bg-stone-100']: hasFocus
+    }
+  );
   const iconClass = classNames('flex self-center rounded-lg p-2 m-1', {});
   const iconKey =
     suggestion.iconKey != undefined ? suggestion.iconKey : CommandIcon.BOLT;
@@ -35,8 +40,8 @@ export function Suggestion({
         <SuggestionIcon hasFocus={hasFocus} iconKey={iconKey} />
       </div>
       <div className="mx-2 min-w-0 self-center">
-        <Title colored={hasFocus}>{suggestion.title}</Title>
-        <Description colored={hasFocus}>{suggestion.description}</Description>
+        <Title hasFocus={hasFocus}>{suggestion.title}</Title>
+        <Description hasFocus={hasFocus}>{suggestion.description}</Description>
       </div>
     </li>
   );
