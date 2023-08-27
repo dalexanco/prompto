@@ -9,12 +9,10 @@ import pinCurrentTab from './pin-current-tab';
 import unpinCurrentTab from './unpin-current-tab';
 import ungroupCurrentTab from './ungroup-current-tab';
 import sortTabs from './sort-tabs';
-import hero from './hero';
 import { useKey } from 'react-use';
 import clean from './clean';
 
 export const DEFAULT_COMMANDS = [
-  hero,
   groupCurrentTab,
   groupCreate,
   pinCurrentTab,

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Suggestion } from '../component';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { CommandIcon, CommandType } from '../../../types/commands';
 
 export default {
   title: 'Components/Suggestion',
   component: Suggestion
-} as ComponentMeta<typeof Suggestion>;
+} as Meta<typeof Suggestion>;
 
 const TITLE = 'A title';
 
