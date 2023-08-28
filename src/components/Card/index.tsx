@@ -60,10 +60,9 @@ export default function Card({
   return (
     <div
       className={classNames(className, 'rounded-lg border border-b-2', {
-        ['border-stone-200 border-b-stone-300 text-stone-800']:
-          isNeutral || isWhite,
-        ['bg-stone-50']: isNeutral,
-        ['bg-white']: isWhite,
+        ['bg-white border-stone-200 border-b-stone-300 text-stone-800']:
+          isWhite,
+        ['border-stone-300 bg-stone-50']: isNeutral,
         ['border-cyan-300 bg-cyan-100']: isPrimary
       })}
     >
