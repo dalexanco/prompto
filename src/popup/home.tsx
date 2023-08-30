@@ -1,10 +1,11 @@
 import React, { FormEvent, useCallback, useState } from 'react';
-import { useKeyPressEvent } from 'react-use';
 import browser from 'webextension-polyfill';
+import classNames from 'classnames';
+import { useKeyPressEvent } from 'react-use';
+import { useNavigate } from 'react-router-dom';
 
 import { PromptInput } from '../components/PromptInput';
 import { Suggestion } from '../components/Suggestion';
-import css from './styles.module.css';
 import useExecute, { usePlaceholder, useSuggestions } from '@src/commands';
 import useFocusLoop from '@src/hooks/useFocusLoop';
 import useScrollToIndex from '@src/hooks/useScrollToIndex';
@@ -13,9 +14,6 @@ import {
   ExtensionRuntimeRequestType
 } from '@src/types/extension';
 import logger from '@src/logger';
-import Footer from '@src/components/Footer';
-import classNames from 'classnames';
-import PromptoSquareIcon from '@src/icons/prompto-square';
 import Card, { CardContent, CardTitle } from '@src/components/Card';
 
 function Hero({ hidden }: { hidden: boolean }) {
@@ -43,7 +41,7 @@ function TipsOfTheDay({ hidden }: { hidden: boolean }) {
   );
 }
 
-export function Popup(): JSX.Element {
+export default function PopupHome(): JSX.Element {
   React.useEffect(() => {
     browser.runtime.sendMessage({
       type: ExtensionRuntimeRequestType.POPUP_MOUNTED
@@ -64,6 +62,12 @@ export function Popup(): JSX.Element {
   });
   useKeyPressEvent('ArrowUp', () => moveFocus(-1));
   useKeyPressEvent('ArrowDown', () => moveFocus(1));
+  const navigate = useNavigate();
+  useKeyPressEvent('ArrowRight', () => {
+    const { detailsPath } = suggestions[focusedIndex];
+    console.log(detailsPath);
+    if (detailsPath) navigate(detailsPath);
+  });
   const focusedSuggestion = suggestions[focusedIndex];
 
   // Prompt changes
@@ -101,13 +105,7 @@ export function Popup(): JSX.Element {
   const hasSuggestions = suggestions.length > 0;
 
   return (
-    <div className={`${css.popupContainer} flex flex-col bg-stone-50`}>
-      <div className="m-4 flex items-center justify-center">
-        <PromptoSquareIcon className="inline-block h-5 w-5 align-text-bottom" />{' '}
-        <span className="ml-2 text-base font-medium text-stone-800">
-          Prompto
-        </span>
-      </div>
+    <>
       <Card color="white" className="mx-4 p-0">
         <form onSubmit={onSubmit}>
           <PromptInput
@@ -136,8 +134,6 @@ export function Popup(): JSX.Element {
       </Card>
       <Hero hidden={hasSuggestions} />
       <TipsOfTheDay hidden={hasSuggestions} />
-
-      <Footer />
-    </div>
+    </>
   );
 }

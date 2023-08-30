@@ -10,6 +10,7 @@ export interface CommandSuggestion {
   description?: string;
   colorCode?: string;
   iconKey?: CommandIcon;
+  detailsPath?: string | undefined;
 }
 
 export enum CommandType {

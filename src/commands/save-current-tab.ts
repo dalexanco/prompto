@@ -78,7 +78,8 @@ export default {
           title: `Save in ${formatedFolder}`,
           url: 'Attach current tab in this folder',
           description: `In folder ${formatedPath}`,
-          iconKey: CommandIcon.BOOKMARK
+          iconKey: CommandIcon.BOOKMARK,
+          detailsPath: '/details/save'
         } as CommandSuggestion;
       })
     );
