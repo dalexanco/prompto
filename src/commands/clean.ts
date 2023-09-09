@@ -1,5 +1,4 @@
 import {
-  CommandIcon,
   CommandSuggestion,
   CommandTemplate,
   CommandType
@@ -39,7 +38,12 @@ export default {
 
     return true;
   },
-  generateSuggestions: async (): Promise<CommandSuggestion[]> => {
+  generateSuggestions: async (
+    inputText,
+    options
+  ): Promise<CommandSuggestion[]> => {
+    if (!options?.extractedKeyword) return Promise.resolve([]);
+
     return Promise.resolve([
       {
         key: `clean-tabs`,

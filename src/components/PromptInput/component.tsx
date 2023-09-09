@@ -1,46 +1,63 @@
-import React, { LegacyRef } from 'react';
+import React from 'react';
+import { useKey } from 'react-use';
+import classNames from 'classnames';
 
 import MagnifyingGlassIcon from '../../icons/magnifying-glass';
-import classNames from 'classnames';
 import css from './styles.module.css';
-
-interface PromptInputProps {
-  onChange?: (value: string) => void;
-  placeholder?: string;
-  value?: string;
-  ignoreKeys?: string[];
-  ref?: LegacyRef<HTMLInputElement>;
-  className?: string | undefined;
-}
+import usePromptActions from '@src/hooks/usePromptActions';
+import LoaderIcon from '@src/icons/loader';
+import {
+  useInputPlaceholderStore,
+  useInputValueStore,
+  useSuggestionsStore
+} from '@src/stores';
 
 const PROMPT_IGNORE_KEYS = ['ArrowUp', 'ArrowDown', 'Tab'];
 
+const ignoreArrowKeys = (event: React.KeyboardEvent) =>
+  PROMPT_IGNORE_KEYS.includes(event.key) && event.preventDefault();
+
 export function PromptInput({
-  onChange,
-  placeholder = '',
-  value = '',
   className
-}: PromptInputProps): JSX.Element {
-  const ignoreArrowKeys = (event: React.KeyboardEvent) =>
-    PROMPT_IGNORE_KEYS.includes(event.key) && event.preventDefault();
-  const wrapperClassName = classNames(
-    'items-center flex flex-row',
-    className,
-    css.dynamicPlaceholder
+}: {
+  className?: string | undefined;
+}): JSX.Element {
+  const { acceptPlaceholder, updateInputValue } = usePromptActions();
+  const { placeholderValue } = useInputPlaceholderStore();
+  const { inputValue } = useInputValueStore();
+  const { suggestionsIsLoading } = useSuggestionsStore();
+  useKey(
+    'Tab',
+    (event) => {
+      event.preventDefault();
+      acceptPlaceholder();
+    },
+    {},
+    [acceptPlaceholder]
   );
 
   return (
-    <div className={wrapperClassName} data-placeholder={placeholder}>
-      <MagnifyingGlassIcon className="mx-4 h-4 w-4 stroke-gray-600" />
+    <div
+      className={classNames(
+        'items-center flex flex-row',
+        className,
+        css.dynamicPlaceholder
+      )}
+      data-placeholder={placeholderValue}
+    >
+      <MagnifyingGlassIcon className="m-4 h-5 w-5 stroke-gray-600" />
       <input
-        onChange={(event) => onChange && onChange(event.currentTarget.value)}
-        onKeyDown={ignoreArrowKeys}
-        value={value}
         autoFocus
+        className="flex h-12 grow whitespace-nowrap bg-transparent text-base leading-none text-gray-600 outline-none placeholder:text-gray-600 placeholder:opacity-50"
+        onChange={(event) => updateInputValue(event.currentTarget.value)}
+        onKeyDown={ignoreArrowKeys}
         placeholder="Search or command..."
         type="text"
-        className="flex h-12 grow whitespace-nowrap bg-transparent text-base leading-none text-gray-600 outline-none placeholder:text-gray-600 placeholder:opacity-50"
+        value={inputValue}
       />
+      {suggestionsIsLoading && (
+        <LoaderIcon className="m-4 h-5 w-5 animate-spin stroke-gray-200" />
+      )}
     </div>
   );
 }

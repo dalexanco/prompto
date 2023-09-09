@@ -34,12 +34,17 @@ export default {
 
     return true;
   },
-  generateSuggestions: async (): Promise<CommandSuggestion[]> =>
-    Promise.resolve([
+  generateSuggestions: async (
+    inputText,
+    options
+  ): Promise<CommandSuggestion[]> => {
+    if (!options?.extractedKeyword) return Promise.resolve([]);
+    return Promise.resolve([
       {
         key: `sort-tabs`,
         type: CommandType.SORT_TABS,
         title: `Sort all your tabs`
       } as CommandSuggestion
-    ])
+    ]);
+  }
 } as CommandTemplate;

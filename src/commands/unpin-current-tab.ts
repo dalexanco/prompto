@@ -18,7 +18,12 @@ export default {
     await chrome.tabs.update(tabId, { pinned: false });
     return true;
   },
-  generateSuggestions: async (): Promise<CommandSuggestion[]> => {
+  generateSuggestions: async (
+    inputText,
+    options
+  ): Promise<CommandSuggestion[]> => {
+    if (!options?.extractedKeyword) return Promise.resolve([]);
+
     const [currentTab] = await chrome.tabs.query({
       active: true,
       lastFocusedWindow: true

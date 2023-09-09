@@ -13,7 +13,6 @@ export default {
   type: CommandType.GROUP_CREATE,
   keywords: ['group'],
   keywordRequired: true,
-  initialize: async (): Promise<void> => Promise.resolve(),
   execute: async (suggestion: CommandSuggestion) => {
     const command = suggestion as CommandSuggestionGroupCreate;
     const windowId = chrome.windows.WINDOW_ID_CURRENT;
@@ -30,14 +29,17 @@ export default {
     return true;
   },
   generateSuggestions: async (
-    rawInput: string
+    rawInput,
+    options
   ): Promise<CommandSuggestion[]> => {
-    if (!rawInput) return Promise.resolve([]);
+    if (!options?.extractedKeyword || !options.extractedInputWithoutKeyword)
+      return Promise.resolve([]);
 
+    const inputQuery = options.extractedInputWithoutKeyword;
     const windowId = chrome.windows.WINDOW_ID_CURRENT;
     const existingGroups = await chrome.tabGroups.query({
       windowId,
-      title: rawInput
+      title: inputQuery
     });
     if (existingGroups.length > 0) return Promise.resolve([]);
 
@@ -45,9 +47,9 @@ export default {
       {
         key: `group-in-new`,
         type: CommandType.GROUP_CREATE,
-        title: `group in ${rawInput}`,
+        title: `group in ${inputQuery}`,
         description: 'Create a new group containing current tab',
-        groupName: rawInput,
+        groupName: inputQuery,
         iconKey: CommandIcon.SQUARE_HELP
       } as CommandSuggestionGroupCreate
     ]);

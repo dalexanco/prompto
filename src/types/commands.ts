@@ -1,8 +1,3 @@
-export interface PromptQuery {
-  results: CommandSuggestion[];
-  isLoading: boolean;
-}
-
 export interface CommandSuggestion {
   key: string;
   type: CommandType;
@@ -10,6 +5,8 @@ export interface CommandSuggestion {
   description?: string;
   colorCode?: string;
   iconKey?: CommandIcon;
+  hasDetails?: boolean;
+  focused?: boolean;
 }
 
 export enum CommandType {
@@ -27,12 +24,23 @@ export enum CommandType {
   SORT_TABS
 }
 
+export interface SuggestionHookOptions {
+  extractedKeyword?: string;
+  extractedInputWithoutKeyword?: string;
+}
+
+export interface SuggestionsFactoryOptions {
+  extractedKeyword?: string;
+  extractedInputWithoutKeyword?: string;
+}
+
 export interface CommandTemplate {
   type: CommandType;
-  keywordRequired: boolean;
   keywords: string[];
-  initialize?: () => void;
-  generateSuggestions: (input: string) => Promise<CommandSuggestion[]>;
+  generateSuggestions: (
+    input: string,
+    options?: SuggestionsFactoryOptions
+  ) => Promise<CommandSuggestion[]>;
   execute: (suggestion: CommandSuggestion) => Promise<boolean>;
 }
 

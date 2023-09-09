@@ -23,21 +23,19 @@ export function Suggestion({
 }: SuggestionProps): JSX.Element | null {
   if (!suggestion) return null;
 
-  const wrapperClass = classNames(
-    className,
-    'flex flex-row items-start m-1 py-1 rounded-lg',
-    {
-      ['bg-stone-100']: hasFocus
-    }
-  );
   const iconClass = classNames('flex self-center rounded-lg p-2 m-1', {});
   const iconKey =
     suggestion.iconKey != undefined ? suggestion.iconKey : CommandIcon.BOLT;
 
   return (
-    <li className={wrapperClass} {...wrapperProps}>
+    <li
+      className={classNames(className, 'flex flex-row items-start py-2', {
+        ['bg-stone-100']: hasFocus
+      })}
+      {...wrapperProps}
+    >
       <div className={iconClass}>
-        <SuggestionIcon hasFocus={hasFocus} iconKey={iconKey} />
+        <SuggestionIcon className="h-5 w-5 stroke-gray-700" iconKey={iconKey} />
       </div>
       <div className="mx-2 min-w-0 self-center">
         <Title hasFocus={hasFocus}>{suggestion.title}</Title>
