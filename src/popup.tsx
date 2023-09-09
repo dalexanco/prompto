@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { Popup } from './component';
+import { PopupPrompt } from './pages/PopupPrompt';
 
 const container = document.getElementById('popup');
 const root = createRoot(container!);
-root.render(<Popup />);
+root.render(<PopupPrompt />);

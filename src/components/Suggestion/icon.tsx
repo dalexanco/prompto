@@ -1,5 +1,3 @@
-import classNames from 'classnames';
-
 import BoltIcon from '@src/icons/bolt';
 import BookmarkIcon from '@src/icons/bookmark';
 import InformationCircleIcon from '@src/icons/information-circle';
@@ -14,33 +12,32 @@ import PinnedOffIcon from '@src/icons/pinned-off';
 
 export default function SuggestionIcon({
   iconKey,
-  hasFocus
+  className
 }: {
   iconKey: CommandIcon;
-  hasFocus: boolean;
+  className?: string | undefined;
 }): JSX.Element {
-  const styles = classNames('w-5 h-5 stroke-gray-700', {});
   switch (iconKey) {
     case CommandIcon.INFORMATION_CIRCLE:
-      return <InformationCircleIcon className={styles} />;
+      return <InformationCircleIcon className={className} />;
     case CommandIcon.BOOKMARK:
-      return <BookmarkIcon className={styles} />;
+      return <BookmarkIcon className={className} />;
     case CommandIcon.RECTANGLE_STACK:
-      return <RectangleStackIcon className={styles} />;
+      return <RectangleStackIcon className={className} />;
     case CommandIcon.BOLT:
-      return <BoltIcon className={styles} />;
+      return <BoltIcon className={className} />;
     case CommandIcon.SQUARE_PLUS:
-      return <SquarePlusIcon className={styles} />;
+      return <SquarePlusIcon className={className} />;
     case CommandIcon.SQUARE_X:
-      return <SquareXIcon className={styles} />;
+      return <SquareXIcon className={className} />;
     case CommandIcon.SQUARE_HELP:
-      return <SquareHelpIcon className={styles} />;
+      return <SquareHelpIcon className={className} />;
     case CommandIcon.PINNED:
-      return <PinnedIcon className={styles} />;
+      return <PinnedIcon className={className} />;
     case CommandIcon.PINNED_OFF:
-      return <PinnedOffIcon className={styles} />;
+      return <PinnedOffIcon className={className} />;
     case CommandIcon.MAGNIFYING_GLASS:
     default:
-      return <MagnifyingGlassIcon className={styles} />;
+      return <MagnifyingGlassIcon className={className} />;
   }
 }

@@ -1,2 +1,3 @@
-export const limit = (max: number) => (value: any, index: number) =>
-  index < max;
+export function limit<T>(max: number) {
+  return (value: T, index: number) => index < max;
+}

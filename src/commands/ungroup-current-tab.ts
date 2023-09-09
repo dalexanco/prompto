@@ -18,12 +18,17 @@ export default {
     await chrome.tabs.ungroup(tabId);
     return true;
   },
-  generateSuggestions: async (): Promise<CommandSuggestion[]> => {
+  generateSuggestions: async (
+    inputText,
+    options
+  ): Promise<CommandSuggestion[]> => {
+    if (!options?.extractedKeyword) return Promise.resolve([]);
+
     const [currentTab] = await chrome.tabs.query({
       active: true,
       lastFocusedWindow: true
     });
-    if (!currentTab || !currentTab.id || !currentTab.groupId)
+    if (!currentTab || !currentTab.id || currentTab.groupId < 0)
       return Promise.resolve([]);
 
     const group = await chrome.tabGroups.get(currentTab.groupId);

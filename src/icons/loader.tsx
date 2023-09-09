@@ -4,25 +4,20 @@ interface IconProps {
   className: string | undefined;
 }
 
-export default function MagnifyingGlassIcon({
-  className
-}: IconProps): JSX.Element {
+export default function ChevronUpIcon({ className }: IconProps): JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      strokeWidth="2"
-      stroke="currentColor"
       fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={3}
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className={className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-      <path d="M21 21l-6 -6"></path>
+      <path d="M12 3a9 9 0 1 0 9 9"></path>
     </svg>
   );
 }

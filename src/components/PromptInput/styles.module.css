@@ -3,7 +3,7 @@
   content: attr(data-placeholder);
   pointer-events: none;
   opacity: 0.35;
-  margin-left: 3rem;
+  margin-left: 3.25rem;
   font-size: 1rem;
   margin-right: 0.5rem;
 }

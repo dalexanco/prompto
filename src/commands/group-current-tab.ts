@@ -32,7 +32,6 @@ export default {
   type: CommandType.GROUP_CURRENT,
   keywords: ['group'],
   keywordRequired: true,
-  initialize: async (): Promise<void> => Promise.resolve(),
   execute: async (suggestion: CommandSuggestion) => {
     const command = suggestion as CommandSuggestionGroupCurrentTab;
     const windowId = chrome.windows.WINDOW_ID_CURRENT;
@@ -49,15 +48,19 @@ export default {
     return true;
   },
   generateSuggestions: async (
-    rawInput: string
+    rawInput,
+    options
   ): Promise<CommandSuggestion[]> => {
-    const inputWords = rawInput.toLowerCase().split(' ');
+    if (!options?.extractedKeyword) return Promise.resolve([]);
+
+    const inputQuery = options.extractedInputWithoutKeyword || '';
+    const inputWords = inputQuery.toLowerCase().split(' ');
     const currentWindowId = chrome.windows.WINDOW_ID_CURRENT;
     const allGroups = await chrome.tabGroups.query({
       windowId: currentWindowId
     });
 
-    if (!rawInput || rawInput.length < MIN_INPUT_LENGTH) {
+    if (!inputQuery || inputQuery.length < MIN_INPUT_LENGTH) {
       return allGroups
         .sort(({ title: titleA = '' }, { title: titleB = '' }) =>
           titleA.localeCompare(titleB)
