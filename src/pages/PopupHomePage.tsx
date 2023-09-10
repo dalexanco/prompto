@@ -1,9 +1,9 @@
-import React, { FormEvent, useCallback, useState } from 'react';
+import React, { FormEvent, useCallback } from 'react';
 import classNames from 'classnames';
 import browser from 'webextension-polyfill';
 import { useKeyPressEvent } from 'react-use';
+import { useNavigate } from 'react-router-dom';
 
-import css from './styles.module.css';
 import useCommandExecute from '@src/commands';
 import { PromptInput } from '@src/components/PromptInput';
 import {
@@ -15,7 +15,6 @@ import logger from '@src/logger';
 import Footer from '@src/components/Footer';
 import SuggestionList from '@src/components/SuggestionList';
 import Header from '@src/components/Header';
-import PopupCommandDetails from '@src/pages/PopupCommandDetails';
 import {
   useAppStore,
   useFocusedSuggestionStore,
@@ -49,24 +48,18 @@ function TipsOfTheDay({ hidden }: { hidden: boolean }) {
   );
 }
 
-export function PopupPrompt(): JSX.Element {
+export default function PopupHomePage(): JSX.Element {
   React.useEffect(() => {
     browser.runtime.sendMessage({
       type: ExtensionRuntimeRequestType.POPUP_MOUNTED
     } as ExtensionRuntimeRequest);
     logger.info('Popup connected');
   }, []);
-  const [isDetailsPanelVisible, showDetailsPanel] = useState(false);
 
+  const navigate = useNavigate();
   useKeyPressEvent('ArrowRight', () => {
-    if (focusedSuggestion && focusedSuggestion.hasDetails) {
-      showDetailsPanel(true);
-    }
-  });
-  useKeyPressEvent('ArrowLeft', () => {
-    if (isDetailsPanelVisible) {
-      showDetailsPanel(false);
-    }
+    if (!focusedSuggestion || !focusedSuggestion.hasDetails) return;
+    navigate(`/details/${focusedSuggestion.key}`);
   });
 
   // Form validation
@@ -94,33 +87,25 @@ export function PopupPrompt(): JSX.Element {
   const hasSuggestions = suggestions.length > 0;
 
   return (
-    <div
-      className={classNames(css.popupContainer, 'flex flex-col bg-stone-50')}
-    >
-      {isDetailsPanelVisible ? (
-        <PopupCommandDetails suggestion={focusedSuggestion} />
-      ) : (
-        <>
-          <Header />
-          <Card color="white" className="mx-4 p-0">
-            <form onSubmit={onSubmit}>
-              <PromptInput
-                className={classNames('border-gray-200', {
-                  ['border-b']: hasSuggestions
-                })}
-              />
-              <SuggestionList
-                className="flex max-h-96 grow flex-col items-stretch overflow-y-scroll"
-                onClickSuggestion={executeFocusSuggestion}
-              />
-            </form>
-          </Card>
-          <Hero hidden={hasSuggestions} />
-          <TipsOfTheDay hidden={hasSuggestions} />
+    <div className="flex flex-col">
+      <Header />
+      <Card color="white" className="mx-4 p-0">
+        <form onSubmit={onSubmit}>
+          <PromptInput
+            className={classNames('border-gray-200', {
+              ['border-b']: hasSuggestions
+            })}
+          />
+          <SuggestionList
+            className="flex max-h-96 grow flex-col items-stretch overflow-y-scroll"
+            onClickSuggestion={executeFocusSuggestion}
+          />
+        </form>
+      </Card>
+      <Hero hidden={hasSuggestions} />
+      <TipsOfTheDay hidden={hasSuggestions} />
 
-          <Footer />
-        </>
-      )}
+      <Footer />
     </div>
   );
 }
