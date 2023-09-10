@@ -43,7 +43,7 @@ function TipsOfTheDay({ hidden }: { hidden: boolean }) {
   );
 }
 
-export function Popup(): JSX.Element {
+export default function PopupHomePage(): JSX.Element {
   React.useEffect(() => {
     browser.runtime.sendMessage({
       type: ExtensionRuntimeRequestType.POPUP_MOUNTED
