@@ -1,0 +1,322 @@
+{
+  "checksum": "3c78f40b3b673c45da8bbf33da522cc0",
+  "roots": {
+    "bookmark_bar": {
+      "children": [
+        {
+          "children": [
+            {
+              "date_added": "13339189995475122",
+              "date_last_used": "0",
+              "guid": "f093c08d-eb0a-48d6-9bb6-665fa711432d",
+              "id": "3",
+              "meta_info": {
+                "power_bookmark_meta": ""
+              },
+              "name": "Example Domain",
+              "type": "url",
+              "url": "https://example.com/"
+            }
+          ],
+          "date_added": "13339190009522181",
+          "date_last_used": "0",
+          "date_modified": "13339200554219136",
+          "guid": "2407988e-6579-4580-9751-088828ea07c9",
+          "id": "2",
+          "name": "Example",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "date_added": "13339200858225842",
+                  "date_last_used": "0",
+                  "guid": "702db9d4-9a3f-463a-81d0-d8b5e7c66c60",
+                  "id": "6",
+                  "meta_info": {
+                    "power_bookmark_meta": ""
+                  },
+                  "name": "Human Verification",
+                  "type": "url",
+                  "url": "https://dictionnaire.lerobert.com/definition/procrastination"
+                }
+              ],
+              "date_added": "13339200735727819",
+              "date_last_used": "0",
+              "date_modified": "13339200861041875",
+              "guid": "934332b3-420b-4d49-9860-5109aa7bc904",
+              "id": "5",
+              "name": "Today",
+              "type": "folder"
+            },
+            {
+              "date_added": "13339200804400216",
+              "date_last_used": "0",
+              "guid": "fb6c97eb-0939-44cb-9a93-429317f939a5",
+              "id": "7",
+              "meta_info": {
+                "power_bookmark_meta": ""
+              },
+              "name": "Periodic table - Wikipedia",
+              "type": "url",
+              "url": "https://en.wikipedia.org/wiki/Periodic_table"
+            },
+            {
+              "children": [
+                {
+                  "date_added": "13339200836642376",
+                  "date_last_used": "0",
+                  "guid": "98191805-8af3-4a35-b7af-069b28a01e3f",
+                  "id": "9",
+                  "name": "Mathematics - Wikipedia",
+                  "type": "url",
+                  "url": "https://en.wikipedia.org/wiki/Mathematics"
+                },
+                {
+                  "date_added": "13339200836642487",
+                  "date_last_used": "0",
+                  "guid": "3f97261a-b3dd-4fcd-86cd-5662b042ea06",
+                  "id": "10",
+                  "name": "Philosophy - Wikipedia",
+                  "type": "url",
+                  "url": "https://en.wikipedia.org/wiki/Philosophy"
+                },
+                {
+                  "date_added": "13339200836642571",
+                  "date_last_used": "0",
+                  "guid": "d6e87dcf-8260-4191-9d37-59ddd258b1b8",
+                  "id": "11",
+                  "name": "Biology - Wikipedia",
+                  "type": "url",
+                  "url": "https://en.wikipedia.org/wiki/Biology"
+                },
+                {
+                  "date_added": "13339200836642651",
+                  "date_last_used": "0",
+                  "guid": "aaa640b0-341b-4467-a3f1-d9dca68613cf",
+                  "id": "12",
+                  "name": "Music - Wikipedia",
+                  "type": "url",
+                  "url": "https://en.wikipedia.org/wiki/Music"
+                },
+                {
+                  "date_added": "13339200836642729",
+                  "date_last_used": "0",
+                  "guid": "e2d1b6fd-07bf-4863-a339-9f077b1a4373",
+                  "id": "13",
+                  "name": "Physics - Wikipedia",
+                  "type": "url",
+                  "url": "https://en.wikipedia.org/wiki/Physics"
+                },
+                {
+                  "date_added": "13339200836642804",
+                  "date_last_used": "0",
+                  "guid": "f2bf0714-8f9c-4f03-9681-4d3a9558f8d7",
+                  "id": "14",
+                  "name": "Chemistry - Wikipedia",
+                  "type": "url",
+                  "url": "https://en.wikipedia.org/wiki/Chemistry"
+                },
+                {
+                  "date_added": "13339200836642880",
+                  "date_last_used": "0",
+                  "guid": "0bfc61d2-275b-4ac5-b717-00ab92e5f689",
+                  "id": "15",
+                  "name": "Nouvel onglet",
+                  "type": "url",
+                  "url": "chrome://newtab/"
+                }
+              ],
+              "date_added": "13339200836642202",
+              "date_last_used": "0",
+              "date_modified": "13339200836642880",
+              "guid": "e7689fd3-7ec2-4ac5-9d52-5ea5fd30dce1",
+              "id": "8",
+              "name": "Later",
+              "type": "folder"
+            }
+          ],
+          "date_added": "13339200728504246",
+          "date_last_used": "0",
+          "date_modified": "13339200858225842",
+          "guid": "a6b8b9fa-9b1b-48b1-b5a6-5a2720388ade",
+          "id": "4",
+          "name": "Todo",
+          "type": "folder"
+        }
+      ],
+      "date_added": "13339189956647683",
+      "date_last_used": "0",
+      "date_modified": "13339200728504786",
+      "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+      "id": "1",
+      "name": "Barre de favoris",
+      "type": "folder"
+    },
+    "other": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "date_added": "13339200567306879",
+                  "date_last_used": "0",
+                  "guid": "d966a765-bdc5-4fe9-aad6-b939b05fd8e4",
+                  "id": "19",
+                  "meta_info": {
+                    "power_bookmark_meta": ""
+                  },
+                  "name": "Dealabs - La communauté de bons plans n°1 en France",
+                  "type": "url",
+                  "url": "https://www.dealabs.com/"
+                },
+                {
+                  "date_added": "13339200627629133",
+                  "date_last_used": "0",
+                  "guid": "8ccca908-972e-46fb-9cb8-c770e485bb25",
+                  "id": "20",
+                  "meta_info": {
+                    "power_bookmark_meta": ""
+                  },
+                  "name": "Cdiscount : Meuble, Déco, High Tech, Bricolage, Jardin, Sport",
+                  "type": "url",
+                  "url": "https://www.cdiscount.com/"
+                },
+                {
+                  "date_added": "13339200632587878",
+                  "date_last_used": "0",
+                  "guid": "6caa8d2e-2a2a-476e-a5f7-a4d45ef2afc3",
+                  "id": "21",
+                  "meta_info": {
+                    "power_bookmark_meta": ""
+                  },
+                  "name": "Amazon.fr : livres, DVD, jeux vidéo, musique, high-tech, informatique, jouets, vêtements, chaussures, sport, bricolage, maison, beauté, puériculture, épicerie et plus encore !",
+                  "type": "url",
+                  "url": "https://www.amazon.fr/?&tag=hydraamazon05-21&ref=pd_sl_781ozcfkw9_e&adgrpid=56499088752&hvpone=&hvptwo=&hvadid=441814514344&hvpos=&hvnetw=g&hvrand=9816386066993085337&hvqmt=e&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1005822&hvtargid=kwd-10573980&hydadcr=11802_2067617"
+                }
+              ],
+              "date_added": "13339200621424542",
+              "date_last_used": "0",
+              "date_modified": "13339200632587878",
+              "guid": "c2057ac3-d7c0-4ece-9484-e79112bacb2d",
+              "id": "18",
+              "name": "e-commerce",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "date_added": "13339200699140965",
+                  "date_last_used": "0",
+                  "guid": "ec5f09c1-2ded-45be-9aad-05bd4ed2f21e",
+                  "id": "23",
+                  "name": "Cdiscount : Meuble, Déco, High Tech, Bricolage, Jardin, Sport",
+                  "type": "url",
+                  "url": "https://www.cdiscount.com/"
+                },
+                {
+                  "date_added": "13339200699141085",
+                  "date_last_used": "0",
+                  "guid": "2a3cbde2-831f-4eb8-9e90-0dbb6113055f",
+                  "id": "24",
+                  "name": "PC Portable HP 15-fc0071nf - 15,6\" FHD - Ryzen 5-7520U - RAM 16Go - Stockage 512Go SSD - Windows 11 - AZERTY - Cdiscount Informatique",
+                  "type": "url",
+                  "url": "https://www.cdiscount.com/informatique/ordinateurs-pc-portables/pc-portable-hp-15-fc0071nf-15-6-fhd-ryzen-5-7/f-1070992-hp15fc0071nf.html?idOffre=2491235745#cm_sp=PA:12177909:NH:CAR"
+                },
+                {
+                  "date_added": "13339200699141245",
+                  "date_last_used": "0",
+                  "guid": "8f8e7a93-93f3-4ea4-bf0d-0219b3d8f6b8",
+                  "id": "25",
+                  "name": "Console PlayStation 5 - Édition Standard - Cdiscount Jeux vidéo",
+                  "type": "url",
+                  "url": "https://www.cdiscount.com/jeux-pc-video-console/ps5/console-playstation-5-edition-standard/f-1035001-ps5stdchassisc.html?idOffre=2254512291#cm_sp=PA:12177909:NH:CAR"
+                },
+                {
+                  "date_added": "13339200699141382",
+                  "date_last_used": "0",
+                  "guid": "a2fcd5ac-5257-40e6-a5d1-935b65eab73f",
+                  "id": "26",
+                  "name": "CONTINENTAL EDISON - TV LED UHD 4K - 55'' (139,7 cm) - Smart Android TV - Wifi Bluetooth - 4xHDMI - 3xUSB - Noir - Cdiscount TV Son Photo",
+                  "type": "url",
+                  "url": "https://www.cdiscount.com/high-tech/televiseurs/continental-edison-tv-led-uhd-4k-55-139-7-c/f-1062613-celed55sauhd23b7.html?idOffre=2676403106#cm_sp=PA:12177909:NH:CAR"
+                },
+                {
+                  "date_added": "13339200699141533",
+                  "date_last_used": "0",
+                  "guid": "7a78efcf-c827-4989-898d-2670d370e82f",
+                  "id": "27",
+                  "name": "Trottinette électrique AOVO ES80 M365 PRO Scooter - 350W - 10.5Ah - Noir - Cdiscount Sport",
+                  "type": "url",
+                  "url": "https://www.cdiscount.com/le-sport/mobilite-urbaine/trottinette-electrique-aovo-es80-m365-pro-scooter/f-1214801-auc0123112458436.html?idOffre=2240989794#cm_sp=PA:12177909:NH:CAR"
+                },
+                {
+                  "date_added": "13339200699141636",
+                  "date_last_used": "0",
+                  "guid": "0ce5353f-5f44-42b2-8558-5041f7a97998",
+                  "id": "28",
+                  "name": "Lave-linge hublot HOTPOINT AQ114D497SDEUN Aqualtis - 11 kg - Induction - Classe B - 1400 trs/min - Blanc - Cdiscount Electroménager",
+                  "type": "url",
+                  "url": "https://www.cdiscount.com/electromenager/lavage-sechage/lave-linge-hublot-hotpoint-aq114d497sdeun-aqualtis/f-1100104-hot8050147621523.html?idOffre=664773768#cm_sp=PA:12177909:NH:CAR"
+                },
+                {
+                  "date_added": "13339200699141745",
+                  "date_last_used": "0",
+                  "guid": "4ef0dad3-ee00-4427-878c-5d9990b894ce",
+                  "id": "29",
+                  "name": "CONTINENTAL EDISON CEFC193NFS Réfrigérateur combiné 193 L (129 L + 64 L) Total No Frost L 48,5 cm x P 57,5 cm x H 160 cm Silver - Achat / Vente réfrigérateur classique CONTINENTAL EDISON CEFC193NFS Réfrigérateur combiné 193 L (129 L + 64 L) Total No Frost L 48,5 cm x P 57,5 cm x H 160 cm Silver - Cdiscount",
+                  "type": "url",
+                  "url": "https://www.cdiscount.com/electromenager/refrigerateur-congelateur/continental-edison-cefc193nfs-refrigerateur-combin/f-1100309-cefc193nfs.html?idOffre=681096450#cm_sp=PA:12177909:NH:CAR"
+                },
+                {
+                  "date_added": "13339200699141887",
+                  "date_last_used": "0",
+                  "guid": "af8bfd89-62b0-4cd5-9f2a-af0baf149840",
+                  "id": "30",
+                  "name": "TEFAL INGENIO Batterie de cuisine 13 pcs, Induction, Acier inoxydable, Revêtement antiadhésif durable, Emotion On L897DS04 - Cdiscount Maison",
+                  "type": "url",
+                  "url": "https://www.cdiscount.com/maison/cuisson/tefal-ingenio-batterie-de-cuisine-13-pcs-inductio/f-1178901-tefl897ds04.html?idOffre=2556066819#cm_sp=PA:12177909:NH:CAR"
+                }
+              ],
+              "date_added": "13339200699140857",
+              "date_last_used": "0",
+              "date_modified": "13339200699141887",
+              "guid": "84f6bdf8-b175-4c34-83d1-b976dde3bd41",
+              "id": "22",
+              "name": "search",
+              "type": "folder"
+            }
+          ],
+          "date_added": "13339200621424424",
+          "date_last_used": "0",
+          "date_modified": "13339200707199333",
+          "guid": "412f3593-ed19-4e83-9bb9-86fcce568c6a",
+          "id": "17",
+          "name": "Custom Root",
+          "type": "folder"
+        }
+      ],
+      "date_added": "13339189956647688",
+      "date_last_used": "0",
+      "date_modified": "13339200567306879",
+      "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+      "id": "16",
+      "name": "Autres favoris",
+      "type": "folder"
+    },
+    "synced": {
+      "children": [],
+      "date_added": "13339189956647691",
+      "date_last_used": "0",
+      "date_modified": "0",
+      "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+      "id": "31",
+      "name": "Favoris sur mobile",
+      "type": "folder"
+    }
+  },
+  "version": 1
+}

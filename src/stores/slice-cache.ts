@@ -54,9 +54,6 @@ export const createCacheSlice: StateCreator<CacheSlice, [], [], CacheSlice> = (
 ) => ({
   cacheEntries: {},
   cache: (key: string) => get().cacheEntries[key]?.data,
-  cacheKey: (cacheKeys: string[]): string => {
-    return cacheKeys.join('.');
-  },
   cacheStatus: (key: string) => {
     const entry = get().cacheEntries[key];
     if (!entry) return 'miss';
@@ -100,6 +97,7 @@ export const createCacheSlice: StateCreator<CacheSlice, [], [], CacheSlice> = (
     delete EXECUTOR_TASKS[key];
 
     if (!existingTask) {
+      console.log('Update cache ', cacheEntry);
       set(
         produce(get(), (state) => {
           state.cacheEntries[key] = cacheEntry as CacheEntry<unknown>;

@@ -14,5 +14,5 @@ export default function Title({ hasFocus, children }: TitleProps): JSX.Element {
       ['text-gray-700']: !hasFocus
     }
   );
-  return <p className={styles}>{children}</p>;
+  return <h3 className={styles}>{children}</h3>;
 }

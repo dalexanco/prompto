@@ -54,6 +54,7 @@ export function PromptInput({
         placeholder="Search or command..."
         type="text"
         value={inputValue}
+        data-testid="input-prompt"
       />
       {suggestionsIsLoading && (
         <LoaderIcon className="m-4 h-5 w-5 animate-spin stroke-gray-200" />
