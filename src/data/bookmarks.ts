@@ -8,11 +8,43 @@ export interface SimpleBookmarkNode {
   index: string;
 }
 
+interface DiggingMetas {
+  depth: number;
+  layerIndex: number;
+  parentPath: string[];
+}
+
+function formatTitle(
+  node: chrome.bookmarks.BookmarkTreeNode,
+  metas: DiggingMetas
+) {
+  if (!node.title) return '';
+  if (metas.depth > 1) return node.title;
+
+  switch (metas.layerIndex) {
+    case 0:
+      return 'My bar';
+    case 1:
+      return 'Others';
+    case 2:
+      return 'Mobile';
+    default:
+      return node.title;
+  }
+}
+
 function digBookmarks(
   node: chrome.bookmarks.BookmarkTreeNode,
-  parentPath: string[] = []
+  metas: DiggingMetas = {
+    depth: 0,
+    parentPath: [],
+    layerIndex: 0
+  }
 ): SimpleBookmarkNode[] {
-  const currentPath = node.title ? [...parentPath, node.title] : parentPath;
+  const title = formatTitle(node, metas);
+  const currentPath = node.title
+    ? [...metas.parentPath, title]
+    : metas.parentPath;
   const currentIndex = currentPath.join('/').toLocaleLowerCase();
   const currentSimpleNode = {
     id: node.id,
@@ -27,7 +59,19 @@ function digBookmarks(
     return [currentSimpleNode];
   }
 
-  return flatten(node.children.map((node) => digBookmarks(node, currentPath)));
+  return [
+    ...(title ? [currentSimpleNode] : []),
+    ...flatten(
+      node.children.map((node, index) => {
+        const childMetas: DiggingMetas = {
+          depth: metas.depth + 1,
+          layerIndex: index,
+          parentPath: currentPath
+        };
+        return digBookmarks(node, childMetas);
+      })
+    )
+  ];
 }
 
 export const fetchBookmarks = () => {

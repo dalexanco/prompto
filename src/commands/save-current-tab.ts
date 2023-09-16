@@ -8,13 +8,23 @@ import {
 } from '@src/types/commands';
 
 const RESULTS_LIMIT = 15;
-const MIN_INPUT_LENGTH = 1;
 
 const searchFolderWithWords = (folder: SimpleBookmarkNode, words: string[]) => {
-  const nonMatchingWordsIndex = words.findIndex(
-    (word) => !folder.index.includes(word)
-  );
-  return nonMatchingWordsIndex < 0;
+  const someWordMatching = words.some((word) => folder.index.includes(word));
+  const isRootFolder = folder.path.length == 1;
+
+  return someWordMatching || isRootFolder;
+};
+
+const compareFolderWeight = (
+  folderA: SimpleBookmarkNode,
+  folderB: SimpleBookmarkNode
+) => {
+  const isARootFolder = folderA.path.length == 1;
+  const isBRootFolder = folderB.path.length == 1;
+  if (isARootFolder) return 1;
+  if (isBRootFolder) return -1;
+  return 0;
 };
 
 export default {
@@ -24,16 +34,19 @@ export default {
   generateSuggestions: async (inputText, options) => {
     const bookmarksPromise = fetchBookmarks();
 
-    const inputQuery = options?.extractedInputWithoutKeyword || '';
-    if (inputQuery.length < MIN_INPUT_LENGTH) return Promise.resolve([]);
+    if (!inputText || !options?.extractedKeyword) return Promise.resolve([]);
 
+    const inputQuery = options?.extractedInputWithoutKeyword || '';
     const { data: bookmarks } = await bookmarksPromise;
     if (!bookmarks || bookmarks.length == 0) return Promise.resolve([]);
 
-    const inputWords = inputQuery.toLowerCase().split(' ');
-    const folders = bookmarks.filter((folder) =>
-      searchFolderWithWords(folder, inputWords)
-    );
+    const inputWords = inputQuery
+      .toLowerCase()
+      .split(' ')
+      .filter((word) => !!word);
+    const folders = bookmarks
+      .filter((folder) => searchFolderWithWords(folder, inputWords))
+      .sort(compareFolderWeight);
 
     const data = folders.filter(limit(RESULTS_LIMIT)).map((folder) => {
       const formatedFolder = folder.path[folder.path.length - 1];
@@ -47,7 +60,7 @@ export default {
         type: CommandType.BOOKMARK_SAVE,
         title: `Save in ${formatedFolder}`,
         url: 'Attach current tab in this folder',
-        description: `In ${formatedPath}`,
+        description: formatedPath ? `In ${formatedPath}` : undefined,
         iconKey: CommandIcon.BOOKMARK,
         hasDetails: true
       } as CommandSuggestion;

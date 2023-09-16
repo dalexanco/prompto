@@ -22,7 +22,7 @@ function extractOptions(
   keywords: string[]
 ): SuggestionsFactoryOptions {
   const extractedKeyword = keywords.find((keyword) =>
-    input.startsWith(keyword)
+    input.startsWith(keyword + ' ')
   );
 
   if (!extractedKeyword) return {};
