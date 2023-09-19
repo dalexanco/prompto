@@ -1,4 +1,8 @@
-import { CommandTemplate, CommandSuggestion } from '@src/types/commands';
+import {
+  CommandTemplate,
+  CommandSuggestion,
+  CommandResult
+} from '@src/types/commands';
 
 import saveCurrentTab from './save-current-tab';
 import groupCurrentTab from './group-current-tab';
@@ -8,6 +12,7 @@ import unpinCurrentTab from './unpin-current-tab';
 import ungroupCurrentTab from './ungroup-current-tab';
 import sortTabs from './sort-tabs';
 import clean from './clean';
+import { useAppStore } from '@src/stores';
 
 export const DEFAULT_COMMANDS = [
   groupCurrentTab,
@@ -23,7 +28,7 @@ export const DEFAULT_COMMANDS = [
 async function execute(
   templates: CommandTemplate[],
   command?: CommandSuggestion | undefined
-): Promise<boolean> {
+): Promise<CommandResult> {
   if (!command) return Promise.reject('no suggestion provided');
 
   const commandTemplate = templates.find(
@@ -32,12 +37,18 @@ async function execute(
 
   if (!commandTemplate) return Promise.reject('no template found');
 
-  return commandTemplate.execute(command);
+  const result = await commandTemplate.execute(command);
+  if (result.succeed) {
+    useAppStore.getState().inputValueSet('');
+    window.close();
+  }
+
+  return result;
 }
 
 export default function useCommandExecute(
   templates = DEFAULT_COMMANDS
-): (command?: CommandSuggestion | undefined) => Promise<boolean> {
+): (command?: CommandSuggestion | undefined) => Promise<CommandResult> {
   return (command: CommandSuggestion | undefined) =>
     execute(templates, command);
 }

@@ -16,7 +16,7 @@ export default {
   execute: async (suggestion: CommandSuggestion) => {
     const { tabId } = suggestion as CommandSuggestionUnpinCurrentTab;
     await chrome.tabs.update(tabId, { pinned: false });
-    return true;
+    return { succeed: true };
   },
   generateSuggestions: async (
     inputText,

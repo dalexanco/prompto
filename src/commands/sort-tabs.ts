@@ -32,7 +32,7 @@ export default {
         Promise.resolve() as Promise<chrome.tabGroups.TabGroup | void>
       );
 
-    return true;
+    return { succeed: true };
   },
   generateSuggestions: async (
     inputText,

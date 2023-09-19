@@ -2,10 +2,19 @@ import flatten from 'lodash/flatten';
 import { useAppStore } from '@src/stores';
 import { CacheKeys } from '.';
 
+export enum SpecialBookmarkFolder {
+  BAR,
+  OTHERS,
+  MOBILE,
+  NONE
+}
+
 export interface SimpleBookmarkNode {
   id: string;
   path: string[];
   index: string;
+  isRoot: boolean;
+  specialFolder: SpecialBookmarkFolder;
 }
 
 interface DiggingMetas {
@@ -33,6 +42,21 @@ function formatTitle(
   }
 }
 
+function getSpecialFolder(metas: DiggingMetas) {
+  if (metas.depth > 1) return SpecialBookmarkFolder.NONE;
+
+  switch (metas.layerIndex) {
+    case 0:
+      return SpecialBookmarkFolder.BAR;
+    case 1:
+      return SpecialBookmarkFolder.OTHERS;
+    case 2:
+      return SpecialBookmarkFolder.MOBILE;
+    default:
+      return SpecialBookmarkFolder.NONE;
+  }
+}
+
 function digBookmarks(
   node: chrome.bookmarks.BookmarkTreeNode,
   metas: DiggingMetas = {
@@ -49,7 +73,9 @@ function digBookmarks(
   const currentSimpleNode = {
     id: node.id,
     path: currentPath,
-    index: currentIndex
+    index: currentIndex,
+    isRoot: metas.depth <= 1,
+    specialFolder: getSpecialFolder(metas)
   } as SimpleBookmarkNode;
 
   if (!node.children) return [];

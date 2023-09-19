@@ -36,7 +36,7 @@ export default {
       active: true
     });
 
-    return true;
+    return { succeed: true };
   },
   generateSuggestions: async (
     inputText,

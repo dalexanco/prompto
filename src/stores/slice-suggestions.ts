@@ -12,8 +12,8 @@ import { FocusedIndexSlice } from './slice-focus-index';
 export interface SuggestionsSlice {
   suggestionsIsLoading: boolean;
   suggestions: CommandSuggestion[];
+  suggestionUpdate: (key: string, updatedSuggestion: CommandSuggestion) => void;
   suggestionsSet: (suggestions: CommandSuggestion[]) => void;
-  suggestionFocus: (index: number) => void;
   suggestionsFetch: (inputText: string) => Promise<CommandSuggestion[]>;
 }
 
@@ -45,13 +45,17 @@ export const createSuggestionsSlice: StateCreator<
 > = (set, get) => ({
   suggestionsIsLoading: false,
   suggestions: [],
-  suggestionsSet: (suggestions: CommandSuggestion[]) => set({ suggestions }),
-  suggestionFocus: (focusedIndex) => {
-    const suggestions = produce(get().suggestions, (draft) => {
-      draft.forEach((item, index) => (item.focused = index == focusedIndex));
-    });
-    set({ suggestions });
+  suggestionUpdate: (key: string, updatedSuggestion: CommandSuggestion) => {
+    const updateIndex = get().suggestions.findIndex((item) => item.key == key);
+
+    set(
+      produce(get(), (state) => {
+        state.suggestions[updateIndex] = updatedSuggestion;
+        return state;
+      })
+    );
   },
+  suggestionsSet: (suggestions: CommandSuggestion[]) => set({ suggestions }),
   suggestionsFetch: async (inputText: string) => {
     set({ suggestionsIsLoading: true });
     const results = await Promise.all(

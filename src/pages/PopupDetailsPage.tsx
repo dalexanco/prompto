@@ -25,7 +25,7 @@ export default function PopupDetailsPage() {
           <Header />
           <Card color="white" className="mx-4 p-0">
             <Suggestion suggestion={suggestion} />
-            <CommandDetailsSave />
+            <CommandDetailsSave suggestion={suggestion} />
           </Card>
           <Footer />
         </>

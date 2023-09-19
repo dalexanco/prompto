@@ -34,6 +34,10 @@ export interface SuggestionsFactoryOptions {
   extractedInputWithoutKeyword?: string;
 }
 
+export interface CommandResult {
+  succeed: boolean;
+}
+
 export interface CommandTemplate {
   type: CommandType;
   keywords: string[];
@@ -41,7 +45,7 @@ export interface CommandTemplate {
     input: string,
     options?: SuggestionsFactoryOptions
   ) => Promise<CommandSuggestion[]>;
-  execute: (suggestion: CommandSuggestion) => Promise<boolean>;
+  execute: (suggestion: CommandSuggestion) => Promise<CommandResult>;
 }
 
 export enum CommandIcon {

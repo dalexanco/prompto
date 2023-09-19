@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { CommandSuggestion } from '@src/types/commands';
 
 import { InputValueSlice, createInputValueSlice } from './slice-input-value';
 import {
@@ -11,7 +12,6 @@ import {
   createFocusedIndexSlice
 } from './slice-focus-index';
 import { CacheSlice, createCacheSlice } from './slice-cache';
-import { CommandSuggestion } from '@src/types/commands';
 
 function sliceSelectorFactory<T>() {
   return (state: T) => state as T;

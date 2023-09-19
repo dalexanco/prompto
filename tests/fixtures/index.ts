@@ -1,12 +1,13 @@
 import { test as base, chromium, type BrowserContext } from '@playwright/test';
 import { randomUUID } from 'crypto';
-import { mkdir, readFile, writeFile, copyFile } from 'fs/promises';
+import { mkdir, copyFile } from 'fs/promises';
 import path from 'path';
 
 const EXTENSION_PATH = path.join(__dirname, '../../dist');
 
 export const test = base.extend<{
   context: BrowserContext;
+  extensionBaseUrl: string;
   extensionId: string;
   importBookmarks: (bookmarkFilePath: string) => Promise<BrowserContext>;
   goToExtensionPage: (pagePath: string) => Promise<BrowserContext>;
@@ -49,6 +50,9 @@ export const test = base.extend<{
     const extensionId = extensionDetailsUrl.host;
     if (!extensionId) throw new Error('Missing extensionId : cannot found id');
     await use(extensionId);
+  },
+  extensionBaseUrl: async ({ extensionId }, use) => {
+    await use(`chrome-extension://${extensionId}`);
   },
   goToExtensionPage: async ({ context, extensionId, page }, use) => {
     await use(async (pagePath: string) => {

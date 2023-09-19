@@ -69,7 +69,7 @@ export default function PopupHomePage(): JSX.Element {
     (async function () {
       try {
         if (!focusedSuggestion) return;
-        const commandSuccess = await execute(focusedSuggestion);
+        const { succeed: commandSuccess } = await execute(focusedSuggestion);
         if (commandSuccess) {
           window.close();
         }
