@@ -20,13 +20,13 @@ export default {
       active: true,
       windowId
     });
-    if (!currentTab || !currentTab.id) return false;
+    if (!currentTab || !currentTab.id) return { succeed: false };
 
     const groupId = await chrome.tabs.group({
       tabIds: [currentTab.id]
     });
     await chrome.tabGroups.update(groupId, { title: command.groupName });
-    return true;
+    return { succeed: true };
   },
   generateSuggestions: async (
     rawInput,

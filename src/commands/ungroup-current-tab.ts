@@ -16,7 +16,7 @@ export default {
   execute: async (suggestion: CommandSuggestion) => {
     const { tabId } = suggestion as CommandSuggestionUngroupCurrentTab;
     await chrome.tabs.ungroup(tabId);
-    return true;
+    return { succeed: true };
   },
   generateSuggestions: async (
     inputText,

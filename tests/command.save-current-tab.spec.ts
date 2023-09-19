@@ -57,4 +57,56 @@ test.describe('#command.save-current-tab', () => {
     await page.keyboard.press('ArrowRight');
     await page.waitForURL('**/popup.html#/details/save-on-*');
   });
+
+  test('should add bookmark on execute', async ({
+    page,
+    context,
+    goToExtensionPage
+  }) => {
+    await goToExtensionPage(`/popup.html`);
+    const targetUrl = page.url();
+    // Execute command
+    await page.getByTestId('input-prompt').fill('save example');
+    await page.keyboard.press('Enter');
+    await page.waitForEvent('close');
+    // Retrieve bookmark
+    const bookmarksPage = await context.newPage();
+    await bookmarksPage.goto('chrome://bookmarks');
+    await bookmarksPage.getByRole('treeitem').getByText('example').click();
+    const bookmarkFound = bookmarksPage.getByRole('grid').getByText('Prompto');
+    await expect(bookmarkFound).toBeVisible();
+    // Check bookmark target
+    const targetPagePromise = context.waitForEvent('page');
+    await bookmarkFound.dblclick();
+    const targetPage = await targetPagePromise;
+    await targetPage.waitForURL(targetUrl);
+  });
+
+  test('should add bookmark folder if necessary', async ({
+    page,
+    context,
+    goToExtensionPage
+  }) => {
+    await goToExtensionPage(`/popup.html`);
+    const targetUrl = page.url();
+    // Execute command
+    await page.getByTestId('input-prompt').fill('save new-folder');
+    await page.keyboard.press('Enter');
+    await page.waitForEvent('close');
+    // Retrieve bookmark
+    const bookmarksPage = await context.newPage();
+    await bookmarksPage.goto('chrome://bookmarks');
+    const createdFolder = bookmarksPage
+      .getByRole('treeitem')
+      .getByText('new-folder');
+    await expect(createdFolder).toBeVisible();
+    await createdFolder.click();
+    const bookmarkFound = bookmarksPage.getByRole('grid').getByText('Prompto');
+    await expect(bookmarkFound).toBeVisible();
+    // Check bookmark target
+    const targetPagePromise = context.waitForEvent('page');
+    await bookmarkFound.dblclick();
+    const targetPage = await targetPagePromise;
+    await targetPage.waitForURL(targetUrl);
+  });
 });
