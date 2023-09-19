@@ -12,10 +12,6 @@ import {
   createFocusedIndexSlice
 } from './slice-focus-index';
 import { CacheSlice, createCacheSlice } from './slice-cache';
-import {
-  BrowserContextSlice,
-  createBrowserContextSlice
-} from './slice-browser-context';
 
 function sliceSelectorFactory<T>() {
   return (state: T) => state as T;
@@ -26,14 +22,12 @@ export const useAppStore = create<
     InputPlaceholderSlice &
     SuggestionsSlice &
     FocusedIndexSlice &
-    BrowserContextSlice &
     CacheSlice
 >((...a) => ({
   ...createInputValueSlice(...a),
   ...createInputPlaceholderSlice(...a),
   ...createSuggestionsSlice(...a),
   ...createFocusedIndexSlice(...a),
-  ...createBrowserContextSlice(...a),
   ...createCacheSlice(...a)
 }));
 
