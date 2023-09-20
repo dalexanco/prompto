@@ -14,7 +14,7 @@ import sortTabs from './sort-tabs';
 import clean from './clean';
 import { useAppStore } from '@src/stores';
 
-export const DEFAULT_COMMANDS = [
+export const COMMANDS_REGISTRY = [
   groupCurrentTab,
   groupCreate,
   pinCurrentTab,
@@ -47,7 +47,7 @@ async function execute(
 }
 
 export default function useCommandExecute(
-  templates = DEFAULT_COMMANDS
+  templates = COMMANDS_REGISTRY
 ): (command?: CommandSuggestion | undefined) => Promise<CommandResult> {
   return (command: CommandSuggestion | undefined) =>
     execute(templates, command);

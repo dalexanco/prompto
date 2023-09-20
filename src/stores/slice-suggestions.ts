@@ -6,7 +6,7 @@ import {
   CommandSuggestion,
   SuggestionsFactoryOptions
 } from '@src/types/commands';
-import { DEFAULT_COMMANDS } from '@src/commands';
+import { COMMANDS_REGISTRY } from '@src/commands';
 import { FocusedIndexSlice } from './slice-focus-index';
 
 export interface SuggestionsSlice {
@@ -59,7 +59,7 @@ export const createSuggestionsSlice: StateCreator<
   suggestionsFetch: async (inputText: string) => {
     set({ suggestionsIsLoading: true });
     const results = await Promise.all(
-      DEFAULT_COMMANDS.map(({ keywords, generateSuggestions }) => {
+      COMMANDS_REGISTRY.map(({ keywords, generateSuggestions }) => {
         const options = extractOptions(inputText, keywords);
         return generateSuggestions(inputText, options);
       })

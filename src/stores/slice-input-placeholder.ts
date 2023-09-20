@@ -1,7 +1,7 @@
 import flatten from 'lodash/flatten';
 import { StateCreator } from 'zustand';
 
-import { DEFAULT_COMMANDS } from '@src/commands';
+import { COMMANDS_REGISTRY } from '@src/commands';
 
 export interface InputPlaceholderSlice {
   placeholderValue: string;
@@ -24,7 +24,7 @@ export const createInputPlaceholderSlice: StateCreator<
       if (!inputText) return set({ placeholderValue: EMPTY_PLACEHOLDER });
 
       const KEYWORDS = flatten(
-        DEFAULT_COMMANDS.map(({ keywords }) =>
+        COMMANDS_REGISTRY.map(({ keywords }) =>
           keywords.map((keyword) => keyword.toLowerCase())
         )
       );

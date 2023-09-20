@@ -100,7 +100,6 @@ export default {
     const newFolderSuggestions = inputQuery
       ? [
           {
-            id: 'new',
             key: `save-on-new`,
             type: CommandType.BOOKMARK_SAVE,
             title: `Save in a new folder ${inputQuery}`,
@@ -129,7 +128,6 @@ export default {
           .join('/');
 
         return {
-          id: folder.id,
           key: `save-on-${folder.id}`,
           type: CommandType.BOOKMARK_SAVE,
           title: `Save in ${parentFolderName}`,
