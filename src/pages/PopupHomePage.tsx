@@ -23,7 +23,7 @@ import {
 
 function Hero({ hidden }: { hidden: boolean }) {
   const invalidate = useAppStore((state) => state.cacheInvalidate);
-  if (hidden) return;
+  if (hidden) return null;
 
   return (
     <Card color="primary" className="mx-4 mt-3">
@@ -38,7 +38,7 @@ function Hero({ hidden }: { hidden: boolean }) {
 }
 
 function TipsOfTheDay({ hidden }: { hidden: boolean }) {
-  if (hidden) return;
+  if (hidden) return null;
 
   return (
     <Card className="mx-4 mt-3">
