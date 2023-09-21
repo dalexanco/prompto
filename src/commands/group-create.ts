@@ -45,7 +45,7 @@ export default {
 
     return Promise.resolve([
       {
-        key: `group-in-new`,
+        key: `group-create`,
         type: CommandType.GROUP_CREATE,
         title: `group in ${inputQuery}`,
         description: 'Create a new group containing current tab',

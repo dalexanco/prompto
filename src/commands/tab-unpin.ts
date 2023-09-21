@@ -5,16 +5,16 @@ import {
   CommandType
 } from '@src/types/commands';
 
-interface CommandSuggestionUnpinCurrentTab extends CommandSuggestion {
+interface CommandSuggestionTabUnpin extends CommandSuggestion {
   tabId: number;
 }
 
 export default {
-  type: CommandType.UNPIN_CURRENT_TAB,
+  type: CommandType.TAB_UNPIN,
   keywords: ['unpin'],
   keywordRequired: true,
   execute: async (suggestion: CommandSuggestion) => {
-    const { tabId } = suggestion as CommandSuggestionUnpinCurrentTab;
+    const { tabId } = suggestion as CommandSuggestionTabUnpin;
     await chrome.tabs.update(tabId, { pinned: false });
     return { succeed: true };
   },
@@ -33,12 +33,12 @@ export default {
 
     return Promise.resolve([
       {
-        key: `unpin-current-tab`,
-        type: CommandType.UNPIN_CURRENT_TAB,
+        key: `tab-unpin`,
+        type: CommandType.TAB_UNPIN,
         title: `Unpin current tab`,
         tabId: currentTab.id,
         iconKey: CommandIcon.PINNED_OFF
-      } as CommandSuggestionUnpinCurrentTab
+      } as CommandSuggestionTabUnpin
     ]);
   }
 } as CommandTemplate;

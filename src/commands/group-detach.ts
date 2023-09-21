@@ -5,16 +5,16 @@ import {
   CommandType
 } from '@src/types/commands';
 
-interface CommandSuggestionUngroupCurrentTab extends CommandSuggestion {
+interface CommandSuggestionGroupDetach extends CommandSuggestion {
   tabId: number;
 }
 
 export default {
-  type: CommandType.UNGROUP_CURRENT,
+  type: CommandType.GROUP_DETACH,
   keywords: ['ungroup'],
   keywordRequired: true,
   execute: async (suggestion: CommandSuggestion) => {
-    const { tabId } = suggestion as CommandSuggestionUngroupCurrentTab;
+    const { tabId } = suggestion as CommandSuggestionGroupDetach;
     await chrome.tabs.ungroup(tabId);
     return { succeed: true };
   },
@@ -36,13 +36,13 @@ export default {
 
     return Promise.resolve([
       {
-        key: `ungroup-current-tab`,
-        type: CommandType.UNGROUP_CURRENT,
+        key: `group-detach`,
+        type: CommandType.GROUP_DETACH,
         iconKey: CommandIcon.SQUARE_X,
         title: `Ungroup current tab`,
         description: `Remove current tab from '${group.title}'`,
         tabId: currentTab.id
-      } as CommandSuggestionUngroupCurrentTab
+      } as CommandSuggestionGroupDetach
     ]);
   }
 } as CommandTemplate;

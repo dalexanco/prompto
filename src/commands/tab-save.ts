@@ -27,7 +27,7 @@ const searchFolders = (folders: SimpleBookmarkNode[], inputQuery: string) => {
   return folders.filter((folder) => filterFolderWithWords(folder, inputWords));
 };
 
-export interface CommandSuggestionSaveCurrentTab extends CommandSuggestion {
+export interface CommandSuggestionTabSave extends CommandSuggestion {
   bookmarkTitle: string;
   bookmarkUrl: string;
   parentFolderId?: string;
@@ -48,7 +48,7 @@ export default {
   keywords: ['save'],
   execute: async (suggestion) => {
     const { bookmarkTitle, bookmarkUrl, parentFolderId, parentFolderName } =
-      suggestion as CommandSuggestionSaveCurrentTab;
+      suggestion as CommandSuggestionTabSave;
 
     if (!parentFolderId && parentFolderName) {
       const defaultFolder = await retreiveDefaultBookmarkFolder();
@@ -100,7 +100,7 @@ export default {
     const newFolderSuggestions = inputQuery
       ? [
           {
-            key: `save-on-new`,
+            key: `tab-save-new-folder`,
             type: CommandType.BOOKMARK_SAVE,
             title: `Save in a new folder ${inputQuery}`,
             url: 'Attach current tab in this folder',
@@ -114,7 +114,7 @@ export default {
             parentFolderName: inputQuery,
             bookmarkTitle: activeTab.title,
             bookmarkUrl: activeTab.url
-          } as CommandSuggestionSaveCurrentTab
+          } as CommandSuggestionTabSave
         ]
       : [];
 
@@ -128,7 +128,7 @@ export default {
           .join('/');
 
         return {
-          key: `save-on-${folder.id}`,
+          key: `tab-save-${folder.id}`,
           type: CommandType.BOOKMARK_SAVE,
           title: `Save in ${parentFolderName}`,
           url: 'Attach current tab in this folder',
@@ -138,7 +138,7 @@ export default {
           parentFolderId,
           bookmarkTitle: activeTab.title,
           bookmarkUrl: activeTab.url
-        } as CommandSuggestionSaveCurrentTab;
+        } as CommandSuggestionTabSave;
       })
       .concat(newFolderSuggestions);
   }

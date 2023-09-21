@@ -55,7 +55,7 @@ test.describe('#command.save-current-tab', () => {
     await goToExtensionPage(`/popup.html`);
     await page.getByTestId('input-prompt').fill('save example');
     await page.keyboard.press('ArrowRight');
-    await page.waitForURL('**/popup.html#/details/save-on-*');
+    await page.waitForURL('**/popup.html#/details/tab-save-*');
   });
 
   test('should add bookmark on execute', async ({

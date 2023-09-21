@@ -8,7 +8,7 @@ const isTabEmpty = ({ url }: chrome.tabs.Tab) =>
   url && new URL(url).host !== 'newtab';
 
 export default {
-  type: CommandType.CLEAN,
+  type: CommandType.ALL_TABS_CLEAN,
   keywords: ['clean'],
   keywordRequired: true,
   execute: async () => {
@@ -47,7 +47,7 @@ export default {
     return Promise.resolve([
       {
         key: `clean-tabs`,
-        type: CommandType.CLEAN,
+        type: CommandType.ALL_TABS_CLEAN,
         title: `Clean current session`,
         description: 'Close all tabs except ones attached in a group'
       } as CommandSuggestion

@@ -4,14 +4,14 @@ import {
   CommandResult
 } from '@src/types/commands';
 
-import saveCurrentTab from './save-current-tab';
-import groupCurrentTab from './group-current-tab';
+import saveCurrentTab from './tab-save';
+import groupCurrentTab from './group-attach';
 import groupCreate from './group-create';
-import pinCurrentTab from './pin-current-tab';
-import unpinCurrentTab from './unpin-current-tab';
-import ungroupCurrentTab from './ungroup-current-tab';
-import sortTabs from './sort-tabs';
-import clean from './clean';
+import pinCurrentTab from './tab-pin';
+import unpinCurrentTab from './tab-unpin';
+import ungroupCurrentTab from './group-detach';
+import sortTabs from './all-tabs-sort';
+import clean from './all-tabs-clean';
 import { useAppStore } from '@src/stores';
 
 export const COMMANDS_REGISTRY = [

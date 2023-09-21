@@ -30,7 +30,7 @@ export const Default = (): JSX.Element => (
         key: '',
         title: TITLE,
         description: 'And an awesome description !',
-        type: CommandType.FOCUS_TAB,
+        type: CommandType.TAB_FOCUS,
         iconKey: CommandIcon.SQUARE_PLUS
       }}
     />
@@ -62,7 +62,7 @@ export const WithFocus = (): JSX.Element => (
         key: '',
         title: 'When it does not have focus',
         description: 'And an awesome description !',
-        type: CommandType.FOCUS_TAB
+        type: CommandType.TAB_FOCUS
       }}
     />
     <Suggestion

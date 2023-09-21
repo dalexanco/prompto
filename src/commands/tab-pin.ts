@@ -5,16 +5,16 @@ import {
   CommandType
 } from '@src/types/commands';
 
-interface CommandSuggestionPinCurrentTab extends CommandSuggestion {
+interface CommandSuggestionTabPin extends CommandSuggestion {
   tabId: number;
 }
 
 export default {
-  type: CommandType.PIN_CURRENT_TAB,
+  type: CommandType.TAB_PIN,
   keywords: ['pin'],
   keywordRequired: true,
   execute: async (suggestion: CommandSuggestion) => {
-    const { tabId } = suggestion as CommandSuggestionPinCurrentTab;
+    const { tabId } = suggestion as CommandSuggestionTabPin;
     await chrome.tabs.update(tabId, { pinned: true });
     return { succeed: true };
   },
@@ -33,12 +33,12 @@ export default {
 
     return Promise.resolve([
       {
-        key: `pin-current-tab`,
-        type: CommandType.PIN_CURRENT_TAB,
+        key: `tab-pin`,
+        type: CommandType.TAB_PIN,
         title: `Pin current tab`,
         tabId: currentTab.id,
         iconKey: CommandIcon.PINNED
-      } as CommandSuggestionPinCurrentTab
+      } as CommandSuggestionTabPin
     ]);
   }
 } as CommandTemplate;
