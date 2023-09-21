@@ -1,5 +1,5 @@
 import useCommandExecute from '@src/commands';
-import { CommandSuggestionSaveCurrentTab } from '@src/commands/save-current-tab';
+import { CommandSuggestionTabSave } from '@src/commands/tab-save';
 import { useAppStore } from '@src/stores';
 import { CommandSuggestion } from '@src/types/commands';
 import { FormEvent, useState } from 'react';
@@ -18,7 +18,7 @@ export default function CommandDetailsSave({
 }: {
   suggestion: CommandSuggestion;
 }) {
-  const suggestion = suggestionBase as CommandSuggestionSaveCurrentTab;
+  const suggestion = suggestionBase as CommandSuggestionTabSave;
   const placeHolderValue = useTitlePlaceHolder();
   const navigate = useNavigate();
   const execute = useCommandExecute();
@@ -35,7 +35,7 @@ export default function CommandDetailsSave({
     suggestionUpdate(suggestion.key, {
       ...suggestion,
       bookmarkTitle: value
-    } as CommandSuggestionSaveCurrentTab);
+    } as CommandSuggestionTabSave);
   };
 
   return (

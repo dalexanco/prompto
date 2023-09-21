@@ -10,18 +10,17 @@ export interface CommandSuggestion {
 }
 
 export enum CommandType {
-  UNKNOWN,
-  HERO,
+  ALL_TABS_CLEAN,
+  ALL_TABS_SORT,
   BOOKMARK,
   BOOKMARK_SAVE,
-  GROUP_CURRENT,
+  GROUP_ATTACH,
   GROUP_CREATE,
-  UNGROUP_CURRENT,
-  FOCUS_TAB,
-  PIN_CURRENT_TAB,
-  CLEAN,
-  UNPIN_CURRENT_TAB,
-  SORT_TABS
+  GROUP_DETACH,
+  TAB_FOCUS,
+  TAB_PIN,
+  TAB_UNPIN,
+  UNKNOWN
 }
 
 export interface SuggestionHookOptions {

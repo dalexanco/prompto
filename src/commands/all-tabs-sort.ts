@@ -12,7 +12,7 @@ const alphaCompare = (a: string | undefined, b: string | undefined) => {
 };
 
 export default {
-  type: CommandType.SORT_TABS,
+  type: CommandType.ALL_TABS_SORT,
   keywords: ['sort'],
   keywordRequired: true,
   execute: async () => {
@@ -41,8 +41,8 @@ export default {
     if (!options?.extractedKeyword) return Promise.resolve([]);
     return Promise.resolve([
       {
-        key: `sort-tabs`,
-        type: CommandType.SORT_TABS,
+        key: `all-tabs-sort`,
+        type: CommandType.ALL_TABS_SORT,
         title: `Sort all your tabs`
       } as CommandSuggestion
     ]);

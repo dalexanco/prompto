@@ -9,31 +9,31 @@ import {
 const RESULTS_LIMIT = 5;
 const MIN_INPUT_LENGTH = 1;
 
-export interface CommandSuggestionGroupCurrentTab extends CommandSuggestion {
+export interface CommandSuggestionGroupAttach extends CommandSuggestion {
   groupId: number;
   groupName: string;
 }
 
 function mapGroupToSuggestion(
   group: chrome.tabGroups.TabGroup
-): CommandSuggestionGroupCurrentTab {
+): CommandSuggestionGroupAttach {
   return {
     groupId: group.id,
     groupName: group.title,
-    key: `group-in-${group.id}`,
-    type: CommandType.GROUP_CURRENT,
+    key: `group-attache-${group.id}`,
+    type: CommandType.GROUP_ATTACH,
     title: `group in ${group.title || ''}`,
     description: 'Attach current tab to this group',
     iconKey: CommandIcon.SQUARE_PLUS
-  } as CommandSuggestionGroupCurrentTab;
+  } as CommandSuggestionGroupAttach;
 }
 
 export default {
-  type: CommandType.GROUP_CURRENT,
+  type: CommandType.GROUP_ATTACH,
   keywords: ['group'],
   keywordRequired: true,
   execute: async (suggestion: CommandSuggestion) => {
-    const command = suggestion as CommandSuggestionGroupCurrentTab;
+    const command = suggestion as CommandSuggestionGroupAttach;
     const windowId = chrome.windows.WINDOW_ID_CURRENT;
     const [currentTab] = await chrome.tabs.query({
       active: true,
