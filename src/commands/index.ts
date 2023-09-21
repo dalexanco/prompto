@@ -3,26 +3,28 @@ import {
   CommandSuggestion,
   CommandResult
 } from '@src/types/commands';
-
-import saveCurrentTab from './tab-save';
-import groupCurrentTab from './group-attach';
-import groupCreate from './group-create';
-import pinCurrentTab from './tab-pin';
-import unpinCurrentTab from './tab-unpin';
-import ungroupCurrentTab from './group-detach';
-import sortTabs from './all-tabs-sort';
-import clean from './all-tabs-clean';
 import { useAppStore } from '@src/stores';
 
+import allTabsClean from './all-tabs-clean';
+import allTabsSort from './all-tabs-sort';
+import groupAttach from './group-attach';
+import groupCreate from './group-create';
+import groupDetach from './group-detach';
+import tabDuplicate from './tab-duplicate';
+import tabPin from './tab-pin';
+import tabSave from './tab-save';
+import tabUnpin from './tab-unpin';
+
 export const COMMANDS_REGISTRY = [
-  groupCurrentTab,
+  groupAttach,
   groupCreate,
-  pinCurrentTab,
-  saveCurrentTab,
-  sortTabs,
-  ungroupCurrentTab,
-  unpinCurrentTab,
-  clean
+  tabPin,
+  tabUnpin,
+  tabDuplicate,
+  allTabsSort,
+  tabSave,
+  groupDetach,
+  allTabsClean
 ] as CommandTemplate[];
 
 async function execute(

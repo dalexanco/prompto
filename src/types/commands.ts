@@ -20,6 +20,7 @@ export enum CommandType {
   TAB_FOCUS,
   TAB_PIN,
   TAB_UNPIN,
+  TAB_DUPLICATE,
   UNKNOWN
 }
 

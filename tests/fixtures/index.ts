@@ -9,6 +9,7 @@ export const test = base.extend<{
   context: BrowserContext;
   extensionBaseUrl: string;
   extensionId: string;
+  extractPromptPlaceholder: () => Promise<string>;
   importBookmarks: (bookmarkFilePath: string) => Promise<BrowserContext>;
   goToExtensionPage: (pagePath: string) => Promise<BrowserContext>;
   expectHasSuggestion: (suggestionTitle: string) => Promise<BrowserContext>;
@@ -41,6 +42,14 @@ export const test = base.extend<{
       args: chromeArgs
     });
     use(browser);
+  },
+  extractPromptPlaceholder: async ({ page }, use) => {
+    use(
+      () =>
+        page.evaluate(
+          'document.querySelector("[data-testid=input-prompt]").parentNode.getAttribute("data-placeholder")'
+        ) as Promise<string>
+    );
   },
   extensionId: async ({ context }, use) => {
     let [background] = context.serviceWorkers();

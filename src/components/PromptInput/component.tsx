@@ -49,12 +49,12 @@ export function PromptInput({
       <input
         autoFocus
         className="flex h-12 grow whitespace-nowrap bg-transparent text-base leading-none text-gray-600 outline-none placeholder:text-gray-600 placeholder:opacity-50"
+        data-testid="input-prompt"
         onChange={(event) => updateInputValue(event.currentTarget.value)}
         onKeyDown={ignoreArrowKeys}
         placeholder="Search or command..."
         type="text"
         value={inputValue}
-        data-testid="input-prompt"
       />
       {suggestionsIsLoading && (
         <LoaderIcon className="m-4 h-5 w-5 animate-spin stroke-gray-200" />

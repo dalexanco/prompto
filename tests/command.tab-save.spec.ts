@@ -1,14 +1,17 @@
 import { test, expect } from './fixtures';
 
-test.describe('#command.save-current-tab', () => {
-  test("should expose autocomplete on 's'", async ({
+test.describe('#command.tab-save', () => {
+  test("should expose autocomplete on 'sa'", async ({
     page,
-    goToExtensionPage
+    goToExtensionPage,
+    extractPromptPlaceholder
   }) => {
     await goToExtensionPage(`/popup.html`);
 
-    await page.getByTestId('input-prompt').fill('s');
-    await expect(page.getByText('save')).toBeVisible();
+    await page.getByTestId('input-prompt').fill('sa');
+
+    const placeholder = await extractPromptPlaceholder();
+    await expect(placeholder).toEqual('save');
 
     await page.keyboard.press('Tab');
     await expect(page.getByTestId('input-prompt')).toHaveValue(/^save\s*/);
