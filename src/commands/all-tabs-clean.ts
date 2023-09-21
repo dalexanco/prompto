@@ -46,7 +46,7 @@ export default {
 
     return Promise.resolve([
       {
-        key: `clean-tabs`,
+        key: `all-tabs-clean`,
         type: CommandType.ALL_TABS_CLEAN,
         title: `Clean current session`,
         description: 'Close all tabs except ones attached in a group'
