@@ -16,10 +16,16 @@ export default {
   keywords: ['sort'],
   keywordRequired: true,
   execute: async () => {
-    const pinnedTabs = await chrome.tabs.query({ pinned: true });
+    const currentWindowId = chrome.windows.WINDOW_ID_CURRENT;
+    const pinnedTabs = await chrome.tabs.query({
+      pinned: true,
+      windowId: currentWindowId
+    });
     // Push groups on top
     const pinnedIndexOffset = pinnedTabs.length;
-    const allGroups = await chrome.tabGroups.query({});
+    const allGroups = await chrome.tabGroups.query({
+      windowId: currentWindowId
+    });
     await allGroups
       .sort((a, b) => alphaCompare(a.title, b.title))
       .map(({ id }) => id)
@@ -36,7 +42,8 @@ export default {
     // Sort other tabs
     const otherTabs = await chrome.tabs.query({
       pinned: false,
-      groupId: chrome.tabGroups.TAB_GROUP_ID_NONE
+      groupId: chrome.tabGroups.TAB_GROUP_ID_NONE,
+      windowId: currentWindowId
     });
     const groupsIndexOffset = otherTabs.reduce(
       (prev, { index }) => (prev < index ? prev : index),

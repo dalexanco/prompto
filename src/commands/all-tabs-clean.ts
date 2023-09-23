@@ -13,10 +13,16 @@ export default {
   keywordRequired: true,
   execute: async () => {
     const currentWindowId = chrome.windows.WINDOW_ID_CURRENT;
-    const tabs = await chrome.tabs.query({ windowId: currentWindowId });
+    const [currentTab] = await chrome.tabs.query({
+      active: true,
+      windowId: currentWindowId
+    });
+    const tabs = await chrome.tabs.query({
+      windowId: currentWindowId,
+      groupId: chrome.tabGroups.TAB_GROUP_ID_NONE
+    });
     const orphanTabIds = tabs
-      .filter((tab) => tab.groupId < 0 && tab.id != undefined)
-      .filter((tab) => isTabEmpty(tab) && !tab.active)
+      .filter((tab) => tab.id != undefined && !tab.active)
       .map((tab) => tab.id) as [number];
 
     const groups = await chrome.tabGroups.query({ windowId: currentWindowId });
@@ -30,11 +36,17 @@ export default {
     console.log('Will close %d tabs...', orphanTabIds.length);
     await chrome.tabs.remove(orphanTabIds);
 
-    console.log('Create a new active tab...', orphanTabIds.length);
-    await chrome.tabs.create({
-      windowId: currentWindowId,
-      active: true
-    });
+    console.log('Replace active tab by a new one...', orphanTabIds.length);
+    const removeActivePromise = currentTab?.id
+      ? chrome.tabs.remove(currentTab.id)
+      : Promise.resolve();
+    await Promise.all([
+      chrome.tabs.create({
+        windowId: currentWindowId,
+        active: true
+      }),
+      removeActivePromise
+    ]);
 
     return { succeed: true };
   },
