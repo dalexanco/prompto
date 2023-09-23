@@ -29,9 +29,13 @@ export function Suggestion({
 
   return (
     <li
-      className={classNames(className, 'flex flex-row items-start py-2', {
-        ['bg-stone-100']: hasFocus
-      })}
+      className={classNames(
+        className,
+        'flex flex-row items-start py-2 last:rounded-b-lg',
+        {
+          ['bg-stone-100']: hasFocus
+        }
+      )}
       {...wrapperProps}
     >
       <div className={iconClass}>
