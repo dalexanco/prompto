@@ -16,20 +16,45 @@ export default {
   keywords: ['sort'],
   keywordRequired: true,
   execute: async () => {
+    const pinnedTabs = await chrome.tabs.query({ pinned: true });
+    // Push groups on top
+    const pinnedIndexOffset = pinnedTabs.length;
     const allGroups = await chrome.tabGroups.query({});
     await allGroups
       .sort((a, b) => alphaCompare(a.title, b.title))
       .map(({ id }) => id)
       .reverse()
+      .reduce(async (prev, groupId) => {
+        await prev;
+        await chrome.tabGroups.move(groupId, {
+          index: pinnedIndexOffset
+        });
+        await chrome.tabGroups.update(groupId, {
+          collapsed: true
+        });
+      }, Promise.resolve());
+    // Sort other tabs
+    const otherTabs = await chrome.tabs.query({
+      pinned: false,
+      groupId: chrome.tabGroups.TAB_GROUP_ID_NONE
+    });
+    const groupsIndexOffset = otherTabs.reduce(
+      (prev, { index }) => (prev < index ? prev : index),
+      pinnedIndexOffset + otherTabs.length
+    );
+    await otherTabs
+      .sort((a, b) => alphaCompare(a.url, b.url))
+      .filter(({ id }) => id != undefined)
+      .map(({ id }) => id as number)
       .reduce(
-        (prev, groupId) =>
+        (prev, tabId, indexInOthers) =>
           prev.then(
             () =>
-              chrome.tabGroups.move(groupId, {
-                index: 0
-              }) as Promise<chrome.tabGroups.TabGroup | void>
+              chrome.tabs.move(tabId, {
+                index: indexInOthers + groupsIndexOffset
+              }) as Promise<chrome.tabs.Tab | void>
           ),
-        Promise.resolve() as Promise<chrome.tabGroups.TabGroup | void>
+        Promise.resolve() as Promise<chrome.tabs.Tab | void>
       );
 
     return { succeed: true };
@@ -43,7 +68,8 @@ export default {
       {
         key: `all-tabs-sort`,
         type: CommandType.ALL_TABS_SORT,
-        title: `Sort all your tabs`
+        title: `Sort all your tabs`,
+        description: 'Groups collapsed first and tabs sorted by url'
       } as CommandSuggestion
     ]);
   }
